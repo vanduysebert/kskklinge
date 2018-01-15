@@ -1,0 +1,77 @@
+<div *ngIf="route.children.length === 0">
+
+  <div class="row justify-content-center">
+    <div class="col col-md-10">
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+          <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn-lg btn-secondary btn-block btn">Nieuw verslag aanmaken</a>
+        </div>
+
+      </div>
+
+      <div class="card border-info">
+        <div class="card-header bg-primary">
+            <h3 class=" text-secondary text-center">Wedstrijdverslagen</h3>
+        </div>
+        <div class="card-body text-primary">
+
+          <div class="row justify-content-center">
+            <div *ngIf="wedstrijden != null" class="col col-md-10 col-lg-8 col-xl-6">
+                <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
+            </div>
+          </div>
+
+          <div class="row mt-4">
+          <mat-table class="table table-bordered table-hover" #table [dataSource]="wedstrijden" matSort>
+
+
+            <ng-container matColumnDef="datum">
+              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Datum </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api//wedstrijden-detail', element.wedstrijd_id]"> {{element.datum | amDateFormat:'l'}}  </a></mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="thuisploeg">
+              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Thuisploeg </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary "> <span *ngIf="element.thuisSpelend == true"> {{element.ploegNaam}}</span> <span *ngIf="element.thuisSpelend == false"> {{element.tegenstander}}</span> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="uitploeg">
+              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Uitploeg </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary " ><span *ngIf="element.thuisSpelend == false"> {{element.ploegNaam}}</span> <span *ngIf="element.thuisSpelend == true"> {{element.tegenstander}}</span>  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="uitslag">
+              <mat-header-cell class="tableHeader" *matHeaderCellDef mat-sort-header> Uitslag </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary" ><span *ngIf="element.thuisSpelend == true">{{element.doelpuntenKSK}} - {{element.doelpuntenTegenstander}}</span><span *ngIf="element.thuisSpelend == false"> {{element.doelpuntenTegenstander}} - {{element.doelpuntenKSK}} </span> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/wedstrijden/wedstrijd-edit', element.wedstrijd_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="del">
+              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteNieuws(element.wedstrijd_id, element.titel)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
+            </ng-container>
+            <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn btn-success ">Nieuw verslag aanmaken</a>
+          <a class="float-sm-right btn btn-dark" routerLink="/api"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Overzicht</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  <router-outlet></router-outlet>

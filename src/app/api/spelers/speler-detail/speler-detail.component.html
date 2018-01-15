@@ -1,0 +1,58 @@
+<div *ngIf="player">
+  <div class="row">
+    <div class="col s12 m10 offset-m1 l8 offset-l2">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2 m4">
+              <img *ngIf="player.fotoUrl" [src]="player.fotoUrl" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10 m8">
+                <h4 class="klingeApp blue-grey-text">{{player.voornaam}} {{player.naam}}</h4>
+                <div class="row">
+                  <div class="col m6 s12">
+                    <p>
+                      <strong>Ploeg: </strong><br />{{player.ploegNaam}}
+                    </p>
+                    <p>
+                      <strong>Geboortedatum: </strong><br />{{player.geboortedatum}}
+                    </p>
+                    <p>
+                      <strong>Email: </strong><br />{{player.email}}
+                    </p>
+                    <p>
+                      <strong>Adres: </strong><br />
+
+                      {{player.adres}}
+                    </p>
+                  </div>
+                  <div class="col m6 s12">
+                    <p>
+                      <strong>Telefoonnummer: </strong><br />{{player.telefoonnummer}}
+                    </p>
+                    <p *ngIf="player.ingeschreven == true">
+                      <strong>Ingeschreven: </strong><br />Ja
+                    </p>
+                    <p *ngIf="player.ingeschreven == false">
+                      <strong>Ingeschreven: </strong><br />Nee
+                    </p>
+                    <p>
+                      <strong>Positie: </strong><br />{{player.positie}}
+                    </p>
+                    <p>
+                      <strong>Doelpunten: </strong><br />{{player.doelpunten}}
+                    </p>
+                  </div>
+                </div>
+              <div class="row">
+                <button class="klingeApp blue-grey btn" [routerLink]="['/api/spelers']"><i class="material-icons left">chevron_left</i>Speleroverzicht</button>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ </div>
+ <div *ngIf="!player">
+   <h2 class="center">Geen speler gevonden</h2>
+ </div>

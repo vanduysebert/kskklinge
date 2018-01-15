@@ -1,0 +1,82 @@
+<div *ngIf="team">
+<h4 class="klingeApp-text text-orange center-align">Ploeg {{team.naam}} aanpassen</h4>
+<div class="row">
+   <form #editTeamForm="ngForm" (ngSubmit)="onSubmit()" class="col s12">
+
+
+
+     <div class="row">
+
+       <div class="col m6 s12">
+         <div *ngIf="src" class="col s4 offset-s4">
+           <img class="responsive-img" [src]="src">
+         </div>
+         <div class="progress">
+            <div class="determinate" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          </div>
+          <div class="input-field file-field center-align">
+            <div class="btn">
+             <span *ngIf="src">Nieuwe foto uploaden</span>
+             <span *ngIf="src == '' || !src">Foto uploaden</span>
+               <input type="file" imageUpload
+         (imageSelected)="selected($event)"
+         [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader" name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()"/>
+           </div>
+          </div>
+
+       </div>
+     </div>
+     <div class="row">
+
+
+       <div class="input-field col m6 s12">
+         <input [ngClass]="{'teal-text text-lighten-2': naam.valid, 'red-text text-lighten-2': naam.invalid}" [(ngModel)]="team.naam" #naam="ngModel" name="naam" required id="teamName" type="text"  value="team.naam">
+         <div [hidden]="naam.valid || naam.pristine" class="red-text text-lighten-1">Ploegnaam is vereist</div>
+         <label for="teamName" [ngClass]="{'active': team.naam != ''}" class="klingeApp-text text-blue-dark">Ploegnaam</label>
+       </div>
+     </div>
+
+     <div class="row">
+
+       <div class="input-field col m6 s12">
+         <input placeholder="Naam trainer" [ngClass]="{'teal-text text-lighten-2': trainer_1.valid}" [(ngModel)]="team.trainer_1" #trainer_1="ngModel" name="trainer_1" id="trainer_1" type="text"  value="">
+         <label for="trainer_1" [ngClass]="{'active': team.trainer_1 != ''}" class="klingeApp-text text-blue-dark">Naam trainer</label>
+       </div>
+       <div class="input-field col m6 s12">
+         <input placeholder="Telefoon trainer" [ngClass]="{'teal-text text-lighten-2': telTrainer_1.valid}" [(ngModel)]="team.telTrainer_1" #telTrainer_1="ngModel" name="telTrainer_1" id="telTrainer_1" type="text"  value="">
+         <label for="telTrainer_1" [ngClass]="{'active': team.telTrainer_1 != ''}" class="klingeApp-text text-blue-dark">Telefoon trainer</label>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col m6 s12">
+         <input placeholder="Naam trainer(2)" [ngClass]="{'teal-text text-lighten-2': trainer_2.valid}" [(ngModel)]="team.trainer_2" #trainer_2="ngModel" name="trainer_2" id="trainer_2" type="text"  value="">
+         <label for="trainer_2" [ngClass]="{'active': team.trainer_2 != ''}" class="klingeApp-text text-blue-dark">Naam trainer(2)</label>
+       </div>
+       <div class="input-field col m6 s12">
+         <input placeholder="Telefoon trainer(2)" [ngClass]="{'teal-text text-lighten-2': telTrainer_2.valid}" [(ngModel)]="team.telTrainer_2" #telTrainer_2="ngModel" name="telTrainer_2" id="telTrainer_2" type="text"  value="">
+         <label for="telTrainer_2" [ngClass]="{'active': team.telTrainer_2 != ''}" class="klingeApp-text text-blue-dark">Telefoon trainer(2)</label>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col m6 s12">
+         <input placeholder="Trainingsdagen (bv dinsdag en donderdag)" [ngClass]="{'teal-text text-lighten-2': trainingsdagen.valid}" [(ngModel)]="team.trainingsdagen" #trainingsdagen="ngModel" name="trainingsdagen" id="trainingsdagen" type="text"  value="">
+         <label for="trainingsdagen" [ngClass]="{'active': team.trainingsdagen != ''}" class="klingeApp-text text-blue-dark">Trainingsdagen</label>
+       </div>
+       <div class="input-field col m6 s12">
+         <input class="timepicker" placeholder="Aanvangsuur training (formaat: hh:mm:ss)" [ngClass]="{'teal-text text-lighten-2': trainingsuur.valid, 'red-text text-lighten-2': trainingsuur.invalid}" pattern="([0-1]?\d|2[0-3]):([0-5]?\d):([0-5]?\d)" [(ngModel)]="team.trainingsuur" #trainingsuur="ngModel" name="trainingsuur" id="trainingsuur" type="text"  value="">
+         <div [hidden]="trainingsuur.valid || trainingsuur.pristine" class="red-text text-lighten-1">Geef in volgens volgende formaat: 'uu:mm:ss'</div>
+         <label for="trainingsuur" [ngClass]="{'active': team.trainingsuur != ''}" class="klingeApp-text text-blue-dark">Aanvangsuur training</label>
+       </div>
+     </div>
+     <div class="row">
+      <div class="input-field col m12 s12">
+        <button class="btn teal lighten-2" [disabled]="!editTeamForm.form.valid || (!editTeamForm.form.dirty && newPick==false)" type="submit" name="action">Wijzigingen opslaan
+          <i class="material-icons right">save</i>
+        </button>
+        <button class="klingeApp blue-grey btn" [routerLink]="['/api/ploegen']"><i class="material-icons left">chevron_left</i>Ploegenoverzicht</button>
+        <button class="klingeApp blue-grey btn" [routerLink]="['/api/ploegen/ploeg-detail', team.ploeg_id]">Detail {{team.naam}}</button>
+      </div>
+     </div>
+   </form>
+ </div>
+ </div>

@@ -1,0 +1,57 @@
+<div *ngIf="isRootRoute">
+
+  <div class="row">
+    <div class="col s12 m10 offset-m1">
+      <div class="card">
+        <div class="card-content klingeApp-text text-blue-dark">
+          <h3 class="klingeApp-text text-orange">Spelers</h3>
+          <table class="highlight bordered responsive-table">
+            <thead>
+              <tr>
+                <th>Naam</th>
+                <th>Geboortedatum</th>
+                <th>Email</th>
+                <th>Telnr</th>
+                <th>
+                  Ploegnaam
+                </th>
+                <th>Ingeschreven</th>
+                <th>Aanpassen</th>
+                <th>
+                  Verwijderen
+                </th>
+              </tr>
+            </thead>
+
+            <tbody *ngFor="let speler of spelers">
+              <tr>
+                <td><a class="apiLink" [routerLink]="['/api/spelers/speler-detail', speler.speler_id]">{{speler.voornaam}} {{speler.naam}}</a></td>
+                <td>{{speler.geboortedatum}}</td>
+                <td>{{speler.email}}</td>
+                <td>{{speler.telefoonnummer}}</td>
+                <td>
+                  {{speler.ploegNaam}}
+                </td>
+                <td *ngIf="speler.ingeschreven == true">Ja</td>
+                <td *ngIf="speler.ingeschreven == false">Nee</td>
+                <td class="center-align">
+                  <a [routerLink]="['/api/spelers/speler-edit', speler.speler_id]" class="btn-flat teal-text text-lighten-1"><i class="material-icons">edit</i></a>
+                </td>
+                <td class="center-align">
+                  <a (click)="deletePlayer(speler.speler_id, speler.naam, speler.voornaam)" class="red-text text-lighten-2 btn-flat"><i class="material-icons">delete</i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-action">
+          <a routerLink="/api/spelers/speler-nieuw" class="btn green lighten-2">Nieuwe speler toevoegen</a>
+          <a class="right klingeApp blue-grey btn" routerLink="/api"><i class="material-icons left">chevron_left</i>Overzicht</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  <router-outlet></router-outlet>

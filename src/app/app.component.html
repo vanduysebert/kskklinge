@@ -1,3 +1,192 @@
-<h1>
-  {{title}}
-</h1>
+<div *ngIf="checkPath() && screen > 992" class="d-none d-lg-block">
+  <div class="row d-none d-xl-block">
+    <div class="col-xl-2">
+      <h1 *ngIf="route === '/home' || route === 'Home'"><a routerLink="/home" ><img src="assets/img/logo.png" class="logoSide"/><span>KSK Klinge</span></a></h1>
+    </div>
+    <div class="col-xl-10">
+      <h1 *ngIf="route != '/home' && route != 'Home'"><a routerLink="/home" ><img src="assets/img/logo.png" class="logo"/><span>KSK Klinge</span></a></h1>
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+  <ng-sidebar-container class="d-xl-none" *ngIf="checkPath() && screen <= 992">
+    <ng-sidebar [(opened)]="_opened">
+        <p>Sidebar contents</p>
+      </ng-sidebar>
+
+      <!-- Page content -->
+      <div ng-sidebar-content>
+        <div class="row header">
+          <div class="col s1">
+            <div class="valign-wrapper right sideBarBtn"  (swiperight)="sidenav.open()" >
+              <a class="hide-on-small-only btn-large  waves-effect waves-light klingeApp blue-dark" (click)="sidenav.toggle()" ><i class="material-icons">more_vert</i></a>
+              <a class="hide-on-med-and-up smallNav klingeApp blue-dark" (click)="sidenav.toggle()"><i class="material-icons">more_vert</i></a>
+            </div>
+          </div>
+          <div class="col s10">
+            <h1 *ngIf='route != "/home" && route != "Home"'><a routerLink="/home" ><img src="assets/img/logo.png" class="logo"/><span>KSK Klinge</span></a></h1>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+  </ng-sidebar-container>
+</div>
+
+
+<div *ngIf="checkPath() && screen > 992" class="hide-on-med-and-down">
+  <div class="row show-on-large">
+    <div class="col l2">
+
+      <!-- <mat-accordion >
+
+          <div *ngIf="route != '/home' && route != 'Home'" class="collection">
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/home"> <span class="right"><i class="material-icons">home</i></span> Home</a>
+          </div>
+
+        <mat-expansion-panel class="sideBarItem rowAcco" hideToggle="true">
+          <mat-expansion-panel-header routerLinkActive="active">
+            <mat-panel-title class=" klingeApp-text text-blue-dark">
+              Senioren
+            </mat-panel-title>
+            <span class="right klingeApp-text text-blue-dark"><i class="material-icons">people</i></span>
+
+          </mat-expansion-panel-header>
+          <div class="collection">
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/aploeg"><span class="right"><i class="material-icons">format_color_text</i></span> A-ploeg</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/reserven"><span class="right"><i class="material-icons">format_bold</i></span> Beloften</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/zondagsreserven"><span class="right"><i class="material-icons">copyright</i></span> Zondagsreserven</a>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="sideBarItem" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title class=" klingeApp-text text-blue-dark">
+              Jeugd
+            </mat-panel-title>
+            <span class=" klingeApp-text text-blue-dark right"><i class="material-icons">face</i></span>
+          </mat-expansion-panel-header>
+          <div class="collection">
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u6"><span class="right"><i class="material-icons">photo_filter</i></span> U6</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u7"><span class="right"><i class="material-icons">star</i></span> U7</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u8"><span class="right"><i class="material-icons">star_border</i></span> U8</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u9"><span class="right"><i class="material-icons">stars</i></span> U9</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u11"><span class="right"><i class="material-icons">photo_filter</i></span> U11</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u13"><span class="right"><i class="material-icons">star</i></span> U13</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u15"><span class="right"><i class="material-icons">star_border</i></span> U15</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u17"><span class="right"><i class="material-icons">stars</i></span> U17</a>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="sideBarItem" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title class=" klingeApp-text text-blue-dark">
+              Club
+            </mat-panel-title>
+            <span class=" klingeApp-text text-blue-dark right"><i class="material-icons">store</i></span>
+          </mat-expansion-panel-header>
+          <div class="collection">
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/bestuur"><span class="right"><i class="fa fa-sitemap" aria-hidden="true"></i></span> Bestuur</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/info"><span class="right"><i class="material-icons">info_outline</i></span> Info</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/ligging"><span class="right"><i class="material-icons">location_on</i></span> Ligging</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/contact"><span class="right"><i class="material-icons">phone</i></span> Contact</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/documenten"><span class="right"><i class="fa fa-files-o" aria-hidden="true"></i></span> Nuttige documenten</a>
+            <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/links"><span class="right"><i class="material-icons">link</i></span> Links</a>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div class="row noAccordion sideBarColl">
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/evenementen"> <span class="right"><i class="material-icons">event</i></span> Evenementen</a>
+        </div>
+      </div>
+      <div class="row rowAcc sideBarColl">
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/sponsors"> <span class="right"><i class="material-icons">flag</i></span> Sponsors</a>
+        </div>
+      </div> -->
+    </div>
+    <div class="col l10">
+
+    </div>
+  </div>
+</div>
+<!-- <mat-sidenav-container  class="hide-on-large-only" >
+  <mat-sidenav-content role="main">
+
+
+  </mat-sidenav-content>
+  <mat-sidenav #sidenav mode="over" opened="false" fixedInViewport="true" role="navigation" id="sideNav" (swipeleft)="sidenav.close()">
+
+    <mat-accordion >
+
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/home"> <span class="right"><i class="material-icons">home</i></span> Home</a>
+        </div>
+
+      <mat-expansion-panel class="sideBarItem rowAcco" hideToggle="true">
+        <mat-expansion-panel-header routerLinkActive="active" >
+          <mat-panel-title class=" klingeApp-text text-blue-dark">
+            Senioren
+          </mat-panel-title>
+          <span class="right klingeApp-text text-blue-dark"><i class="material-icons">people</i></span>
+
+        </mat-expansion-panel-header>
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/aploeg"><span class="right"><i class="material-icons">format_color_text</i></span> A-ploeg</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/reserven"><span class="right"><i class="material-icons">format_bold</i></span> Beloften</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/senioren/zondagsreserven"><span class="right"><i class="material-icons">copyright</i></span> Zondagsreserven</a>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="sideBarItem" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class=" klingeApp-text text-blue-dark">
+            Jeugd
+          </mat-panel-title>
+          <span class=" klingeApp-text text-blue-dark right"><i class="material-icons">face</i></span>
+        </mat-expansion-panel-header>
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u6"><span class="right"><i class="material-icons">photo_filter</i></span> U6</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u7"><span class="right"><i class="material-icons">star</i></span> U7</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u8"><span class="right"><i class="material-icons">star_border</i></span> U8</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u9"><span class="right"><i class="material-icons">stars</i></span> U9</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u11"><span class="right"><i class="material-icons">photo_filter</i></span> U11</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u13"><span class="right"><i class="material-icons">star</i></span> U13</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u15"><span class="right"><i class="material-icons">star_border</i></span> U15</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/u17"><span class="right"><i class="material-icons">stars</i></span> U17</a>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="sideBarItem" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title class=" klingeApp-text text-blue-dark">
+            Club
+          </mat-panel-title>
+          <span class=" klingeApp-text text-blue-dark right"><i class="material-icons">store</i></span>
+        </mat-expansion-panel-header>
+        <div class="collection">
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/bestuur"><span class="right"><i class="fa fa-sitemap" aria-hidden="true"></i></span> Bestuur</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/info"><span class="right"><i class="material-icons">info_outline</i></span> Info</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/ligging"><span class="right"><i class="material-icons">location_on</i></span> Ligging</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/club/contact"><span class="right"><i class="material-icons">phone</i></span> Contact</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/documenten"><span class="right"><i class="fa fa-files" aria-hidden="true"></i></span> Nuttige documenten</a>
+          <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/jeugd/links"><span class="right"><i class="material-icons">link</i></span> Links</a>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="row noAccordion sideBarColl">
+      <div class="collection">
+        <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/evenementen"> <span class="right"><i class="material-icons">event</i></span> Evenementen</a>
+      </div>
+    </div>
+    <div class="row rowAcc sideBarColl">
+      <div class="collection">
+        <a class="collection-item klingeApp-text text-blue-dark" routerLinkActive="active" (click)="sidenav.close()" routerLink="/sponsors"> <span class="right"><i class="material-icons">flag</i></span> Sponsors</a>
+      </div>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container> -->
+
+<div *ngIf="checkPath() == false">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center"><a class="text-primary" routerLink="/api">KSK Klinge API</a></h2>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

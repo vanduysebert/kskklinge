@@ -1,0 +1,71 @@
+<h4 class="klingeApp-text text-orange center-align">Nieuw verslag toevoegen</h4>
+<div class="row">
+   <form #newGameForm="ngForm" (ngSubmit)="onSubmit()" class="col s12">
+     <div class="row">
+       <!-- <mat-form-field class="col m6 s12">
+         <input matInput [matDatepicker]="picker" [ngClass]="{'teal-text text-lighten-2': birth.valid, 'red-text text-lighten-2': birth.invalid}" placeholder="Datum" [(ngModel)]="game.datum" #birth="ngModel" name="birth" required id="playerBirth" value="game.datum">
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-datepicker touchUi="true" #picker></mat-datepicker>
+         <div [hidden]="birth.valid || birth.pristine" class="red-text text-lighten-1">Datum is vereist</div>
+       </mat-form-field> -->
+     </div>
+     <div class="row">
+         <!-- <mat-form-field class="col m6 s12">
+           <mat-select placeholder="Kies ploeg" [formControl]="selected" [errorStateMatcher]="matcher"  [(value)]="game.ploeg_id"  name="ploegSelect" id="ploegSelect" (change)="setTeamName($event)" required>
+            <mat-option *ngFor="let f of ploegen" name="ploeg"  [value]="f.ploeg_id">
+              {{ f.naam }}
+            </mat-option>
+          </mat-select>
+          <mat-error class="red-text text-lighten-1" *ngIf="selected.hasError('required')">Je moet een ploeg kiezen</mat-error>
+         </mat-form-field> -->
+       <div class="input-field col m6 s12">
+         <input placeholder="Tegenstander" [ngClass]="{'teal-text text-lighten-2': tel.valid}" [(ngModel)]="game.tegenstander" required #tel="ngModel" name="tel" id="tel" type="text"  value="">
+         <label for="tel" [ngClass]="{'active': game.tegenstander != ''}" class="klingeApp-text text-blue-dark">Tegenstander</label>
+         <div [hidden]="tel.valid || tel.pristine" class="red-text text-lighten-1">Kies een tegenstander</div>
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col m6 s12">
+         <input placeholder="Doelpunten KSK " [ngClass]="{'teal-text text-lighten-2': pos.valid, 'red-text text-lighten-2': pos.invalid}" [(ngModel)]="game.doelpuntenKSK" #pos="ngModel" required pattern="[0-9]*" name="pos" id="pos" type="text"  value="">
+         <div [hidden]="pos.valid" class="red-text text-lighten-1">Enkel numerieke waarden</div>
+         <label for="pos" [ngClass]="{'active': game.doelpuntenKSK != ''}" class="klingeApp-text text-blue-dark">Doelpunten KSK {{game.ploegNaam}}</label>
+       </div>
+       <div class="input-field col m6 s12">
+         <input placeholder="Doelpunten tegenstander" [ngClass]="{'teal-text text-lighten-2': goal.valid, 'red-text text-lighten-2': goal.invalid}" pattern="[0-9]*" [(ngModel)]="game.doelpuntenTegenstander" required #goal="ngModel" name="goal" id="goal" type="text"  value="">
+         <div [hidden]="goal.valid" class="red-text text-lighten-1">Enkel numerieke waarden</div>
+         <label for="goal" [ngClass]="{'active':game.doelpuntenTegenstander.pristine != ''}" class="klingeApp-text text-blue-dark">Doelpunten {{game.tegenstander}}</label>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col m6 s12">
+         <label for="ingeschreven" class="example-margin">Thuis/uit?:</label>
+          <!-- <mat-radio-group [(ngModel)]="game.thuisSpelend" name="ingeschreven">
+            <mat-radio-button class="example-margin" value="1">
+              KSK Thuis
+            </mat-radio-button>
+            <mat-radio-button class="example-margin" value="0">
+              KSK Uit
+            </mat-radio-button>
+          </mat-radio-group> -->
+       </div>
+     </div>
+     <div class="row">
+       <div class="input-field col s12">
+         <p [ngClass]="{'active': game.verslag != ''}" class="klingeApp-text text-blue-dark">
+           Verslag
+         </p>
+         <div [froalaEditor] [(froalaModel)]="game.verslag" name="verslag" id="verslag" ></div>
+       </div>
+
+
+     </div>
+     <div class="row">
+      <div class="input-field col m12 s12">
+        <button class="btn teal lighten-2" [disabled]="!newGameForm.form.valid || game.ploeg_id == ''" type="submit" name="action">Verslag toevoegen
+          <i class="material-icons right">save</i>
+        </button>
+        <button class="klingeApp blue-grey btn" [routerLink]="['/api/wedstrijden']"><i class="material-icons left">chevron_left</i>Alle verslagen</button>
+      </div>
+     </div>
+   </form>
+ </div>
