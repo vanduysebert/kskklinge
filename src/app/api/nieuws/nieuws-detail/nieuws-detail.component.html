@@ -1,18 +1,29 @@
 <div *ngIf="news">
 
-<h4 class="klingeApp-text text-orange center-align">{{news.titel}}</h4>
-<div  class="row">
-  <div class="col s12">
-    <div class="card">
-      <div class="card-content klingeApp-text text-blue-dark">
-        <p class="right-align klingeApp-text text-medium-blue">
-          <span >{{news.datum | date}}</span>
-        </p>
+
+<div  class="row justify-content-center">
+  <div class="col col-md-10 col-lg-8">
+    <div class="border-info card">
+      <div class="card-header  bg-dark">
+          <h4 class="display-4 text-center text-secondary">{{news.titel}}</h4>
+          <p class="text-right muted text-info">
+            <span >{{news.datum |  amDateFormat:'DD MMMM YYYY'}}</span>
+          </p>
+      </div>
+      <div class="card-body text-primary">
         <div [froalaView]="news.inhoud"></div>
       </div>
-      <div class="card-action">
-        <a routerLink="/api/nieuws/nieuws-nieuw" class="btn green lighten-2">Nieuw bericht opmaken</a>
-        <a class="right klingeApp blue-grey btn" routerLink="/api/nieuws"><i class="material-icons left">chevron_left</i>Alle berichten</a>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col">
+            <a routerLink="/api/nieuws/nieuws-nieuw" class="btn btn-success btn-block">Nieuw bericht opmaken</a>
+          </div>
+          <div class="col">
+            <a class="btn btn-block btn-info" routerLink="/api/nieuws"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</a>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -20,9 +31,11 @@
 
 </div>
  <div *ngIf="!news">
-   <h5 class="center red-text darken-1">Kon bericht niet vinden</h5>
-   <div class="center">
-     <button class="klingeApp blue-grey btn " [routerLink]="['/api/nieuws']"><i class="material-icons left">chevron_left</i>Alle verslagen</button>
+   <h3 class="text-center text-danger">Kon bericht niet vinden</h3>
+   <div class="row justify-content-center">
+     <div class="col-3">
+       <button class="btn btn-block btn-dark " [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
+     </div>
 
    </div>
 

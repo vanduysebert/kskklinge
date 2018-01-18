@@ -1,22 +1,22 @@
 <div *ngIf="game">
-
-  <h3 *ngIf="game.thuisSpelend" class="klingeApp-text text-orange center-align">Verslag {{game.ploegNaam}} - {{game.tegenstander}}</h3>
-  <h3 *ngIf="!game.thuisSpelend" class="klingeApp-text text-orange center-align">Verslag {{game.tegenstander}} - {{game.ploegNaam}}</h3>
 <div  class="row">
-  <div class="col s12">
-    <div class="card">
-      <div class="card-content klingeApp-text text-blue-dark">
-        <p class="right-align klingeApp-text text-medium-blue">
-          <span >{{game.datum | date}}</span>
+  <div class="col">
+    <div class="card border-info">
+      <div class="card-header bg-primary">
+        <h3 *ngIf="game.thuisSpelend" class="text-center text-secondary">Verslag {{game.ploegNaam}} - {{game.tegenstander}}</h3>
+        <h3 *ngIf="!game.thuisSpelend" class="text-center text-secondary">Verslag {{game.tegenstander}} - {{game.ploegNaam}}</h3>
+        <p class="text-right muted text-info">
+          <span>{{game.datum | amDateFormat:'DD MMMM YYYY'}}</span>
         </p>
-
-        <h4 *ngIf="game.thuisSpelend" class="center klingeApp-text text-blue-dark">{{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}} </h4>
-        <h4 *ngIf="!game.thuisSpelend" class="center klingeApp-text text-blue-dark">{{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}</h4>
+      </div>
+      <div class="card-body text-primary">
+        <h4 *ngIf="game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}} </h4>
+        <h4 *ngIf="!game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}</h4>
         <div [froalaView]="game.verslag"></div>
       </div>
-      <div class="card-action">
-        <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn green lighten-2">Nieuw verslag opmaken</a>
-        <a class="right klingeApp blue-grey btn" routerLink="/api/wedstrijden"><i class="material-icons left">chevron_left</i>Alle verslagen</a>
+      <div class="card-footer">
+        <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn btn-success">Nieuw verslag opmaken <i class="fa fa-plus" aria-hidden="true"></i></a>
+        <a class="btn btn-info" routerLink="/api/wedstrijden"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</a>
       </div>
     </div>
   </div>
@@ -24,9 +24,9 @@
 
 </div>
  <div *ngIf="!game">
-   <h5 class="center red-text darken-1">Kon verslag niet vinden</h5>
+   <h5 class="text-danger text-center">Kon verslag niet vinden</h5>
    <div class="center">
-     <button class="klingeApp blue-grey btn " [routerLink]="['/api/wedstrijden']"><i class="material-icons left">chevron_left</i>Alle verslagen</button>
+     <button class="btn btn-info " [routerLink]="['/api/wedstrijden']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</button>
 
    </div>
 

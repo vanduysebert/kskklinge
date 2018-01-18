@@ -7,7 +7,7 @@ import {AppSettings} from '../../../app-settings';
 import { FileUploader } from 'ng2-file-upload';
 import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upload';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
-
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-edit-ploeg',
   templateUrl: './edit-ploeg.component.html',
@@ -16,8 +16,9 @@ import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 export class EditPloegComponent implements OnInit {
   @Output() edited = new EventEmitter<boolean>();
   team: Ploeg;
+  route: ActivatedRoute;
   param: number;
-  time: string;
+  time: Date;
   uploader:FileUploader;
   uploaderOptions: FileUploaderOptions;
   response: string;
@@ -26,13 +27,9 @@ export class EditPloegComponent implements OnInit {
   src: string = "";
   sizeLimit = 5;
   newPick: boolean = false;
-  constructor(location: Location, private router: Router, private ploegService: PloegenService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, private router: Router, private activeRoute: ActivatedRoute, private ploegService: PloegenService, private snackBar: MatSnackBar) {
+    activeRoute.params.subscribe( p => {
+      this.param = p['id'];
     });
     this.uploader = new FileUploader({
       url: AppSettings.API_ENDPOINT + 'ploegen/upload'
@@ -53,9 +50,9 @@ export class EditPloegComponent implements OnInit {
           this.team.fotoUrl = this.src;
           this.ploegService.editTeam(this.team).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
+                duration: 2000
+              });
               this.router.navigateByUrl('/api/ploegen');
 
             }
@@ -70,9 +67,9 @@ export class EditPloegComponent implements OnInit {
           this.src = "";
           this.ploegService.editTeam(this.team).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
+                duration: 2000
+              });
               this.router.navigateByUrl('/api/ploegen');
 
             }
@@ -119,17 +116,21 @@ export class EditPloegComponent implements OnInit {
 
 
    onSubmit() {
+     this.team.trainingsuur = this.time.getHours() + ":" + this.time.getMinutes() + ":" + this.time.getSeconds();
+     console.log(this.team);
      if (this.uploader.getNotUploadedItems().length) {
        this.uploader.uploadAll();
        console.log("uploaded");
      } else {
+
+
      this.ploegService.editTeam(this.team).subscribe(res => {
        console.log("no upload");
        if (res == "OK") {
 
-         // this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
-         //   duration: 2000
-         // });
+         this.snackBar.open("Ploeg " + this.team.naam + "succesvol aangepast.","", {
+           duration: 2000
+         });
          this.router.navigateByUrl('/api/ploegen').then(()=>{
            location.reload();
           }
@@ -144,11 +145,17 @@ export class EditPloegComponent implements OnInit {
     this.ploegService.getPloeg(this.param).subscribe(
       ploeg => {
         let t: string;
+        let s : string;
+        let d: Date;
+
         this.team = ploeg;
         this.src = ploeg.fotoUrl;
         t = ploeg.trainingsuur;
         if (t) {
-          this.time = t.substr(0,5);
+
+          d= new Date();
+          s = d.getMonth()+1 + "/" + d.getDate() + "/" + d.getFullYear() + " " + t;
+          this.time = new Date(s);
         }
       },
       err => {

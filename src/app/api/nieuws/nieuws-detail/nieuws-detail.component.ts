@@ -16,13 +16,9 @@ export class NieuwsDetailComponent implements OnInit {
   news: Nieuws;
   param: number;
 
-  constructor(location: Location, private router: Router, private nieuwsService: NieuwsService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, private route: ActivatedRoute, private nieuwsService: NieuwsService) {
+    route.params.subscribe( p => {
+      this.param = p['id'];
     });
   }
 

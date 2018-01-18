@@ -3,8 +3,8 @@ import {WedstrijdService} from './wedstrijd.service'
 import { Wedstrijd }           from './wedstrijd';
 import {Observable} from 'rxjs/Rx';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
-
+import {MatTableDataSource, MatSort, MatPaginator, MatSnackBar} from '@angular/material';
+import {DeleteDialogService} from './../dialog/delete-dialog.service';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -21,7 +21,7 @@ export class WedstrijdenComponent implements OnInit {
   wedstrijden = new MatTableDataSource<Wedstrijd>([]);
   route: ActivatedRoute;
 
-  constructor(location: Location, protected router: Router, activeRoute: ActivatedRoute, protected wedstrijdService: WedstrijdService) {
+  constructor(location: Location, protected router: Router, activeRoute: ActivatedRoute, protected wedstrijdService: WedstrijdService, private dialogsService: DeleteDialogService, private snackBar: MatSnackBar) {
     this.route = activeRoute;
   }
 
@@ -32,7 +32,22 @@ export class WedstrijdenComponent implements OnInit {
   }
 
   deleteWedstrijd(id: number, ploegNaam:string, tegenstander: string) {
-
+    console.log(tegenstander);
+    this.dialogsService
+     .confirm('Verwijder ' + ploegNaam + ' - ' + tegenstander, 'Ben je zeker dat je wedstrijd ' + ploegNaam + ' -  ' + tegenstander + ' wilt verwijderen?')
+     .subscribe(res => {
+       console.log(res);
+       if (res === "delete") {
+         this.wedstrijdService.deleteWedstrijd(id).subscribe(res => {
+           if (res == true) {
+             this.snackBar.open(ploegNaam + " - " + tegenstander + " succesvol verwijderd","", {
+               duration: 2000
+             });
+             this.loadWedstrijden();
+         }
+         });
+       }
+     });
 
   }
 

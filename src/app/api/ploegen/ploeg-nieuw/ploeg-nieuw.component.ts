@@ -7,7 +7,7 @@ import {AppSettings} from '../../../app-settings';
 import { FileUploader } from 'ng2-file-upload';
 import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upload';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
-
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-ploeg-nieuw',
   templateUrl: './ploeg-nieuw.component.html',
@@ -19,11 +19,12 @@ export class PloegNieuwComponent implements OnInit {
   uploader:FileUploader;
   uploaderOptions: FileUploaderOptions;
   response: string;
+  time: Date;
   birthDate: Date;
   imgSync: boolean = true;
   src: string = "";
   sizeLimit = 5;
-  constructor(private ploegService: PloegenService, private router: Router) {
+  constructor(private ploegService: PloegenService, private router: Router, private snackBar: MatSnackBar) {
     this.uploader = new FileUploader({
       url: AppSettings.API_ENDPOINT + 'ploegen/upload'
     });
@@ -43,9 +44,9 @@ export class PloegNieuwComponent implements OnInit {
           this.team.fotoUrl = this.src;
           this.ploegService.addNewTeam(this.team).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
+                duration: 2000
+              });
             }
           });
         }
@@ -58,9 +59,9 @@ export class PloegNieuwComponent implements OnInit {
           this.src = "";
           this.ploegService.addNewTeam(this.team).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
+                duration: 2000
+              });
             }
           });
         };
@@ -100,6 +101,11 @@ export class PloegNieuwComponent implements OnInit {
     }
 
   onSubmit() {
+    console.log(this.time);
+    if(this.time) {
+      this.team.trainingsuur = this.time.getHours() + ":" + this.time.getMinutes() + ":" + this.time.getSeconds();
+    }
+
     if (this.uploader.getNotUploadedItems().length) {
       this.uploader.uploadAll();
       console.log("uploaded");
@@ -116,9 +122,9 @@ export class PloegNieuwComponent implements OnInit {
     }
     this.ploegService.addNewTeam(newTeam).subscribe(res => {
       if (res == "OK") {
-        // this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
-        //   duration: 2000
-        // });
+        this.snackBar.open("Nieuwe ploeg " + this.team.naam + "succesvol aangemaakt.","", {
+          duration: 2000
+        });
         this.router.navigateByUrl('/api/ploegen').then(()=>{
           location.reload();
         });

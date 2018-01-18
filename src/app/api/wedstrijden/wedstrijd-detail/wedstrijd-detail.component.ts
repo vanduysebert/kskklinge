@@ -14,13 +14,9 @@ import { Wedstrijd } from './../wedstrijd';
 export class WedstrijdDetailComponent implements OnInit {
   game: Wedstrijd;
   param: number;
-  constructor(location: Location, private router: Router, private wedstrijdService: WedstrijdService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, private route: ActivatedRoute, private wedstrijdService: WedstrijdService) {
+    route.params.subscribe( p => {
+      this.param = p['id'];
     });
    }
 

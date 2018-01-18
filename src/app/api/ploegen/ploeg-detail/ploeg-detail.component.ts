@@ -21,13 +21,9 @@ export class PloegDetailComponent implements OnInit {
   spelers: Speler[];
   time: string;
   param: number
-  constructor(location: Location, router: Router, private ploegService: PloegenService,private spelersService: SpelersService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, route: ActivatedRoute, private ploegService: PloegenService,private spelersService: SpelersService) {
+    route.params.subscribe( p => {
+      this.param = p['id'];
     });
   }
 
@@ -45,7 +41,7 @@ export class PloegDetailComponent implements OnInit {
 
   deletePlayer(id: number, speler:string, spelerVoornaam: string) {
     console.log(speler);
-    
+
 
   }
 

@@ -2,9 +2,37 @@
 
 //@import "assets/resetcss.scss";
 //@import "assets/materialize/materialize.scss";
+
+
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "assets/bootstrap/bootstrap.scss";
 
+.hoverable:hover {
+  cursor:pointer;
+
+}
+
+.rounded-circle i {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    font-size: 1.2em;
+    background: $appBlueDark;
+    border-radius: 100%;
+    color: $appOrange;
+}
+
+.frameCenter, .frameDiv {
+  width: 320px;
+  height: 240px;
+}
+
+.captionOpac {
+  background: rgba(98, 120, 148, .7);
+  border: 2px solid $appBlue;
+  border-radius: 10px;
+}
 
 .tableHeader {
   font-family: $headings-font-family;
@@ -117,33 +145,56 @@ mat-header-row {
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
+  .sidebarWidth {
+    width: 250px;
+  }
 
+  .border-top {
+    border-top: 2px solid $lightKSK;
+  }
 }
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) {
-
+  .sidebarWidth {
+    width: 300px;
+  }
+  .frameCenter, .frameDiv {
+    width: 420px;
+    height: 240px;
+  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+  .sidebarWidth {
+    width: 400px;
+  }
 
+  .rounded-circle i {
+      width: 70px;
+      height: 70px;
+      padding: 13px;
+      font-size: 2.5em;
+      background: $appBlueDark;
+      border-radius: 100%;
+      color: $appOrange;
+  }
 }
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
-  .center-table {
-    margin: 0 auto;
-    width: 90%;
-    float:none;
+  .sidebarWidth {
+    width: 320px;
   }
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
-  .center-table {
-    margin: 0 auto;
-    width: 50%;
-    float:none;
+  .sidebarWidth {
+    width: 320px;
+  }
+  .border-top {
+    border-top: none;
   }
 }

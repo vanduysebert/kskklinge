@@ -10,6 +10,7 @@ import { FileUploader } from 'ng2-file-upload';
 import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upload';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import * as moment from 'moment';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-speler-nieuw',
@@ -17,8 +18,7 @@ import * as moment from 'moment';
   styleUrls: ['./speler-nieuw.component.scss']
 })
 export class SpelerNieuwComponent implements OnInit {
-  player: Speler = new Speler(0, "", "", null, "", "", "", false, 0, "", "", 0);
-  param: number;
+  player: Speler = new Speler(0, "", "", null, "", "", "", 0, 0, "", "", 0, "");
   time: string;
   photoUrl: string;
   ploegen: Ploeg[];
@@ -29,15 +29,7 @@ export class SpelerNieuwComponent implements OnInit {
   imgSync: boolean = true;
   src: string = "";
   sizeLimit = 5;
-  constructor(location: Location, private router: Router, private ploegenService : PloegenService, private spelerService: SpelersService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
-    });
-
+  constructor(private ploegenService : PloegenService, private router: Router, private spelerService: SpelersService, private snackBar: MatSnackBar) {
     this.uploader = new FileUploader({
       url: AppSettings.API_ENDPOINT + 'spelers/upload'
     });
@@ -57,9 +49,9 @@ export class SpelerNieuwComponent implements OnInit {
           this.player.fotoUrl = this.src;
           this.spelerService.addNewPlayer(this.player).subscribe(res => {
             if (res == "OK") {
-              /*this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
+              this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
                 duration: 2000
-              });*/
+              });
               this.router.navigateByUrl('/api/spelers');
             }
           });
@@ -73,9 +65,9 @@ export class SpelerNieuwComponent implements OnInit {
           this.src = "";
           this.spelerService.addNewPlayer(this.player).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
+                duration: 2000
+              });
               this.router.navigateByUrl('/api/spelers');
             }
           });
@@ -117,8 +109,12 @@ export class SpelerNieuwComponent implements OnInit {
     }
 
    onSubmit() {
+     console.log(this.player);
      this.birthDate = new Date(this.player.geboortedatum);
      this.player.geboortedatum = moment(this.birthDate).format('YYYY-MM-DD HH-mm-ss');
+     if (!this.player.ploeg_id) {
+       this.player.ploeg_id = 1
+     }
      if (this.uploader.getNotUploadedItems().length) {
        this.uploader.uploadAll();
        console.log("uploaded");
@@ -126,9 +122,9 @@ export class SpelerNieuwComponent implements OnInit {
        this.spelerService.addNewPlayer(this.player).subscribe(res => {
          if (res == "OK") {
            console.log("not uploaded");
-           // this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
-           //   duration: 2000
-           // });
+           this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
+             duration: 2000
+           });
            this.router.navigateByUrl('/api/spelers').then(()=>{
              location.reload();
             }

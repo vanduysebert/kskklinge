@@ -22,12 +22,20 @@ import { HttpModule } from '@angular/http';
     import {MatTableModule} from '@angular/material/table';
     import {MatSortModule} from '@angular/material/sort';
     import {MatPaginatorModule} from '@angular/material/paginator';
+    import {MatDialogModule} from '@angular/material/dialog';
+    import {MatSnackBarModule} from '@angular/material/snack-bar';
     import { MomentModule } from 'angular2-moment';
 
     //ng-bootstrap
     import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     import { PaginationModule } from 'ngx-bootstrap/pagination';
     import { ModalModule } from 'ngx-bootstrap/modal';
+    import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+    import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+    import { AccordionModule } from 'ngx-bootstrap/accordion';
+    import { CollapseModule } from 'ngx-bootstrap/collapse';
+    import { CarouselModule } from 'ngx-bootstrap/carousel';
+    import {Ng2PageScrollModule} from 'ng2-page-scroll';
 //Classes
 import {AppSettings} from './app-settings';
 
@@ -91,10 +99,15 @@ import {AppSettings} from './app-settings';
       import {SpelersService} from './api/spelers/spelers.service';
       import {WedstrijdService} from './api/wedstrijden/wedstrijd.service';
       import {NieuwsService} from './api/nieuws/nieuws.service';
+      import {DeleteDialogService} from './api/dialog/delete-dialog.service';
     //--Website
 
   //Other services
 import { BooleanCheckPipe } from './boolean-check.pipe';
+import { defineLocale } from 'ngx-bootstrap/bs-moment';
+import { nl } from 'ngx-bootstrap/locale';
+import { U13Component } from './jeugd/u13/u13.component';
+defineLocale('nl', nl);
 
 @NgModule({
   declarations: [
@@ -144,7 +157,8 @@ import { BooleanCheckPipe } from './boolean-check.pipe';
         WedstrijdDetailComponent,
         EditWedstrijdComponent,
     BooleanCheckPipe,
-    DeleteDialog
+    DeleteDialog,
+    U13Component
   ],
   imports: [
     BrowserModule,
@@ -164,22 +178,33 @@ import { BooleanCheckPipe } from './boolean-check.pipe';
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TimepickerModule.forRoot(),
+    AccordionModule.forRoot(),
+    CollapseModule.forRoot(),
+    CarouselModule.forRoot(),
     MomentModule,
     NgxDatatableModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    Ng2PageScrollModule
   ],
   exports: [
+    DeleteDialog
   ],
   providers: [
     PloegenService,
     SpelersService,
     WedstrijdService,
     NieuwsService,
-    AppSettings
+    AppSettings,
+    DeleteDialogService
   ],
   entryComponents: [
+    DeleteDialog
   ],
   bootstrap: [AppComponent]
 })

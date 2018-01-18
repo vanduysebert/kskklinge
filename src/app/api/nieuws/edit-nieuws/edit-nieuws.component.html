@@ -1,45 +1,49 @@
 <div *ngIf="news">
-<h4 class="klingeApp-text text-orange center-align">{{news.titel}} aanpassen</h4>
-<div class="row">
-   <form #editNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col">
-     <div class="row">
-       <div class="form-group col-md-6">
-           <input class="form-control"
-           bsDatepicker
-          [ngClass]="{'teal-text text-lighten-2': birth.valid, 'red-text text-lighten-2': birth.invalid}"
-          placeholder="Datum" [(ngModel)]="news.datum" #birth="ngModel" name="birth" required id="playerBirth" value="news.datum"
-         type="text">
-           <div [hidden]="birth.valid || birth.pristine" class="red-text text-lighten-1">Datum is vereist</div>
-       </div>
-     </div>
-
-     <div class="row">
-       <div class="input-field col m6 s12">
-         <input placeholder="Titel " [ngClass]="{'teal-text text-lighten-2': pos.valid, 'red-text text-lighten-2': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text"  value="">
-         <div [hidden]="pos.valid || pos.pristine" class="red-text text-lighten-1">Titel is vereist</div>
-         <label for="pos" [ngClass]="{'active': news.titel != ''}" class="klingeApp-text text-blue-dark">Titel</label>
-       </div>
-     </div>
-
-     <div class="row">
-       <div class="input-field col s12">
-         <p [ngClass]="{'active': news.inhoud != ''}" class="klingeApp-text text-blue-dark">
-           Bericht
-         </p>
-         <div [froalaEditor] [(froalaModel)]="news.inhoud" name="verslag" id="verslag" ></div>
-       </div>
-
-
-     </div>
-     <div class="row">
-      <div class="input-field col m12 s12">
-        <button class="btn teal lighten-2" [disabled]="!editNewsForm.form.valid || editNewsForm.form.pristine" type="submit" name="action">Bericht aanpassen
-          <i class="material-icons right">save</i>
-        </button>
-        <button class="klingeApp blue-grey btn" [routerLink]="['/api/nieuws']"><i class="material-icons left">chevron_left</i>Alle berichten</button>
+  <h4 class="klingeApp-text text-orange center-align">{{news.titel}} aanpassen</h4>
+  <div class="row">
+    <form #editNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col">
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <label for="pos" class="text-primary">Titel</label>
+          <input class="form-control" [ngClass]="{'is-valid': pos.valid, 'is-invalid text-danger': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text" value="">
+          <div  class="invalid-feedback">Titel is vereist</div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="birth" class="text-primary">Datum</label>
+          <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid, 'text-danger is-invalid': birth.invalid}" [(ngModel)]="news.datum" #birth="ngModel" name="birth" required id="playerBirth" value="news.datum"
+            type="text">
+          <div class="invalid-feedback">Datum is vereist</div>
+        </div>
       </div>
-     </div>
-   </form>
- </div>
 
+      <div class="form-row">
+        <div class="col form-group">
+          <p  class="text-primary">
+            Bericht
+          </p>
+          <div [froalaEditor] [(froalaModel)]="news.inhoud" name="verslag" id="verslag"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <button class="btn btn-success btn-block" [disabled]="!editNewsForm.form.valid || editNewsForm.form.pristine" type="submit" name="action">Bericht aanpassen
+            <i class="fa-floppy-o fa" aria-hidden="true"></i>
+        </button>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+          <button class="btn-dark btn-block btn" [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<div *ngIf="!news">
+  <h2 class="text-center text-danger">Bericht niet gevonden</h2>
+  <div class="row">
+    <div class="input-field col m12 s12">
+      <button class="btn-dark btn" [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Nieuwsoverzicht</button>
+    </div>
+  </div>
 </div>

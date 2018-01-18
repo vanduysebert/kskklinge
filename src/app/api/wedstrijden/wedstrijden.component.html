@@ -27,7 +27,7 @@
 
             <ng-container matColumnDef="datum">
               <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Datum </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api//wedstrijden-detail', element.wedstrijd_id]"> {{element.datum | amDateFormat:'l'}}  </a></mat-cell>
+              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/wedstrijden/wedstrijd-detail', element.wedstrijd_id]"> {{element.datum | amDateFormat:'l'}}  </a></mat-cell>
             </ng-container>
 
 
@@ -46,13 +46,14 @@
               <mat-cell  *matCellDef="let element" class="text-primary" ><span *ngIf="element.thuisSpelend == true">{{element.doelpuntenKSK}} - {{element.doelpuntenTegenstander}}</span><span *ngIf="element.thuisSpelend == false"> {{element.doelpuntenTegenstander}} - {{element.doelpuntenKSK}} </span> </mat-cell>
             </ng-container>
 
+
             <ng-container matColumnDef="edit">
               <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
               <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/wedstrijden/wedstrijd-edit', element.wedstrijd_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
             </ng-container>
             <ng-container matColumnDef="del">
               <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteNieuws(element.wedstrijd_id, element.titel)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteWedstrijd(element.wedstrijd_id, element.ploegNaam, element.tegenstander)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
             </ng-container>
             <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>

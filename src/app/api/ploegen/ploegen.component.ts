@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import {DeleteDialogService} from './../dialog/delete-dialog.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-ploegen',
@@ -15,22 +17,14 @@ import 'rxjs/add/operator/map';
 })
 export class PloegenComponent implements OnInit {
   ploegen: Ploeg[];
-  isRootRoute: boolean = false;
-  public changed: boolean;
+  route:ActivatedRoute;
 
-  constructor(location: Location, protected router: Router, activeRoute: ActivatedRoute, protected ploegService: PloegenService) {
-    router.events.subscribe((val) => {
-      console.log("ev");
-      if (location.path() == "/api/ploegen") {
-        this.isRootRoute = true;
-      } else {
-        this.isRootRoute = false;
-      }
-    });
+  constructor(location: Location, protected router: Router, activeRoute: ActivatedRoute, protected ploegService: PloegenService, protected dialogsService: DeleteDialogService, private snackBar: MatSnackBar) {
+    this.route = activeRoute
   }
 
   deleteTeam(id: number, ploeg:string) {
-    /*this.dialogsService
+    this.dialogsService
      .confirm('Verwijder ' + ploeg, 'Ben je zeker dat je ploeg ' + ploeg + ' wilt verwijderen? Dit verwijdert ook alle spelers uit die ploeg!')
      .subscribe(res => {
        if (res === "delete") {
@@ -43,7 +37,7 @@ export class PloegenComponent implements OnInit {
          }
          });
        }
-     });*/
+     });
 
   }
 

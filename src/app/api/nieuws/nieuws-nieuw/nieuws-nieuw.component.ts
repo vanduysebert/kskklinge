@@ -5,7 +5,7 @@ import {AppSettings} from '../../../app-settings';
 import * as moment from 'moment';
 import {NieuwsService} from './../nieuws.service';
 import { Nieuws } from './../nieuws';
-
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-nieuws-nieuw',
@@ -14,18 +14,11 @@ import { Nieuws } from './../nieuws';
 })
 export class NieuwsNieuwComponent implements OnInit {
   news: Nieuws = new Nieuws(0, "", "", "");
-  param: number;
   time: string;
   playDate: Date;
 
-  constructor(location: Location, private router: Router, private nieuwsService: NieuwsService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
-    });
+  constructor(private router: Router, private nieuwsService: NieuwsService, private snackBar: MatSnackBar) {
+
   }
 
 
@@ -36,9 +29,9 @@ export class NieuwsNieuwComponent implements OnInit {
 
     this.nieuwsService.addNewNieuws(this.news).subscribe(res => {
       if (res == "OK") {
-        // this.snackBar.open(this.news.titel + " succesvol aangemaakt. " ,"", {
-        //   duration: 2000
-        // });
+        this.snackBar.open(this.news.titel + " succesvol aangemaakt. " ,"", {
+          duration: 2000
+        });
         this.router.navigateByUrl('/api/nieuws').then(()=>{
           location.reload();
          }

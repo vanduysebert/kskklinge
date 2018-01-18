@@ -9,6 +9,7 @@ import {AppSettings} from '../../../app-settings';
 import { FileUploader } from 'ng2-file-upload';
 import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upload';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-edit-speler',
@@ -27,13 +28,9 @@ export class EditSpelerComponent implements OnInit {
   response: string;
   imgSync: boolean = true;
   sizeLimit = 5;
-  constructor(location: Location, private router: Router, private ploegenService : PloegenService, private spelerService: SpelersService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, private route: ActivatedRoute, private router:Router, private ploegenService : PloegenService, private spelerService: SpelersService, private snackBar: MatSnackBar) {
+    route.params.subscribe( p => {
+      this.param = p['id'];
     });
 
     this.uploader = new FileUploader({
@@ -54,9 +51,9 @@ export class EditSpelerComponent implements OnInit {
           this.player.fotoUrl = this.src;
           this.spelerService.editPlayer(this.player).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
+                duration: 2000
+              });
             }
           });
         }
@@ -68,9 +65,9 @@ export class EditSpelerComponent implements OnInit {
           this.src = "";
           this.spelerService.editPlayer(this.player).subscribe(res => {
             if (res == "OK") {
-              // this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
-              //   duration: 2000
-              // });
+              this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
+                duration: 2000
+              });
             }
           });
         }
@@ -117,9 +114,9 @@ export class EditSpelerComponent implements OnInit {
      } else {
        this.spelerService.editPlayer(this.player).subscribe(res => {
          if (res == "OK") {
-           // this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
-           //   duration: 2000
-           // });
+           this.snackBar.open("speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangepast.","", {
+             duration: 2000
+           });
            this.router.navigateByUrl('/api/spelers').then(()=>{
              location.reload();
             }

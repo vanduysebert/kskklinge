@@ -1,4 +1,94 @@
-<div *ngIf="isRootRoute">
+<div *ngIf="route.children.length === 0">
+
+  <div class="row justify-content-center">
+    <div class="col col-md-10">
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+          <a routerLink="/api/spelers/speler-nieuw" class="btn-lg btn-secondary btn-block btn">Nieuwe speler aanmaken</a>
+        </div>
+
+      </div>
+
+      <div class="card border-info">
+        <div class="card-header bg-primary">
+            <h3 class=" text-secondary text-center">Speleroverzicht</h3>
+        </div>
+        <div class="card-body text-primary">
+
+          <div class="row justify-content-center">
+            <div *ngIf="spelers != null" class="col col-md-10 col-lg-8 col-xl-6">
+                <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
+            </div>
+          </div>
+
+          <div class="row mt-4">
+          <mat-table class="table table-bordered table-hover" #table [dataSource]="spelers" matSort>
+
+
+            <ng-container matColumnDef="naam">
+              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Naam </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/spelers/speler-detail', element.speler_id]"> {{element.voornaam}} {{element.naam}}  </a></mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="geboortedatum">
+              <mat-header-cell class="tableHeader d-sm-block d-none" *matHeaderCellDef mat-sort-header> Geboortedatum </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary d-sm-block d-none"> {{element.geboortedatum | amDateFormat:'l'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell class="tableHeader d-lg-block d-none" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary d-lg-block d-none" >{{element.email}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tel">
+              <mat-header-cell class="tableHeader d-xl-block d-none" *matHeaderCellDef mat-sort-header> Telefoonnummer </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary d-xl-block d-none" >{{element.telefoonnummer}}</mat-cell>
+            </ng-container>
+
+              <ng-container  matColumnDef="ploegnaam">
+                <mat-header-cell class="tableHeader d-lg-block d-none" *matHeaderCellDef mat-sort-header> Ploeg </mat-header-cell>
+                <mat-cell  *matCellDef="let element" class="text-primary d-lg-block d-none" >{{element.ploegNaam}}</mat-cell>
+              </ng-container>
+
+
+            <ng-container class="d-md-table" matColumnDef="ingeschreven">
+              <mat-header-cell class="tableHeader d-xl-block d-none" *matHeaderCellDef mat-sort-header> Ingeschreven </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary d-xl-block d-none" ><span *ngIf="element.ingeschreven == 1">Ja</span><span *ngIf="element.ingeschreven == 0">Nee</span></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/spelers/speler-edit', element.speler_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="del">
+              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deletePlayer(element.speler_id, element.naam, element.voornaam)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
+            </ng-container>
+            <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <a routerLink="/api/spelers/speler-nieuw" class="btn btn-success ">Nieuwe speler aanmaken</a>
+          <a class="float-sm-right btn btn-dark" routerLink="/api"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Overzicht</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  <router-outlet></router-outlet>
+
+
+<!-- <div *ngIf="route.children.length === 0">
 
   <div class="row">
     <div class="col s12 m10 offset-m1">
@@ -54,4 +144,4 @@
   </div>
 
 </div>
-  <router-outlet></router-outlet>
+  <router-outlet></router-outlet> -->

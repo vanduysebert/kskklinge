@@ -16,7 +16,7 @@ import { U10Component } from './jeugd/u10/u10.component';
 import { U11Component } from './jeugd/u11/u11.component';
 import { U15Component } from './jeugd/u15/u15.component';
 import { U17Component } from './jeugd/u17/u17.component';
-
+import { U13Component } from './jeugd/u13/u13.component';
 
 import { ClubComponent } from './club/club.component';
 import { BestuurComponent } from './club/bestuur/bestuur.component';
@@ -180,6 +180,10 @@ const routes: Routes = [
       {
         path: 'u11',
         component: U11Component
+      },
+      {
+        path: 'u13',
+        component: U13Component
       },
       {
         path: 'u15',

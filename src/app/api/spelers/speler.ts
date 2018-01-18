@@ -7,10 +7,11 @@ export class Speler {
     public email: string,
     public telefoonnummer: string,
     public adres: string,
-    public ingeschreven: boolean,
+    public ingeschreven: number,
     public ploeg_id: number,
     public fotoUrl: string,
     public positie: string,
-    public doelpunten: number
+    public doelpunten: number,
+    public ploegNaam: string
     ){}
 }

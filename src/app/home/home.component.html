@@ -1,53 +1,71 @@
-
-<div class="row carHome">
-  <img class="slider responsive-img" [@enterAnimation] src="assets/img/main1.jpg" *ngIf="slide == 1"/>
-  <img class="slider responsive-img" [@enterAnimation] src="assets/img/main2.jpg" *ngIf="slide == 2"/>
-  <img class="slider responsive-img" [@enterAnimation] src="assets/img/main3.jpg" *ngIf="slide == 3"/>
-  <img class="slider responsive-img" [@enterAnimation] src="assets/img/main4.jpg" *ngIf="slide == 4"/>
-</div>
-
 <div class="row">
-
-  <div class="col l4 s12 m6">
-    <h2 class="center-align">
-      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-    </h2>
-
-    <div class="frameResp hide-on-med-and-down">
-      <iframe class="responsive-table" src="http://www.voetbalkrant.com/service/noscript.php?id=1190" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <div class="frameResp hide-on-large-only">
-      <iframe class="responsive-table" src="http://www.voetbalkrant.com/service/noscript.php?id=1193" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-  </div>
-
-  <div class="col l4 s12 m6">
-    <h2 class="center-align">
-
-    </h2>
-
-  </div>
-  <div class="col l4 s12 m6">
-    <h2 class="center-align">
-      Jeugd
-    </h2>
+  <div class="col">
+    <carousel>
+      <slide>
+        <img src="assets/img/main1.jpg" alt="First slide" class="rounded" style="display: block; width: 100%;">
+      </slide>
+      <slide>
+        <img src="assets/img/main2.jpg" alt="Second slide" style="display: block; width: 100%;">
+        <div class="carousel-caption d-none d-md-block ">
+          <h3 class="text-white d-inline px-2"></h3>
+          <p><a routerLink="/evenementen" class="btn btn-lg btn-secondary">Evenementen</a></p>
+        </div>
+      </slide>
+      <slide>
+        <img src="assets/img/main3.jpg" alt="Third slide" style="display: block; width: 100%;">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 class="text-white d-inline px-2"></h3>
+          <p><a routerLink="/senioren/a-ploeg" class="btn btn-lg btn-secondary">Senioren</a></p>
+        </div>
+      </slide>
+      <slide>
+        <img src="assets/img/main4.jpg" alt="Third slide" style="display: block; width: 100%;">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 class="text-white d-inline px-2"></h3>
+          <p><a routerLink="/senioren/a-ploeg" class="btn btn-lg btn-secondary">Jeugd</a></p>
+        </div>
+      </slide>
+    </carousel>
   </div>
 </div>
+<div class="row justify-content-center m-4">
+  <ul class="list-inline">
+    <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a></li>
+    <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-hand-o-right" aria-hidden="true"></i></a></li>
+      <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-child" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-trophy" aria-hidden="true"></i></a></li>
+          <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
+  </ul>
+</div>
 
+<div class="row mt-3 justify-content-center">
+  <div class="col-12 col-xl-6 menu-item">
+    <h2 class="text-center text-primary">Evenementen</h2>
+
+  </div>
+
+  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center mx-auto">
+    <h2 class="text-primary">Volgende speeldag</h2>
+    <div class="frameDiv mx-auto mb-4">
+      <iframe class="d-block mx-auto frameCenter" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1190"></iframe>
+    </div>
+
+  </div>
+</div>
 <div class="row">
-
-
-  <div class="col s12 m8">
-    <h2 class="center-align">
+  <div class="col-12 col-xl-6 menu-item">
+    <h2 class="text-center text-primary">Jeugd</h2>
+  </div>
+  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center">
+    <h2 class="text-center text-primary">Stand</h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center">
+    <h2 class="text-center text-primary">
       Laatste wedstrijd
     </h2>
   </div>
-  <div class="col s12 m4">
-    <h2 class="center-align">
-      Stand
-    </h2>
-  </div>
+
 
 </div>

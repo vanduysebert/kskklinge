@@ -22,8 +22,6 @@ export class NieuwsComponent implements OnInit {
 
   nieuws = new MatTableDataSource<Nieuws>([]);
   public route: ActivatedRoute;
-  isRootRoute: boolean = false;
-  public changed: boolean;
 
   constructor(activeRoute: ActivatedRoute, protected nieuwsService: NieuwsService) {
     this.route = activeRoute;

@@ -7,8 +7,9 @@ import * as moment from 'moment';
 import {WedstrijdService} from './../wedstrijd.service';
 import { Wedstrijd } from './../wedstrijd';
 import {Ploeg} from '../../ploegen/ploeg';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-edit-wedstrijd',
   templateUrl: './edit-wedstrijd.component.html',
@@ -23,14 +24,18 @@ export class EditWedstrijdComponent implements OnInit {
    Validators.required
  ]);
 
-  constructor(location: Location, private router: Router, private ploegenService : PloegenService, private wedstrijdService: WedstrijdService) {
-    router.events.subscribe((val) => {
-      let s: string;
-      let v: number;
-      s = location.path();
-      v = s.lastIndexOf("/")
-      this.param = +s.substring(v+1, s.length)
+  constructor(location: Location, private route: ActivatedRoute, private router: Router, private ploegenService : PloegenService, private wedstrijdService: WedstrijdService, private localeService: BsLocaleService, private snackBar: MatSnackBar) {
+    route.params.subscribe( p => {
+      this.param = p['id'];
     });
+    localeService.use('nl');
+    // router.events.subscribe((val) => {
+    //   let s: string;
+    //   let v: number;
+    //   s = location.path();
+    //   v = s.lastIndexOf("/")
+    //   this.param = +s.substring(v+1, s.length)
+    // });
   }
 
   onSubmit() {
@@ -45,9 +50,9 @@ export class EditWedstrijdComponent implements OnInit {
         } else{
           thuis = "(U)";
         }
-        // this.snackBar.open("Verslag Klinge " + this.game.ploegNaam + ' - ' + this.game.tegenstander + " succesvol aangepast. " + thuis,"", {
-        //   duration: 2000
-        // });
+        this.snackBar.open("Verslag Klinge " + this.game.ploegNaam + ' - ' + this.game.tegenstander + " succesvol aangepast. " + thuis,"", {
+          duration: 2000
+        });
         this.router.navigateByUrl('/api/wedstrijden').then(()=>{
           location.reload();
          }
@@ -68,9 +73,10 @@ export class EditWedstrijdComponent implements OnInit {
   }
 
   loadGame() {
+    console.log(this.param);
     this.wedstrijdService.getWedstrijd(this.param).subscribe(
       game => {
-      this.game = game;
+        this.game = game;
     },
     err => {
       console.log(err);
