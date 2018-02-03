@@ -24,6 +24,14 @@ export class EditWedstrijdComponent implements OnInit {
    Validators.required
  ]);
 
+ froalaOptions:Object = {
+   charCounterCount: false,
+   imageMaxSize: 1024 * 1024 * 5,
+   imageUploadURL: AppSettings.API_ENDPOINT + 'wedstrijden/upload',
+   videoUpload: false,
+   fileUpload: false
+ }
+
   constructor(location: Location, private route: ActivatedRoute, private router: Router, private ploegenService : PloegenService, private wedstrijdService: WedstrijdService, private localeService: BsLocaleService, private snackBar: MatSnackBar) {
     route.params.subscribe( p => {
       this.param = p['id'];
@@ -73,7 +81,6 @@ export class EditWedstrijdComponent implements OnInit {
   }
 
   loadGame() {
-    console.log(this.param);
     this.wedstrijdService.getWedstrijd(this.param).subscribe(
       game => {
         this.game = game;

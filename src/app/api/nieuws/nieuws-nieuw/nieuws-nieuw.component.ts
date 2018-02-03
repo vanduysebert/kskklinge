@@ -13,9 +13,17 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./nieuws-nieuw.component.scss']
 })
 export class NieuwsNieuwComponent implements OnInit {
-  news: Nieuws = new Nieuws(0, "", "", "");
+  news: Nieuws = new Nieuws(0, "", "", "", "", 2);
   time: string;
   playDate: Date;
+  froalaOptions:Object = {
+    charCounterCount: false,
+    imageMaxSize: 1024 * 1024 * 5,
+    imageUploadURL: AppSettings.API_ENDPOINT + 'nieuws/upload',
+    videoUpload: false,
+    fileUpload: false
+  }
+
 
   constructor(private router: Router, private nieuwsService: NieuwsService, private snackBar: MatSnackBar) {
 
@@ -24,9 +32,16 @@ export class NieuwsNieuwComponent implements OnInit {
 
 
   onSubmit() {
-    this.playDate = new Date(this.news.datum);
-    this.news.datum = moment(this.playDate).format('YYYY-MM-DD HH-mm-ss');
+    if (this.news.eventDate && this.news.newsType == 1) {
+      this.playDate = new Date(this.news.eventDate);
+      this.news.eventDate = moment(this.playDate).format('YYYY-MM-DD HH-mm-ss');
+    } else {
+      this.news.eventDate = null;
+    }
 
+
+    this.news.datum = moment().format('YYYY-MM-DD HH-mm-ss');
+    console.log(this.news);
     this.nieuwsService.addNewNieuws(this.news).subscribe(res => {
       if (res == "OK") {
         this.snackBar.open(this.news.titel + " succesvol aangemaakt. " ,"", {

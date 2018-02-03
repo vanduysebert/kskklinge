@@ -36,13 +36,18 @@
               <mat-cell  *matCellDef="let element" class="text-primary " > {{element.titel}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="newsType">
+              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+              <mat-cell  *matCellDef="let element" class="text-primary " > {{element.newsType}} </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="edit">
               <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/nieuws/nieuws-edit', element.nieuws_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/nieuws/nieuws-edit', element.nieuws_id]" class="text-primary hoverable"><i class="material-icons">edit</i></a> </mat-cell>
             </ng-container>
             <ng-container matColumnDef="del">
               <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteNieuws(element.nieuws_id, element.titel)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
+              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteNieuws(element.nieuws_id, element.titel)" class="text-danger hoverable"><i class="material-icons">delete</i></a> </mat-cell>
             </ng-container>
             <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>

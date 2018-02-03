@@ -1,71 +1,200 @@
-<div class="row">
-  <div class="col">
-    <carousel>
-      <slide>
-        <img src="assets/img/main1.jpg" alt="First slide" class="rounded" style="display: block; width: 100%;">
-      </slide>
-      <slide>
-        <img src="assets/img/main2.jpg" alt="Second slide" style="display: block; width: 100%;">
-        <div class="carousel-caption d-none d-md-block ">
-          <h3 class="text-white d-inline px-2"></h3>
-          <p><a routerLink="/evenementen" class="btn btn-lg btn-secondary">Evenementen</a></p>
-        </div>
-      </slide>
-      <slide>
-        <img src="assets/img/main3.jpg" alt="Third slide" style="display: block; width: 100%;">
-        <div class="carousel-caption d-none d-md-block">
-          <h3 class="text-white d-inline px-2"></h3>
-          <p><a routerLink="/senioren/a-ploeg" class="btn btn-lg btn-secondary">Senioren</a></p>
-        </div>
-      </slide>
-      <slide>
-        <img src="assets/img/main4.jpg" alt="Third slide" style="display: block; width: 100%;">
-        <div class="carousel-caption d-none d-md-block">
-          <h3 class="text-white d-inline px-2"></h3>
-          <p><a routerLink="/senioren/a-ploeg" class="btn btn-lg btn-secondary">Jeugd</a></p>
-        </div>
-      </slide>
-    </carousel>
+<div #home>
+
+
+  <div class="row">
+    <div class="col" id="topHome">
+      <carousel>
+        <slide>
+          <img src="assets/img/main1.jpg" alt="First slide" class="rounded" style="display: block; width: 100%;">
+        </slide>
+        <slide>
+          <img src="assets/img/main2.jpg" alt="Second slide" style="display: block; width: 100%;">
+          <div class="carousel-caption d-none d-md-block ">
+            <h3 class="text-white d-inline px-2"></h3>
+            <p><a routerLink="/evenementen" class="btn btn-lg btn-secondary">Evenementen</a></p>
+          </div>
+        </slide>
+        <slide>
+          <img src="assets/img/main3.jpg" alt="Third slide" style="display: block; width: 100%;">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="text-white d-inline px-2"></h3>
+            <p><a routerLink="/senioren/aploeg" class="btn btn-lg btn-secondary">Senioren</a></p>
+          </div>
+        </slide>
+        <slide>
+          <img src="assets/img/main4.jpg" alt="Third slide" style="display: block; width: 100%;">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="text-white d-inline px-2"></h3>
+            <p><a routerLink="/jeugd" class="btn btn-lg btn-secondary">Jeugd</a></p>
+          </div>
+        </slide>
+      </carousel>
+    </div>
   </div>
-</div>
-<div class="row justify-content-center m-4">
-  <ul class="list-inline">
-    <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a></li>
-    <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-hand-o-right" aria-hidden="true"></i></a></li>
-      <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-child" aria-hidden="true"></i></a></li>
-        <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-trophy" aria-hidden="true"></i></a></li>
-          <li class="list-inline-item hoverable m-1"> <a class="rounded-circle text-center display-inline m-2"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
-  </ul>
-</div>
+  <div class="sticky-top topNav" id="topNav">
+    <div class="row justify-content-center m-4 ">
+      <ul class="list-inline justify-content-center">
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#eventSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#newsSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
 
-<div class="row mt-3 justify-content-center">
-  <div class="col-12 col-xl-6 menu-item">
-    <h2 class="text-center text-primary">Evenementen</h2>
-
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#nextGameSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-hand-o-right" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#tableSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-trophy" aria-hidden="true"></i></a></li>
+                <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#lastGameSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#sponsorSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-flag-checkered" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center mx-auto">
-    <h2 class="text-primary">Volgende speeldag</h2>
-    <div class="frameDiv mx-auto mb-4">
-      <iframe class="d-block mx-auto frameCenter" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1190"></iframe>
+
+  <div class="row mt-3 justify-content-center featurette">
+    <div class="col-12 col-xl-6 menu-item p-3 text-center">
+      <h2 class="text-center text-primary" id="eventSection">Evenementen</h2>
+      <div class="row" *ngFor="let event of events">
+        <div class="card col bg-ksk mb-1 hoverable" routerLink="/evenementen" fragment="event{{event.nieuws_id}}">
+          <div class="card-body ">
+            <h4 class="card-title text-dark">{{event.titel}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{event.eventDate | amDateFormat:"DD/MM/YYYY"}}</h6>
+
+            <a routerLink="/evenementen" class="card-link float-right">Meer info</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-center text-primary mt-3" id="newsSection">Nieuws</h2>
+      <div class="row" *ngFor="let event of news">
+        <div class="col">
+          <div class="card col bg-ksk mb-1 hoverable" routerLink="/evenementen" fragment="event{{event.nieuws_id}}">
+            <div class="card-body ">
+              <h4 class="card-title text-dark">{{event.titel}}</h4>
+              <h6 class="card-subtitle mb-2 text-muted float-right">{{event.datum | amDateFormat:"DD/MM/YYYY"}}</h6>
+              <div [froalaView]="event.inhoud">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>
+            <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+          </p>
+        </div>
+      </div>
+
     </div>
 
+    <div class="col-12 col-xl-6 border-top menu-item p-3 text-center mx-auto">
+      <div class="row" *ngIf="lastGame">
+        <div class="col">
+          <h2 class="text-center text-primary"><a pageScroll [pageScrollEasing]="myEasing" href="#lastGameSection">Laatste wedstrijdverslag</a></h2>
+          <h4 *ngIf="lastGame.thuisSpelend" class="text-center text-primary clearfix mb-2">
+            KSK - {{lastGame.tegenstander}} <small class="text-muted">{{lastGame.doelpuntenKSK}} - {{lastGame.doelpuntenTegenstander}}</small>
+          </h4>
+          <h4 *ngIf="!lastGame.thuisSpelend" class="text-center text-primary clearfix">
+            {{lastGame.tegenstander}} - KSK <small class="text-muted">{{lastGame.doelpuntenTegenstander}} - {{lastGame.doelpuntenKSK}}</small>
+          </h4>
+          <p>
+            <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+          </p>
+        </div>
+
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col">
+          <h2 class="text-primary" id="nextGameSection">Volgende speeldag</h2>
+          <div class="frameDiv mx-auto mb-4">
+            <iframe class="d-block mx-auto frameCenter" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1190"></iframe>
+          </div>
+          <p>
+            <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+          </p>
+        </div>
+
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col">
+          <h2 class="text-center text-primary" id="tableSection">Stand</h2>
+          <div class="frameDivs mx-auto mb-4">
+            <iframe class="d-block mx-auto frameCenters" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1191"></iframe>
+          </div>
+          <p>
+            <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-12 col-xl-6 menu-item">
-    <h2 class="text-center text-primary">Jeugd</h2>
+  <div class="row justify-content-center border-row featurette  p-3" *ngIf="lastGame">
+    <div class="col-12 col-xl-9 border border-dark border-content p-3 bg-ksk" *ngIf="lastGame">
+      <h2 *ngIf="lastGame.thuisSpelend" class="text-center text-primary clearfix mb-2" id="lastGameSection">
+          KSK - {{lastGame.tegenstander}} <small class="text-muted float-right">{{lastGame.datum | amDateFormat:'DD/MM/YYYY'}}</small>
+        </h2>
+      <h2 *ngIf="!lastGame.thuisSpelend" class="text-center text-primary clearfix" id="lastGameSection">
+          {{lastGame.tegenstander}} - KSK <small class="text-muted float-right">{{lastGame.datum | amDateFormat:'DD/MM/YYYY'}}</small>
+        </h2>
+      <h4 *ngIf="!lastGame.thuisSpelend" class="text-muted text-center">{{lastGame.doelpuntenTegenstander}} - {{lastGame.doelpuntenKSK}}</h4>
+      <h4 *ngIf="lastGame.thuisSpelend" class="text-muted text-center">{{lastGame.doelpuntenKSK}} - {{lastGame.doelpuntenTegenstander}}</h4>
+      <div [froalaView]="lastGame.verslag"></div>
+
+      <p>
+        <a class="mt-4 float-right" routerLink="/senioren/aploeg">Meer verslagen</a>
+      </p>
+
+    </div>
+
+
   </div>
-  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center">
-    <h2 class="text-center text-primary">Stand</h2>
+  <div class="row">
+    <div class="col">
+      <p>
+        <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+      </p>
+    </div>
   </div>
-</div>
-<div class="row justify-content-center">
-  <div class="col-12 col-xl-6 border-top menu-item p-3 text-center">
-    <h2 class="text-center text-primary">
-      Laatste wedstrijd
-    </h2>
+  <div class="row border-row featurette">
+    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/jeugd">
+      <div class="rounded-circleMenu"><i class="fa fa-child" aria-hidden="true"></i></div>
+      <h2 class="text-center text-dark">Jeugd</h2>
+      <h4 class="text-muted">Jeugd is de toekomst</h4>
+      <p class="text-primary text-justify">KSK Klinge hecht veel belang aan een <strong>kwalitatieve</strong> jeugdopleiding waar <strong>plezier</strong> centraal staat. Dit uit zich in de jaarlijkse toename van jeugdspelers.</p>
+      <button class="btn btn-primary btn-block text-center hoverable" routerLink="/jeugd">Bekijk al onze jeugdploegen</button>
+      <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">Jeugdspeler inschrijven</a>
+      <p>
+        <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/club">
+      <img src="assets/img/logo2.png" class="img-fluid rounded-circle logoPicture bg-ksk" />
+      <h2 class="text-center text-dark">KSK Klinge</h2>
+      <h4 class="text-muted">Club</h4>
+      <p class="text-primary text-justify">Heb je vragen over het reilen en zeilen van de club? Wil je graag de club een handje toesteken als <strong>vrijwilliger</strong>? Op zoek naar <strong>belangrijke documenten</strong>?</p>
+      <button class="btn btn-primary btn-block text-center hoverable" routerLink="/club/info">Vind alle info over KSK Klinge</button>
+      <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">KSK Klinge contacteren</a>
+      <p>
+        <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/sponsors">
+      <div class="rounded-circleMenu"><i class="fa fa-flag-checkered" aria-hidden="true"></i></div>
+      <h2 class="text-center text-dark" id="sponsorSection">Sponsors</h2>
+      <h4 class="text-muted">De basis van een gezonde club</h4>
+      <p class="text-primary text-justify">Als een stabiele club met wekelijks tal van bezoekers is KSK Klinge een <strong>ideaal uithangbord</strong> voor lokale <strong>zelfstandigen</strong> en <strong>bedrijven</strong> in de buurt. </p>
+      <button class="btn btn-primary btn-block text-center hoverable" routerLink="/sponsors">Bekijk al onze sponsors</button>
+      <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">Interesse om te sponsoren</a>
+      <p>
+        <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+      </p>
+    </div>
   </div>
+
 
 
 </div>

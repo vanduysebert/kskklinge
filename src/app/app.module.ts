@@ -24,7 +24,9 @@ import { HttpModule } from '@angular/http';
     import {MatPaginatorModule} from '@angular/material/paginator';
     import {MatDialogModule} from '@angular/material/dialog';
     import {MatSnackBarModule} from '@angular/material/snack-bar';
+    import {MatSidenavModule} from '@angular/material/sidenav';
     import { MomentModule } from 'angular2-moment';
+    import { AgmCoreModule } from '@agm/core';
 
     //ng-bootstrap
     import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -46,14 +48,12 @@ import {AppSettings} from './app-settings';
     import { HomeComponent } from './home/home.component';
     import { SeniorenComponent } from './senioren/senioren.component';
       import { AploegComponent } from './senioren/aploeg/aploeg.component';
-      import { ReservenComponent } from './senioren/reserven/reserven.component';
       import { ZondagsreservenComponent } from './senioren/zondagsreserven/zondagsreserven.component';
     import { JeugdComponent } from './jeugd/jeugd.component';
       import { U6Component } from './jeugd/u6/u6.component';
       import { U7Component } from './jeugd/u7/u7.component';
       import { U8Component } from './jeugd/u8/u8.component';
       import { U9Component } from './jeugd/u9/u9.component';
-      import { U10Component } from './jeugd/u10/u10.component';
       import { U11Component } from './jeugd/u11/u11.component';
       import { U15Component } from './jeugd/u15/u15.component';
       import { U17Component } from './jeugd/u17/u17.component';
@@ -89,7 +89,11 @@ import {AppSettings} from './app-settings';
       import { WedstrijdNieuwComponent } from './api/wedstrijden/wedstrijd-nieuw/wedstrijd-nieuw.component';
       import { WedstrijdDetailComponent } from './api/wedstrijden/wedstrijd-detail/wedstrijd-detail.component';
       import { EditWedstrijdComponent } from './api/wedstrijden/edit-wedstrijd/edit-wedstrijd.component';
-
+    import { SponsorComponent } from './api/sponsor/sponsor.component';
+      import { EditSponsorComponent } from './api/sponsor/edit-sponsor/edit-sponsor.component';
+      import { DeleteSponsorComponent } from './api/sponsor/delete-sponsor/delete-sponsor.component';
+      import { NewSponsorComponent } from './api/sponsor/new-sponsor/new-sponsor.component';
+      import { SponsorDetailComponent } from './api/sponsor/sponsor-detail/sponsor-detail.component';
 //Help-components
 
 //Services
@@ -100,13 +104,21 @@ import {AppSettings} from './app-settings';
       import {WedstrijdService} from './api/wedstrijden/wedstrijd.service';
       import {NieuwsService} from './api/nieuws/nieuws.service';
       import {DeleteDialogService} from './api/dialog/delete-dialog.service';
+      import {ContactService} from './club/contact/contact.service';
+      import {SponsorService} from './api/sponsor/sponsor.service';
+      import {AuthenticationService} from './user/authentication.service';
+      import {AuthGuard} from './guards/auth.guard';
+
     //--Website
+
 
   //Other services
 import { BooleanCheckPipe } from './boolean-check.pipe';
 import { defineLocale } from 'ngx-bootstrap/bs-moment';
 import { nl } from 'ngx-bootstrap/locale';
 import { U13Component } from './jeugd/u13/u13.component';
+import { PlayerDetailComponent } from './helpers/player-detail/player-detail.component';
+
 defineLocale('nl', nl);
 
 @NgModule({
@@ -115,14 +127,12 @@ defineLocale('nl', nl);
     HomeComponent,
     SeniorenComponent,
       AploegComponent,
-      ReservenComponent,
       ZondagsreservenComponent,
     JeugdComponent,
       U6Component,
       U7Component,
       U8Component,
       U9Component,
-      U10Component,
       U11Component,
       U15Component,
       U17Component,
@@ -156,9 +166,16 @@ defineLocale('nl', nl);
         WedstrijdNieuwComponent,
         WedstrijdDetailComponent,
         EditWedstrijdComponent,
+      SponsorComponent,
+        EditSponsorComponent,
+        DeleteSponsorComponent,
+        NewSponsorComponent,
+        SponsorDetailComponent,
     BooleanCheckPipe,
     DeleteDialog,
-    U13Component
+    U13Component,
+    PlayerDetailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -189,11 +206,16 @@ defineLocale('nl', nl);
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSidenavModule,
     MatSnackBarModule,
-    Ng2PageScrollModule
+    Ng2PageScrollModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBo9M4SgCZAN7yurg-3KZvs6MMC_YIbMp0'
+    })
   ],
   exports: [
-    DeleteDialog
+    DeleteDialog,
+    PlayerDetailComponent
   ],
   providers: [
     PloegenService,
@@ -201,10 +223,15 @@ defineLocale('nl', nl);
     WedstrijdService,
     NieuwsService,
     AppSettings,
-    DeleteDialogService
+    DeleteDialogService,
+    ContactService,
+    SponsorService,
+     AuthenticationService,
+     AuthGuard
   ],
   entryComponents: [
-    DeleteDialog
+    DeleteDialog,
+    PlayerDetailComponent
   ],
   bootstrap: [AppComponent]
 })

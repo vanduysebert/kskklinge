@@ -19,3 +19,33 @@ function moveUploadedFile($directory, $uploadedFile)
 
     return $filename;
 }
+
+$container = $app->getContainer();
+
+
+
+$app->add(new \Slim\Middleware\JwtAuthentication([
+    "path" => "/",
+    "logger" => $container['logger'],
+    "secret" => $settings['settings']['secretPW'],
+    "secure" => false,
+    "rules" => [
+        new \Slim\Middleware\JwtAuthentication\RequestPathRule([
+            "path" => "/",
+            "passthrough" => ["/login", "/not-secure", "/home"]
+        ]),
+        new \Slim\Middleware\JwtAuthentication\RequestMethodRule([
+            "passthrough" => ["OPTIONS", "GET"]
+        ]),
+    ],
+    "callback" => function ($request, $response, $arguments) use ($container) {
+        $container["jwt"] = $arguments["decoded"];
+    },
+    "error" => function ($request, $response, $arguments) {
+        $data["status"] = "error";
+        $data["message"] = $arguments["message"];
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+    }
+]));

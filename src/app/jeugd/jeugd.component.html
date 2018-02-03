@@ -1,4 +1,58 @@
-<p>
-  jeugd works!
-</p>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="/jeugd/u6">U6</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  routerLinkActive="active" routerLink="/jeugd/u7">U7</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="/jeugd/u8">U8</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  routerLinkActive="active" routerLink="/jeugd/u9">U9</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="/jeugd/u11">U11</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  routerLinkActive="active" routerLink="/jeugd/u13">U13</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" routerLink="/jeugd/u15">U15</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  routerLinkActive="active" routerLink="/jeugd/u17">U17</a>
+  </li>
+
+  <li class="nav-item ml-auto">
+    <a class="float-right nav-link" routerLinkActive="active" routerLink="/jeugd">Jeugd</a>
+  </li>
+</ul>
+
+<div class="row" *ngIf="route.children.length === 0">
+  <div class="col-12">
+    <div class=" jumbotron bg-accent mt-4">
+    <h1 class="display-4 text-primary">Jeugd KSK Klinge</h1>
+    <p class="lead text-primary">De jeugdwerking is voor KSK Klinge zeer belangrijk, het bepaalt immers de toekomst van de club.  </p>
+    <hr class="my-4">
+    <p class=text-dark>KSK Klinge tracht om een goede jeugdvorming te verzorgen waarbij plezier centraal staat. Hierbij vindt KSK Klinge dat de club toegankelijk moet zijn voor iedereen. Hoewel het aantal jeugdspelers de laatste jaren een serieuze sprong heeft gemaakt, verwelkomen wij steeds graag niuewe leden.</p>
+    <p class="lead">
+      <a class="btn btn-primary" href="mailto:kurt_susy@telenet.be" role="button">Inschrijven</a>
+    </p>
+    </div>
+    <div class="row align-items-center  justify-content-center mt-5">
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-warning btn-lg btn-block py-md-5 py-4 m-1 border border-primary"  routerLink="/jeugd/u6">U6</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-primary btn-lg btn-block py-md-5 py-4 m-1 border border-warning" routerLink="/jeugd/u7">U7</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-warning btn-lg btn-block py-md-5 py-4 m-1 border border-primary" routerLink="/jeugd/u8">U8</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-primary btn-lg btn-block py-md-5 py-4 m-1 border border-warning" routerLink="/jeugd/u9">U9</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-warning btn-lg btn-block py-md-5 py-4 m-1 border border-primary"  routerLink="/jeugd/u11">U11</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-primary btn-lg btn-block py-md-5 py-4 m-1 border border-warning" routerLink="/jeugd/u13">U13</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-warning btn-lg btn-block py-md-5 py-4 m-1 border border-primary" routerLink="/jeugd/u15">U15</a></div>
+        <div class="col-md-4 col-lg-3 col-xl-2 " ><a class="btn btn-primary btn-lg btn-block py-md-5 py-4 m-1 border border-warning" routerLink="/jeugd/u17">U17</a></div>
+
+    </div>
+  </div>
+
+
+</div>
 <router-outlet></router-outlet>

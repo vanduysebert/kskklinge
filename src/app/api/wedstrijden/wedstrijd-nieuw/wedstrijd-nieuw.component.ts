@@ -19,6 +19,14 @@ export class WedstrijdNieuwComponent implements OnInit {
   param: number;
   time: string;
   ploegen: Ploeg[];
+  froalaOptions:Object = {
+    charCounterCount: false,
+    imageMaxSize: 1024 * 1024 * 5,
+    imageUploadURL: AppSettings.API_ENDPOINT + 'wedstrijden/upload',
+    videoUpload: false,
+    fileUpload: false
+  }
+
   kskTeam: string;
   playDate: Date;
   selected = new FormControl('valid', [

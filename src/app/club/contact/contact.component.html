@@ -1,3 +1,91 @@
-<p>
-  contact works!
-</p>
+<div class=" jumbotron bg-accent mt-4">
+  <h1 class="display-4 text-primary">Contacteer ons</h1>
+
+</div>
+
+
+
+<div class="row">
+  <div class="col-xl-5">
+
+    <div class="card contactCard text-center">
+
+
+      <div class="card-body">
+        <p class="card-text lead text-primary"><i class="fa fa-home" aria-hidden="true"></i> Buitenstraat 9 <br/> 9170 De Klinge <br/>
+          <i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+3237705681"> 03/770 56 81</a> <br/>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:secretariaatkskklinge@telenet.be"> secretariaatkskklinge@telenet.be</a>
+        </p>
+        <a href="tel:+3237705681" class="btn btn-primary"><i class="fa fa-phone" aria-hidden="true"></i> Bel ons</a>
+        <a href="mailto:secretariaatkskklinge@telenet.be" class="btn btn-primary"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail ons</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-7 ">
+    <div id="contactForm" class="card contactCardSuccess text-primary">
+      <div [hidden]="submitted" class="card-body">
+        <form (ngSubmit)="onSubmit()" class="mb-5" #contactForm="ngForm">
+          <div class="form-group" [ngClass]="{'has-success': name.valid, 'has-danger': name.touched && !name.valid}">
+            <label for="name" class="form-control-label">Voornaam</label>
+            <input type="text" class="form-control" id="name" [ngClass]="{'form-control-success': name.valid, 'form-control-danger': name.touched && !name.valid}" required [(ngModel)]="model.firstName" name="name" #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              Gelieve jouw voornaam in te geven
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{'has-success': model.lastName.length > 0}">
+            <label for="lastName" class="form-control-label">Achternaam</label>
+            <input type="text" class="form-control" [ngClass]="{'form-control-success': model.lastName.length > 0}" id="lastName" [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
+          </div>
+          <div class="form-group" [ngClass]="{'has-success': emailVisitor.valid, 'has-danger': emailVisitor.touched && !emailVisitor.valid}">
+            <label for="emailVisitor" class="form-control-label">Email</label>
+            <input type="email" class="form-control" [ngClass]="{'form-control-success': emailVisitor.valid, 'form-control-danger': emailVisitor.touched && !emailVisitor.valid}" id="emailVisitor" required email [(ngModel)]="model.email" name="emailVisitor" #emailVisitor="ngModel">
+
+            <div [hidden]="emailVisitor.valid || emailVisitor.pristine" class="alert alert-danger">
+              Gelieve een geldig emailadres in te vullen
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{'has-success': phone.valid && phone.touched, 'has-danger': phone.touched && !phone.valid}">
+            <label for="phone" class="form-control-label">Telefoonnummer</label>
+            <input type="text" class="form-control" [ngClass]="{'form-control-success': phone.valid && phone.touched, 'form-control-danger': phone.touched && !phone.valid}" id="phone" [(ngModel)]="model.phone" name="phone" #phone="ngModel">
+
+            <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+              Gelieve een geldig telefoonnummer in te vullen
+            </div>
+          </div>
+
+          <div class="form-group" [ngClass]="{'has-success': subjectMail.valid, 'has-danger': subjectMail.touched && !subjectMail.valid}">
+            <label for="subjectMail" class="form-control-label">Onderwerp</label>
+            <textarea class="form-control" [ngClass]="{'form-control-success': subjectMail.valid, 'form-control-danger': subjectMail.touched && !subjectMail.valid}" minlength="10" id="subjectMail" required [(ngModel)]="model.subjectMail" name="subjectMail" #subjectMail="ngModel"
+              rows="5"></textarea>
+            <div [hidden]="subjectMail.valid || subjectMail.pristine" class="alert alert-danger">
+              Vertel ons waar we jou bij kunnen helpen. (Gebruik tenminste 10 karakters)
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-block btn-success btnLink" [disabled]="!contactForm.form.valid">Verzend</button>
+        </form>
+      </div>
+      <div [hidden]="!submitted">
+        <div class="alert alert-success">
+          <h4>
+            Hartelijk dank voor jouw mail
+          </h4>
+          <p>
+            We nemen zo spoedig mogelijk contact met u op!
+          </p>
+        </div>
+      </div>
+      <div [hidden]="!errorSend">
+        <div class="alert alert-danger">
+          <h4>
+            Er is een fout opgetreden
+          </h4>
+          <p>
+            Probeer het opnieuw. Indien het niet lukt, graag een mail sturen naar <a href="mailto:secretariaatkskklinge@telenet.be">KSK Klinge</a> met daarin jouw vraag.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

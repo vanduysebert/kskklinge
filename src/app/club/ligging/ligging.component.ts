@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ligging.component.scss']
 })
 export class LiggingComponent implements OnInit {
-
+  lat: number = 51.252318;
+  lng: number = 4.077796;
   constructor() { }
 
   ngOnInit() {

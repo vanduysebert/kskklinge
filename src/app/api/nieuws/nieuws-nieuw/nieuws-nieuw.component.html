@@ -1,19 +1,30 @@
 <h4 class="text-primary display-4 text-center">Nieuw bericht/evenement</h4>
 <div class="row justify-content-center">
    <form #newNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
-     <div class="form-row">
-       <div class="col-12 col-md-6 form-group">
+     <div class="form-row justify-content-center">
+       <div class="col-12 col-md-6 form-group ">
          <label for="pos" class="text-primary">Titel</label>
          <input class="form-control" [ngClass]="{'is-valid': pos.valid, 'is-invalid text-danger': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text" value="">
          <div  class="invalid-feedback">Titel is vereist</div>
        </div>
-       <div class="form-group col-md-6">
-         <label for="birth" class="text-primary">Datum</label>
-         <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid, 'text-danger is-invalid': birth.invalid}" [(ngModel)]="news.datum" #birth="ngModel" name="birth" required id="playerBirth" value="news.datum"
+     </div>
+     <div class="form-row">
+       <div class="form-group col-md-6 col-12">
+         <label for="cat" class="text-primary d-block">Categorie</label>
+         <select class="form-control hoverable" required [(ngModel)]="news.newsType"  name="catSelect" id="cat">
+           <option name="catOpt" value="2" checked="true">Club</option>
+           <option name="catOpt" value="1">Evenement</option>
+           <option name="catOpt" value="3">Jeugd</option>
+        </select>
+         <div class="invalid-feedback">Categorie is vereist</div>
+       </div>
+       <div class="form-group col-md-6 col-12" *ngIf="news.newsType == 1">
+         <label for="birth" class="text-primary">Datum evenement</label>
+         <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid}" [(ngModel)]="news.eventDate" #birth="ngModel" name="birth" id="playerBirth" value="news.eventDate"
            type="text">
-         <div class="invalid-feedback">Datum is vereist</div>
        </div>
      </div>
+
 
      <div class="form-row">
        <div class="col form-group">

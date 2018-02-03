@@ -10,7 +10,13 @@
             <span >{{news.datum |  amDateFormat:'DD MMMM YYYY'}}</span>
           </p>
       </div>
+
       <div class="card-body text-primary">
+        <div  *ngIf="news.newsType == 'evenementen'">
+          <p class="lead text-dark font-weight-bold">
+            Datum evenement: {{news.eventDate | amDateFormat:'DD MMMM YYYY'}}
+          </p>
+        </div>
         <div [froalaView]="news.inhoud"></div>
       </div>
       <div class="card-footer">

@@ -17,6 +17,8 @@ return [
 
         ],
 
+        'secretPW' => '42Klinge11',
+
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',

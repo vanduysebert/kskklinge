@@ -16,6 +16,14 @@ export class EditNieuwsComponent implements OnInit {
   news: Nieuws;
   param: number;
   playDate: Date;
+  cat: number;
+  froalaOptions:Object = {
+    charCounterCount: false,
+    imageMaxSize: 1024 * 1024 * 5,
+    imageUploadURL: AppSettings.API_ENDPOINT + 'nieuws/upload',
+    videoUpload: false,
+    fileUpload: false
+  }
 
   constructor(location: Location, private route:ActivatedRoute, private router: Router, private nieuwsService: NieuwsService, private snackBar: MatSnackBar) {
     route.params.subscribe( p => {
@@ -24,18 +32,26 @@ export class EditNieuwsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.playDate = new Date(this.news.datum);
-    this.news.datum = moment(this.playDate).format('YYYY-MM-DD HH-mm-ss');
+    if(this.news.eventDate && this.cat == 1) {
+      this.playDate = new Date(this.news.datum);
+      this.news.eventDate = moment(this.playDate).format('YYYY-MM-DD HH-mm-ss');
+      console.log("datum");
+    } else {
+      this.news.eventDate = null;
+      console.log("geen datum");
+    }
 
+    let pDate = new Date(this.news.datum);
+    this.news.datum = moment(pDate).format('YYYY-MM-DD HH-mm-ss');
+    this.news.newsType = this.cat;
+    console.log(this.news);
     this.nieuwsService.editNieuws(this.news).subscribe(res => {
+      console.log(res);
       if (res == "OK") {
         this.snackBar.open(this.news.titel + " succesvol aangepast. " ,"", {
           duration: 2000
         });
-        this.router.navigateByUrl('/api/nieuws').then(()=>{
-          location.reload();
-         }
-        );
+        this.router.navigate('../../', { relativeTo: this.route });
       }
     });
 
@@ -46,6 +62,13 @@ export class EditNieuwsComponent implements OnInit {
     this.nieuwsService.getNieuws(this.param).subscribe(
       news => {
       this.news = news;
+      if(this.news.newsType == "evenementen") {
+        this.cat = 1;
+      } else if (this.news.newsType == "jeugd") {
+        this.cat = 3;
+      } else {
+        this.cat = 2;
+      }
     },
     err => {
       console.log(err);

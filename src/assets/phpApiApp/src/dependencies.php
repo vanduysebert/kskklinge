@@ -30,3 +30,7 @@ $container['logger'] = function ($c) {
 };
 
 $container['upload_directory']= '..\..\uploads';
+
+$container["jwt"] = function ($container) {
+    return new StdClass;
+};

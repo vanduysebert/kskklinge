@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeniorenComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor() {
+
+  }
+
+
 
   ngOnInit() {
   }

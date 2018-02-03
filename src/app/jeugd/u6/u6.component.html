@@ -1,3 +1,69 @@
-<p>
-  u6 works!
-</p>
+<div *ngIf="!ploeg">
+  <h3 class="text-center text-dark">U6</h3>
+  <p class="lead mb-5 text-center text-primary">
+    Voorlopig is er geen verdere info beschikbaar. KSK is volop bezig met de opbouw van de ploeg.
+  </p>
+</div>
+<div *ngIf="ploeg">
+
+  <div class="row justify-content-center pt-4">
+    <div class="col-12 col-lg-10 ">
+      <div class="border-info">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-8 col-lg-12 col-xl-8 justify-content-center align-self-center">
+            <img *ngIf="ploeg.fotoUrl" [src]="ploeg.fotoUrl" alt="" class="img-fluid rounded border border-primary">
+            <h2 *ngIf="!ploeg.fotoUrl" class="text-center">Geen foto beschikbaar</h2>
+            <!-- notice the "circle" class -->
+          </div>
+          <div class="col-12 col-md-4 col-lg-12 col-xl-4">
+
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Trainer </strong><br />{{ploeg.trainer_1}}</li>
+              <li class="list-group-item" *ngIf="ploeg.trainer_2 != ''"><strong>Hulptrainer </strong><br />{{ploeg.trainer_2}}</li>
+              <li class="list-group-item"><strong>Trainingsdagen </strong><br />{{ploeg.trainingsdagen}} om {{ploeg.trainingsuur}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12 col-xl-6 justify-content-center" *ngIf="games.length > 0">
+            <h3 class="display-4 text-primary text-center mb-3">Wedstrijden</h3>
+            <ul  class="list-group">
+              <li *ngFor="let wedstrijd of games; let even = even; let odd = odd" width="100%" [ngClass]="{'bg-accent': even, 'bg-ksk': odd}" routerLink="/jeugd/u6" fragment="gameSection" class="list-group-item hoverable hoverItem" (click)="viewMatchReport(wedstrijd)">
+
+                    <p *ngIf="wedstrijd.thuisSpelend == 1" class="text-dark lead">KSK - {{wedstrijd.tegenstander}}<small class="float-right">{{wedstrijd.datum | amDateFormat:"DD/MM/YYYY"}}</small></p>
+                    <h6 *ngIf="wedstrijd.thuisSpelend == 1" class="text-muted">{{wedstrijd.doelpuntenKSK}} - {{wedstrijd.doelpuntenTegenstander}}</h6>
+                    <p *ngIf="wedstrijd.thuisSpelend == 0" class="text-dark lead">{{wedstrijd.tegenstander}} - KSK<small class="float-right">{{wedstrijd.datum | amDateFormat:"DD/MM/YYYY"}}</small></p>
+                    <h6 *ngIf="wedstrijd.thuisSpelend == 0" class="text-muted">{{wedstrijd.doelpuntenTegenstander}} - {{wedstrijd.doelpuntenKSK}}</h6>
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-12 col-xl-6 justify-content-center" *ngIf="spelers.length > 0">
+            <h4 class="text-primary display-4 text-center mb-3">Spelers</h4>
+            <ul  class="list-group  align-items-center">
+              <li *ngFor="let speler of spelers" style="width:100%" (click)="showPlayerDetail(speler)" class="hoverable list-group-item align-self-center">
+                <div class="media">
+                  <img class="mr-3 img-fluid rounded-circle" width="65" [src]="speler.fotoUrl" alt="">
+                  <div class="media-body align-self-center">
+                    <h5 class="mt-0">{{speler.voornaam}} {{speler.naam}}</h5>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="row justify-content-center mt-3 border p-3 border-secondary rounded bg-ksk" id="gameSection" *ngIf="game">
+          <div class="col-12">
+            <p *ngIf="game.thuisSpelend == 1" class="text-dark display-4 text-center">KSK - {{game.tegenstander}}</p>
+            <h4 *ngIf="game.thuisSpelend == 1" class="text-muted text-center">{{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
+            <p *ngIf="game.thuisSpelend == 0" class="text-dark display-4 text-center">{{game.tegenstander}} - KSK</p>
+            <h4 *ngIf="game.thuisSpelend == 0" class="text-muted text-center">{{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
+            <div [froalaView]="game.verslag"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

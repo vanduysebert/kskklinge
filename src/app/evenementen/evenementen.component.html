@@ -1,3 +1,48 @@
-<p>
-  evenementen works!
-</p>
+<div class=" jumbotron bg-accent mt-4">
+  <h1 class="display-4 text-primary">Evenementen</h1>
+
+</div>
+<div class="row">
+  <div class="col">
+    <h3 class="text-primary text-center mb-3">Aankomende evenementen</h3>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let event of events; let even = even; let odd = odd" class="list-group-item lead text-primary hoverable" id="event{{event.nieuws_id}}" [ngClass]="{'bg-ksk': even, 'bg-accent': odd}">
+        <h3 class="text-primary" (click)=showContent(event.nieuws_id)>{{event.titel}}</h3>
+        <h5 class="text-muted">{{event.eventDate | amDateFormat:"DD/MM/YYYY"}}</h5>
+        <div *ngIf="showEventDetail(event.nieuws_id)" >
+          <div [froalaView]="event.inhoud"></div>
+        </div>
+        <a class="btn" [ngClass]="{'btn-secondary': even, 'btn-primary': odd}" (click)=addToGoogleCalendar(event)>Toevoegen aan kalender <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        <p class="text-muted float-right lead" *ngIf="!showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-plus-square" aria-hidden="true"></i> Meer info
+        </p>
+        <p class="text-muted float-right lead border-bottom" *ngIf="showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-minus-square" aria-hidden="true"></i> Minder info
+        </p>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col">
+    <h3 class="text-primary text-center">Voorbije evenementen</h3>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let event of pastEvents; let even = even; let odd = odd" class="list-group-item lead text-primary hoverable" id="event{{event.nieuws_id}}"  [ngClass]="{'bg-accent': even, 'bg-ksk': odd}">
+        <h3 class="text-primary" (click)=showContent(event.nieuws_id)>{{event.titel}}</h3>
+        <h5 class="text-muted">{{event.eventDate | amDateFormat:"DD/MM/YYYY"}}</h5>
+        <div *ngIf="showEventDetail(event.nieuws_id)" >
+          <div [froalaView]="event.inhoud"></div>
+        </div>
+        <p class="text-muted float-right lead" *ngIf="!showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-plus-square" aria-hidden="true"></i> Meer info
+        </p>
+        <p class="text-muted float-right lead border-bottom" *ngIf="showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-minus-square" aria-hidden="true"></i> Minder info
+        </p>
+      </li>
+
+    </ul>
+  </div>
+</div>

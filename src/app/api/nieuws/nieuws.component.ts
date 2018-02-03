@@ -8,8 +8,8 @@ import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
-
-
+import {DeleteDialogService} from './../dialog/delete-dialog.service';
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-nieuws',
   templateUrl: './nieuws.component.html',
@@ -17,14 +17,15 @@ import 'rxjs/add/operator/map';
 })
 export class NieuwsComponent implements OnInit {
 
-  displayedColumns = ['datum', 'titel', 'edit', 'del'];
+  displayedColumns = ['datum', 'titel', 'newsType', 'edit', 'del'];
 
 
   nieuws = new MatTableDataSource<Nieuws>([]);
   public route: ActivatedRoute;
 
-  constructor(activeRoute: ActivatedRoute, protected nieuwsService: NieuwsService) {
+  constructor(activeRoute: ActivatedRoute, protected nieuwsService: NieuwsService, protected dialogsService: DeleteDialogService, private snackBar: MatSnackBar) {
     this.route = activeRoute;
+    console.log("constructor called");
   }
 
   applyFilter(filterValue: string) {
@@ -34,7 +35,20 @@ export class NieuwsComponent implements OnInit {
   }
 
   deleteNieuws(id: number, titel:string) {
-
+    this.dialogsService
+     .confirm('Verwijder ' + titel, 'Ben je zeker dat je ' + titel + ' wilt verwijderen?')
+     .subscribe(res => {
+       if (res === "delete") {
+         this.nieuwsService.deleteNieuws(id).subscribe(res => {
+           if (res == true) {
+             this.snackBar.open(titel + " succesvol verwijderd","", {
+               duration: 2000
+             });
+             this.loadNieuws();
+         }
+         });
+       }
+     });
   }
 
   loadNieuws() {
@@ -54,6 +68,7 @@ export class NieuwsComponent implements OnInit {
 
   ngOnInit() {
     this.loadNieuws();
+    console.log("ngInit called");
   }
 
   @ViewChild(MatSort) sort: MatSort;

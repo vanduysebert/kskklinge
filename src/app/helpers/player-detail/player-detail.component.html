@@ -1,0 +1,32 @@
+<!-- <div class="row">
+  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+    <h2>Bart Antheunis</h2>
+    <div class="panini align-self-center">
+      <img [src]="speler.fotoUrl" class="img-fluid align-self-center" />
+    </div>
+
+
+  </div>
+</div> -->
+<div *ngIf="player">
+
+     <div class="modal-body justify-content-center d-flex">
+       <div class="card card-panini" >
+  <img *ngIf="player.fotoUrl != ''" class="card-img-top paniniPic" [src]="player.fotoUrl" alt="Profielfoto {{player.voornaam}}">
+
+  <div class="card-body bg-ksk">
+
+      <img  class="card-logo" src="assets/img/badge.png" alt="logo KSK">
+
+
+    <h5 class="card-title text-dark">{{player.voornaam}} {{player.naam}}</h5>
+    <p class="card-text text-primary"><strong class="font-underline">Geboortedatum</strong><br />{{player.geboortedatum | amDateFormat:"DD/MM/YYYY"}}</p>
+    <p class="card-text text-primary" *ngIf="player.positie != ''"><strong class="font-underline">Positie</strong><br />{{player.positie}}</p>
+    <p class="card-text text-primary" *ngIf="player.doelpunten > 0"><strong class="font-underline">Doelpunten</strong><br />{{player.doelpunten}}</p>
+  </div>
+</div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Sluit</button>
+     </div>
+</div>

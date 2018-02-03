@@ -71,6 +71,16 @@ export class WedstrijdService {
                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getLastGame() : Observable<Wedstrijd> {
+    return this.http.get(this.wedstrijdenURL + "/senioren/lastGame")
+                        // ...and calling .json() on the response to return data
+                         .map(res=> res.json())
+                         //...errors if any
+                        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+
+
   // getPloegByWedstrijd(id: number) : Observable<Ploeg> {
   //   return this.http.get(this.ploegenURL + "/" + id)
   //                       // ...and calling .json() on the response to return data

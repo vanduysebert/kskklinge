@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SeniorenComponent } from './senioren/senioren.component';
 import { AploegComponent } from './senioren/aploeg/aploeg.component';
-import { ReservenComponent } from './senioren/reserven/reserven.component';
 import { ZondagsreservenComponent } from './senioren/zondagsreserven/zondagsreserven.component';
 
 import { JeugdComponent } from './jeugd/jeugd.component';
@@ -12,7 +11,6 @@ import { U6Component } from './jeugd/u6/u6.component';
 import { U7Component } from './jeugd/u7/u7.component';
 import { U8Component } from './jeugd/u8/u8.component';
 import { U9Component } from './jeugd/u9/u9.component';
-import { U10Component } from './jeugd/u10/u10.component';
 import { U11Component } from './jeugd/u11/u11.component';
 import { U15Component } from './jeugd/u15/u15.component';
 import { U17Component } from './jeugd/u17/u17.component';
@@ -50,25 +48,37 @@ import {WedstrijdenComponent} from './api/wedstrijden/wedstrijden.component';
 import {WedstrijdDetailComponent} from './api/wedstrijden/wedstrijd-detail/wedstrijd-detail.component';
 import {WedstrijdNieuwComponent} from './api/wedstrijden/wedstrijd-nieuw/wedstrijd-nieuw.component';
 import {EditWedstrijdComponent} from './api/wedstrijden/edit-wedstrijd/edit-wedstrijd.component';
+
+import {SponsorComponent} from './api/sponsor/sponsor.component';
+import {SponsorDetailComponent} from './api/sponsor/sponsor-detail/sponsor-detail.component';
+import {NewSponsorComponent} from './api/sponsor/new-sponsor/new-sponsor.component';
+import {EditSponsorComponent} from './api/sponsor/edit-sponsor/edit-sponsor.component';
+
+import {AuthGuard} from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'api',
     component: ApiComponent,
+
     children: [
       {
         path: 'ploegen',
         component: PloegenComponent,
+        canActivate: [AuthGuard],
         children: [
           {
             path: 'ploeg-detail/:id',
             component: PloegDetailComponent,
+            canActivate: [AuthGuard],
           },
           {
             path: 'ploeg-edit/:id',
+            canActivate: [AuthGuard],
             component: EditPloegComponent
           },
           {
             path: 'ploeg-nieuw',
+            canActivate: [AuthGuard],
             component: PloegNieuwComponent
           },
         ],
@@ -77,54 +87,89 @@ const routes: Routes = [
       {
         path: 'spelers',
         component: SpelersComponent,
+        canActivate: [AuthGuard],
         children: [
           {
             path: 'speler-detail/:id',
+            canActivate: [AuthGuard],
             component: SpelerDetailComponent
           },
           {
             path: 'speler-edit/:id',
+            canActivate: [AuthGuard],
             component: EditSpelerComponent
           },
           {
             path: 'speler-nieuw',
+            canActivate: [AuthGuard],
             component: SpelerNieuwComponent
           },
         ],
       },
       {
         path: 'nieuws',
+        canActivate: [AuthGuard],
         component: NieuwsComponent,
         children: [
           {
             path: 'nieuws-detail/:id',
+            canActivate: [AuthGuard],
             component: NieuwsDetailComponent
           },
           {
             path: 'nieuws-edit/:id',
+            canActivate: [AuthGuard],
             component: EditNieuwsComponent
           },
           {
             path: 'nieuws-nieuw',
+            canActivate: [AuthGuard],
             component: NieuwsNieuwComponent
           },
         ],
       },
       {
         path: 'wedstrijden',
+        canActivate: [AuthGuard],
         component: WedstrijdenComponent,
         children: [
           {
             path: 'wedstrijd-detail/:id',
+            canActivate: [AuthGuard],
             component: WedstrijdDetailComponent
           },
           {
             path: 'wedstrijd-edit/:id',
+            canActivate: [AuthGuard],
             component: EditWedstrijdComponent
           },
           {
             path: 'wedstrijd-nieuw',
+            canActivate: [AuthGuard],
             component: WedstrijdNieuwComponent
+          },
+        ],
+
+      },
+      {
+        path: 'sponsor',
+        component: SponsorComponent,
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'sponsor-detail/:id',
+            canActivate: [AuthGuard],
+            component: SponsorDetailComponent
+          },
+          {
+            path: 'sponsor-edit/:id',
+            canActivate: [AuthGuard],
+            component: EditSponsorComponent
+          },
+          {
+            path: 'new-sponsor',
+            canActivate: [AuthGuard],
+            component: NewSponsorComponent
           },
         ],
 
@@ -142,10 +187,6 @@ const routes: Routes = [
       {
         path: 'aploeg',
         component: AploegComponent,
-      },
-      {
-        path: 'reserven',
-        component: ReservenComponent
       },
       {
         path: 'zondagsreserven',
@@ -172,10 +213,6 @@ const routes: Routes = [
       {
         path: 'u9',
         component: U9Component,
-      },
-      {
-        path: 'u10',
-        component: U10Component
       },
       {
         path: 'u11',

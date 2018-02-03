@@ -2,7 +2,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute, NavigationStart } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
@@ -63,8 +63,13 @@ export class AppComponent implements OnInit {
   show2: boolean = false;
   show3: boolean = false;
   sbOpen: boolean = true;
+  height: number;
+  isLoaded: boolean = false;
+  @ViewChild('app') elementView: ElementRef;
+
   constructor(location: Location, router: Router,activeRoute: ActivatedRoute, ngZone:NgZone) {
     this.screen = window.innerWidth;
+
     window.onresize = (e) =>
     {
         ngZone.run(() => {
@@ -135,6 +140,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+
 
   }
 

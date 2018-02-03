@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Ploeg }           from './ploeg';
 import { Speler }           from './../spelers/speler';
+import { Wedstrijd }           from './../wedstrijden/wedstrijd';
 import {AppSettings} from '../../app-settings';
 
 @Injectable()
@@ -73,6 +74,22 @@ export class PloegenService {
 
   getSpelersByTeam(ploegId: number) : Observable<Speler[]> {
     return this.http.get(this.ploegenURL + "/" + ploegId + "/spelers")
+                        // ...and calling .json() on the response to return data
+                         .map(res=> res.json())
+                         //...errors if any
+                        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getGamesByTeam(ploegId: number) : Observable<Wedstrijd[]> {
+    return this.http.get(this.ploegenURL + "/" + ploegId + "/wedstrijden")
+                        // ...and calling .json() on the response to return data
+                         .map(res=> res.json())
+                         //...errors if any
+                        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  loadPloegByName(name:string) : Observable<Ploeg> {
+    return this.http.get(this.ploegenURL + "/byName/" + name)
                         // ...and calling .json() on the response to return data
                          .map(res=> res.json())
                          //...errors if any

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {SpelersService} from './spelers.service'
 import { Speler }           from './speler';
 import {Observable} from 'rxjs/Rx';
