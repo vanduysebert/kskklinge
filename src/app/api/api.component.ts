@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthenticationService } from './../user/authentication.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-api',
@@ -18,9 +19,13 @@ export class ApiComponent implements OnInit {
   error:string = '';
   loggedIn: boolean = true;
   model: any = {};
+  expired: boolean;
   router: Router;
   route: ActivatedRoute;
-  constructor(location: Location, router: Router, public _route: ActivatedRoute, private authenticationService: AuthenticationService) {
+  constructor(private changeDetector: ChangeDetectorRef, location: Location, router: Router, public _route: ActivatedRoute, private authenticationService: AuthenticationService, private snackBar: MatSnackBar) {
+    _route.params.subscribe(val => {
+
+      });
     this.route = _route;
     this.router = router;
   }
@@ -51,14 +56,21 @@ export class ApiComponent implements OnInit {
   ngOnInit() {
     console.log(localStorage.getItem('currentUser'));
     if (localStorage.getItem('currentUser')) {
-        // logged in so return true
-
+      if (this.authenticationService.tokenIsNotExpired()) {
         this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+
+
     } else {
       this.loggedIn =  false;
     }
 
 
   }
+
+
+
 
 }

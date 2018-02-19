@@ -1,3 +1,3 @@
 export class AppSettings {
-  public static API_ENDPOINT = 'http://kskklingeapi:8080/';
+  public static API_ENDPOINT = 'http://admin.kskklinge.be/';
 }

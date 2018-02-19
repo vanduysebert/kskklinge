@@ -12,11 +12,12 @@
 
 
       <div class="card-body">
-        <p class="card-text lead text-primary"><i class="fa fa-home" aria-hidden="true"></i> Buitenstraat 9 <br/> 9170 De Klinge <br/>
-          <i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+3237705681"> 03/770 56 81</a> <br/>
-          <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:secretariaatkskklinge@telenet.be"> secretariaatkskklinge@telenet.be</a>
+        <p class="card-text lead text-primary text-left">
+          <i class="fa fa-map-marker mr-2" aria-hidden="true"></i><a href="https://www.google.be/maps/place/KSK+Klinge/@51.2523569,4.0796667,15z/data=!4m5!3m4!1s0x0:0xbbd1cff8880fa39e!8m2!3d51.2522243!4d4.077808?hl=nl"> Buitenstraat 9, 9170 De Klinge </a><br/>
+          <i class="fa fa-phone mr-2" aria-hidden="true"></i><a href="tel:+3237705681"> 03/770 56 81</a> <br/>
+          <i class="fa fa-envelope-o mr-2" aria-hidden="true"></i><a href="mailto:secretariaatkskklinge@telenet.be"> secretariaatkskklinge@telenet.be</a>
         </p>
-        <a href="tel:+3237705681" class="btn btn-primary"><i class="fa fa-phone" aria-hidden="true"></i> Bel ons</a>
+        <a href="tel:+3237705681" class="btn btn-primary"><i class="fa fa-phone mr-2" aria-hidden="true"></i> Bel ons</a>
         <a href="mailto:secretariaatkskklinge@telenet.be" class="btn btn-primary"><i class="fa fa-envelope-o" aria-hidden="true"></i> Mail ons</a>
       </div>
     </div>
@@ -65,6 +66,7 @@
           <button type="submit" class="btn btn-block btn-success btnLink" [disabled]="!contactForm.form.valid">Verzend</button>
         </form>
       </div>
+    </div>
       <div [hidden]="!submitted">
         <div class="alert alert-success">
           <h4>
@@ -84,7 +86,6 @@
             Probeer het opnieuw. Indien het niet lukt, graag een mail sturen naar <a href="mailto:secretariaatkskklinge@telenet.be">KSK Klinge</a> met daarin jouw vraag.
           </p>
         </div>
-      </div>
     </div>
   </div>
 

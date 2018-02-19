@@ -1,111 +1,96 @@
-
 <h3 class="text-dark text-center">Nieuwe speler toevoegen</h3>
 <div class="row justify-content-center">
-   <form #newPlayerForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="playerFirstName" class="text-primary">Voornaam</label>
-          <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="player.voornaam" #vnaam="ngModel" name="vnaam" required id="playerFirstName" type="text" value="player.voornaam">
-          <div class="invalid-feedback">Voornaam is vereist</div>
-
-        </div>
-        <div class="form-group col-12 col-md-6">
-          <label for="playerName" class="text-primary">Familienaam</label>
-          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="player.naam" #naam="ngModel" name="naam" required id="playerName" type="text" value="player.naam">
-          <div class="invalid-feedback">Familienaam is vereist</div>
-        </div>
+  <form #newPlayerForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="playerFirstName" class="text-primary">Voornaam</label>
+        <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="player.voornaam" #vnaam="ngModel" name="vnaam" required id="playerFirstName" type="text" value="player.voornaam">
+        <div class="invalid-feedback">Voornaam is vereist</div>
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="playerBirth" class="text-primary">Geboortedatum</label>
-          <input type="text" class="form-control" name="birth" #birth="ngModel" id="playerBirth" [ngClass]="{'is-valid': birth.valid}" placeholder="Datum" bsDatepicker [(ngModel)]="player.geboortedatum">
-        </div>
-        <div class="form-group col-md-6 col-12">
-          <label for="ploegSelect" class="text-primary d-block">Ploeg</label>
-          <select class="form-control" required [(ngModel)]="player.ploeg_id"  name="ploegSelectName" id="ploegSelect">
-           <option *ngFor="let ploeg of ploegen" name="ploeg" [ngValue]="ploeg.ploeg_id">{{ploeg.naam}}</option>
-
-         </select>
-          <div class="invalid-feedback">Ploeg is vereist</div>
-        </div>
+      <div class="form-group col-12 col-md-6">
+        <label for="playerName" class="text-primary">Familienaam</label>
+        <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="player.naam" #naam="ngModel" name="naam" required id="playerName" type="text" value="player.naam">
+        <div class="invalid-feedback">Familienaam is vereist</div>
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="mail" class="text-primary">Email</label>
-          <input class="form-control" placeholder="Email" [ngClass]="{'is-valid': mail.valid}" [(ngModel)]="player.email" #mail="ngModel" name="mail" id="mail" type="text" value="">
-
-        </div>
-        <div class="col-12 col-md-6 form-group">
-          <label for="tel" class="text-primary">Telefoonnummer</label>
-          <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="player.telefoonnummer" #tel="ngModel" name="tel" id="tel" type="text" value="">
-
-        </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="playerBirth" class="text-primary">Geboortedatum</label>
+        <input type="text" class="form-control" name="birth" #birth="ngModel" id="playerBirth" [ngClass]="{'is-valid': birth.valid}" placeholder="Datum" bsDatepicker [(ngModel)]="player.geboortedatum">
       </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="adres" class="text-primary">Adres</label>
-          <textarea class="form-control" [ngClass]="{'is-valid': adres.valid}" [(ngModel)]="player.adres" #adres="ngModel" name="adres" id="trainingsdagen" value=""></textarea>
-        </div>
-        <div class="col-12 col-md-6 form-group">
-          <label class="col-form-label text-primary">Ingeschreven?</label>
-          <div class="form-check">
-            <input class="form-check-input ml-4" [(ngModel)]="player.ingeschreven" type="radio" name="ingeschreven" id="exampleRadios1" value="1">
-            <label class="form-check-label ml-4" for="exampleRadios1">
+      <div class="form-group col-md-6 col-12">
+        <label for="ploegSelect" class="text-primary d-block">Ploeg</label>
+        <select class="form-control" required [(ngModel)]="player.ploeg_id" name="ploegSelectName" id="ploegSelect">
+           <option *ngFor="let ploeg of ploegen" name="ploeg" [ngValue]="ploeg.ploeg_id">{{ploeg.naam}}</option>         </select>
+        <div class="invalid-feedback">Ploeg is vereist</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="mail" class="text-primary">Email</label>
+        <input class="form-control" placeholder="Email" [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="player.email" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+      <div class="col-12 col-md-6 form-group">
+        <label for="tel" class="text-primary">Telefoonnummer</label>
+        <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="player.telefoonnummer" #tel="ngModel" name="tel" id="tel" type="text" value=""> </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="adres" class="text-primary">Adres</label>
+        <textarea class="form-control" [ngClass]="{'is-valid': adres.valid}" [(ngModel)]="player.adres" #adres="ngModel" name="adres" id="trainingsdagen" value=""></textarea>
+      </div>
+      <div class="col-12 col-md-6 form-group">
+        <label class="col-form-label text-primary">Ingeschreven?</label>
+        <div class="form-check">
+          <input class="form-check-input ml-4" [(ngModel)]="player.ingeschreven" type="radio" name="ingeschreven" id="exampleRadios1" value="1">
+          <label class="form-check-label ml-4" for="exampleRadios1">
                 Ja
               </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input ml-4" [(ngModel)]="player.ingeschreven" type="radio" name="ingeschreven" id="exampleRadios2" value="0" >
-            <label class="form-check-label ml-4" for="exampleRadios2">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input ml-4" [(ngModel)]="player.ingeschreven" type="radio" name="ingeschreven" id="exampleRadios2" value="0">
+          <label class="form-check-label ml-4" for="exampleRadios2">
                 Nee
               </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="pos" class="text-primary">Positie</label>
+        <input class="form-control" placeholder="Positie" [ngClass]="{'is-valid': pos.valid}" [(ngModel)]="player.positie" #pos="ngModel" name="pos" id="pos" type="text" value=""> </div>
+      <div class="col-12 col-md-6 form-group">
+        <label for="goal" class="text-primary">Doelpunten</label>
+        <input class="form-control" placeholder="Doelpunten" [ngClass]="{'is-valid': goal.valid, 'text-danger is-invalid': goal.invalid}" pattern="[0-9]*" [(ngModel)]="player.doelpunten" #goal="ngModel" name="goal" id="goal" type="text" value="">
+        <div class="invalid-feedback">Enkel numerieke waarden</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <div class="row justify-content-center" *ngIf="src">
+          <div class="col-4">
+            <img class="img-fluid" [src]="src">
           </div>
         </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="pos" class="text-primary">Positie</label>
-          <input class="form-control" placeholder="Positie" [ngClass]="{'is-valid': pos.valid}" [(ngModel)]="player.positie" #pos="ngModel" name="pos" id="pos" type="text" value="">
-
-        </div>
-        <div class="col-12 col-md-6 form-group">
-          <label for="goal" class="text-primary">Doelpunten</label>
-          <input class="form-control" placeholder="Doelpunten" [ngClass]="{'is-valid': goal.valid, 'text-danger is-invalid': goal.invalid}" pattern="[0-9]*" [(ngModel)]="player.doelpunten" #goal="ngModel" name="goal" id="goal" type="text" value="">
-          <div class="invalid-feedback">Enkel numerieke waarden</div>
+        <div class="w-100"></div>
+        <div class="col-12" *ngIf="uploader.progress > 0">
+          <progressbar class="progress active" [value]="uploader.progress" [max]="100" type="success"></progressbar>
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <div class="row justify-content-center" *ngIf="src">
-            <div  class="col-4">
-              <img class="img-fluid" [src]="src">
-            </div>
-          </div>
-          <div class="w-100"></div>
-          <div class="col-12" *ngIf="uploader.progress > 0">
-            <progressbar class="progress active" [value]="uploader.progress" [max]="100" type="success"></progressbar>
-          </div>
-        </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
+        <span class="text-primary" *ngIf="!src">Foto uploaden</span> <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader"
+          name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-            <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
-            <span class="text-primary" *ngIf="!src">Foto uploaden</span>
-
-
-              <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader" name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
-        </div>
-
-      </div>
-     <div class="form-row">
+    </div>
+    <div class="form-row">
       <div class="col-12 form-group">
-          <div class="btn-group">
-            <button class="btn btn-success" [disabled]="!newPlayerForm.form.valid" type="submit" name="action">Speler toevoegen <i class="fa-plus fa" aria-hidden="true"></i></button>
-            <button class="btn btn-dark" [routerLink]="['/api/spelers']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Spelersoverzicht</button>
-          </div>
+        <div class="btn-group">
+          <button class="btn btn-success" [disabled]="!newPlayerForm.form.valid" type="submit" name="action">Speler toevoegen <i class="fa-plus fa" aria-hidden="true"></i></button>
+          <button class="btn btn-dark" [routerLink]="['/api/spelers']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Spelersoverzicht</button>
+        </div>
       </div>
-     </div>
-   </form>
- </div>
+    </div>
+  </form>
+</div>

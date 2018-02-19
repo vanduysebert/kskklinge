@@ -7,26 +7,30 @@ import { AploegComponent } from './senioren/aploeg/aploeg.component';
 import { ZondagsreservenComponent } from './senioren/zondagsreserven/zondagsreserven.component';
 
 import { JeugdComponent } from './jeugd/jeugd.component';
-import { U6Component } from './jeugd/u6/u6.component';
-import { U7Component } from './jeugd/u7/u7.component';
-import { U8Component } from './jeugd/u8/u8.component';
-import { U9Component } from './jeugd/u9/u9.component';
-import { U11Component } from './jeugd/u11/u11.component';
-import { U15Component } from './jeugd/u15/u15.component';
-import { U17Component } from './jeugd/u17/u17.component';
-import { U13Component } from './jeugd/u13/u13.component';
+  import { U6Component } from './jeugd/u6/u6.component';
+  import { U7Component } from './jeugd/u7/u7.component';
+  import { U8Component } from './jeugd/u8/u8.component';
+  import { U9Component } from './jeugd/u9/u9.component';
+  import { U11Component } from './jeugd/u11/u11.component';
+  import { U15Component } from './jeugd/u15/u15.component';
+  import { U17Component } from './jeugd/u17/u17.component';
+  import { U13Component } from './jeugd/u13/u13.component';
+  import {JeugdNieuwsComponent} from './jeugd/jeugd-nieuws/jeugd-nieuws.component';
 
 import { ClubComponent } from './club/club.component';
-import { BestuurComponent } from './club/bestuur/bestuur.component';
-import { ContactComponent } from './club/contact/contact.component';
-import { DocumentenComponent } from './club/documenten/documenten.component';
-import { InfoComponent } from './club/info/info.component';
-import { LiggingComponent } from './club/ligging/ligging.component';
-import { LinksComponent } from './club/links/links.component';
+  import { BestuurComponent } from './club/bestuur/bestuur.component';
+  import { ContactComponent } from './club/contact/contact.component';
+  import { DocumentenComponent } from './club/documenten/documenten.component';
+  import { InfoComponent } from './club/info/info.component';
+  import { LiggingComponent } from './club/ligging/ligging.component';
+  import { LinksComponent } from './club/links/links.component';
+  import {ClubNieuwsComponent} from './club/club-nieuws/club-nieuws.component';
 
 
 import { EvenementenComponent } from './evenementen/evenementen.component';
+import {SupportersComponent} from './supporters/supporters.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
+
 
 import {ApiComponent} from './api/api.component';
 import {PloegenComponent} from './api/ploegen/ploegen.component';
@@ -53,6 +57,8 @@ import {SponsorComponent} from './api/sponsor/sponsor.component';
 import {SponsorDetailComponent} from './api/sponsor/sponsor-detail/sponsor-detail.component';
 import {NewSponsorComponent} from './api/sponsor/new-sponsor/new-sponsor.component';
 import {EditSponsorComponent} from './api/sponsor/edit-sponsor/edit-sponsor.component';
+
+import {SignupsComponent} from './api/signups/signups.component';
 
 import {AuthGuard} from './guards/auth.guard';
 const routes: Routes = [
@@ -174,6 +180,11 @@ const routes: Routes = [
         ],
 
       },
+      {
+        path: 'signups',
+        component: SignupsComponent,
+        canActivate: [AuthGuard]
+      }
     ]
   },
   {
@@ -229,6 +240,10 @@ const routes: Routes = [
       {
         path: 'u17',
         component: U17Component
+      },
+      {
+        path: 'nieuws',
+        component: JeugdNieuwsComponent
       }
     ]
   },
@@ -259,6 +274,10 @@ const routes: Routes = [
       {
         path: 'links',
         component: LinksComponent
+      },
+      {
+        path: 'nieuws',
+        component: ClubNieuwsComponent
       }
     ]
   },
@@ -271,10 +290,19 @@ const routes: Routes = [
     component: SponsorsComponent
   },
   {
+    path: 'supporters',
+    component: SupportersComponent
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
+  {
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  }
 
 ];
 

@@ -1,0 +1,85 @@
+<div class=" jumbotron bg-accent mt-4">
+  <h1 class="display-4 text-primary">Supporters</h1>
+  <p class="lead text-primary">De trouwe achterban van KSK Klinge</p>
+  <hr class="my-4">
+  <p class="lead text-dark">KSK Klinge heeft doorheen de jaren steeds kunnen rekenen op een talrijke en trouwe achterban die de club door dik en dun gesteund hebben. KSK Klinge is fier op de steeds talrijk aanwezige supporters bij thuis- en uitwedstrijden en het is de bedoeling om de betrokkenheid met de supporters hoog te houden.</p>
+  <p class="text-primary">
+    Via volgende kanalen tracht KSK Klinge haar supporters steeds op de hoogte te houden van de laatste weetjes omtrent KSK Klinge.
+  </p>
+</div>
+
+<div class="row justify-content-center bg-ksk p-3">
+  <div class="col-12 col-md-6 mt-3">
+    <h2 class="text-center text-primary">Nieuwsbrief</h2>
+    <p class="text-primary lead">
+      Via onderstaande knop is het mogelijk om je in te schrijven voor de nieuwsbrief. Je ontvangt dan een email bij alle nieuwe weetjes die op de website worden geplaatst en elke keer KSK Klinge een nieuw evenement aankondigt.
+    </p>
+    <a class="btn btn-primary btn-block btn-large text-white" (click)="addToNewsletter(newsletterSupporterModal)">Inschrijven voor nieuwsbrief</a>
+    <h2 class="text-center text-primary mt-3">Sociale media</h2>
+
+
+
+    <p class="text-primary lead">
+      KSK Klinge is ook actief op de sociale media. Via onderstaande link kan je lid worden van onze facebook-groep (KSK Klinge). Laat gerust iets achter op onze wall!
+    </p>
+
+
+    <a class="btn btn-primary btn-block btn-large text-white" href="https://www.facebook.com/groups/35796537836" target="_blank"><i class="float-left fa fa-facebook-square" aria-hidden="true"></i>Facebookpagina</a>
+    <a class="btn btn-primary btn-block btn-large text-white" href="https://twitter.com/kskklinge" target="_blank"><i class="float-left fa fa-twitter" aria-hidden="true"></i>Twitterpagina</a>
+
+  </div>
+  <div class="col-12 col-md-6 mt-3">
+    <h2 class="text-center text-primary">Whats-app</h2>
+    <p class="text-primary lead">
+      KSK heeft een publieke Whatsapp groep voor de supporters. Via onderstaande link of door de QR-code te scannen kan je een aanvraag indienen om lid te worden van deze groep.
+    </p>
+    <a class="btn btn-primary btn-block btn-large text-white" href="https://chat.whatsapp.com/JFQmjOzI1mS2HqdF7okJRn">Inschrijven Whatsapp</a>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <img class="img-fluid mt-3" src="assets/img/qr.jpg" alt="qr-code"/>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<ng-template #newsletterSupporterModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Nieuwsbrief</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <form #newSubscriberHomeForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <label for="subscriberFirstName" class="text-primary">Voornaam</label>
+          <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="subscriber.voornaam" #vnaam="ngModel" name="vnaam" required id="subscriberFirstName" type="text" value="subscriber.voornaam">
+          <div class="invalid-feedback">Voornaam is vereist</div>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="subscriberName" class="text-primary">Familienaam</label>
+          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="subscriber.naam" #naam="ngModel" name="naam" required id="subscriberName" type="text" value="subscriber.naam">
+          <div class="invalid-feedback">Familienaam is vereist</div>
+        </div>
+      </div>
+
+      <div class="form-row justify-content-center">
+        <div class="col-12 form-group">
+          <label for="mail" class="text-primary">Email</label>
+          <input class="form-control" placeholder="Email" required [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="subscriber.email" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+      </div>
+
+      <div class="form-row mt-2">
+        <div class="col-12 form-group">
+          <div class="btn-group">
+            <button class="btn btn-success" [disabled]="!newSubscriberHomeForm.form.valid" type="submit" name="action">Inschrijven</button>
+            <a class="btn btn-danger text-white" (click)="modalRef.hide()">Annuleer</a>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+</ng-template>

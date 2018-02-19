@@ -12,7 +12,8 @@
         <div *ngIf="showEventDetail(event.nieuws_id)" >
           <div [froalaView]="event.inhoud"></div>
         </div>
-        <a class="btn" [ngClass]="{'btn-secondary': even, 'btn-primary': odd}" (click)=addToGoogleCalendar(event)>Toevoegen aan kalender <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        <a class="btn mt-3" [ngClass]="{'btn-secondary': even, 'btn-primary text-white': odd}" (click)=addToGoogleCalendar(event)>Toevoegen aan kalender <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        <a class="btn mt-3" [ngClass]="{'btn-primary text-white': even, 'btn-secondary': odd}" [href]="'mailto:secretariaatkskklinge@telenet.be?subject=Inschrijven ' + event.titel + '&body=Ik%20zou%20mij%20graag%20inschrijven%20voor%20' + event.titel + '%20op%20' + event.eventDate + '.%0D%0A%0D%0AAantal%20personen:'">Inschrijven <i class="fa fa-sign-in" aria-hidden="true"></i></a>
         <p class="text-muted float-right lead" *ngIf="!showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
           <i class="fa fa-plus-square" aria-hidden="true"></i> Meer info
         </p>
@@ -26,7 +27,7 @@
 </div>
 
 <div class="row mt-5">
-  <div class="col">
+  <div class="col" *ngIf="pastEvents && pastEvents.length > 0">
     <h3 class="text-primary text-center">Voorbije evenementen</h3>
     <ul class="list-group list-group-flush">
       <li *ngFor="let event of pastEvents; let even = even; let odd = odd" class="list-group-item lead text-primary hoverable" id="event{{event.nieuws_id}}"  [ngClass]="{'bg-accent': even, 'bg-ksk': odd}">

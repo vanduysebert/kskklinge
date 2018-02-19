@@ -17,7 +17,7 @@
             <div class="col ">
               <div class="list-group m-4 bg-ksk">
                 <a routerLink="/home" routerLinkActive="bg-primary text-secondary" (click)="sidebar.close()" class="list-group-item list-group-item-action">KSK Klinge<span class="float-right"><i class="material-icons">home</i></span></a>
-                <a (click)="showTeam()" [ngClass]="{'bg-activeAccent': show1}" class="list-group-item list-group-item-action text-grey">Senioren<span class="float-right text-grey"><i class="material-icons">people</i></span></a>
+                <a (click)="showTeam()" [ngClass]="{'bg-activeAccent': show1}" class="hoverable list-group-item list-group-item-action text-grey">Senioren<span class="float-right text-grey"><i class="material-icons">people</i></span></a>
                 <div class="list-group" [ngClass]="{'border-secondary border': show1}">
                   <a [@fadeInAnim]="show1" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/senioren/aploeg"><span class="float-right"><i class="material-icons">format_color_text</i></span> Senioren</a>
                   <a [@fadeInAnim3]="show1" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/senioren/zondagsreserven"><span class="float-right"><i class="material-icons">copyright</i></span> Zondagsreserven</a>
@@ -32,18 +32,20 @@
                   <a [@fadeInAnim3]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/u13"><span class="float-right"><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span> U13</a>
                   <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/u15"><span class="float-right"><i class="fa fa-trophy" aria-hidden="true"></i></span> U15</a>
                   <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/u17"><span class="float-right"><i class="fa fa-star-o" aria-hidden="true"></i></span> U17</a>
+                  <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/nieuws"><span class="float-right"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> Nieuws</a>
                 </div>
 
-                <a (click)="showClub()" [ngClass]="{'bg-activeAccent': show3}" class="list-group-item list-group-item-action text-grey"><span class="float-right text-grey"><i class="material-icons">store</i></span>Club</a>
+                <a (click)="showClub()" [ngClass]="{'bg-activeAccent': show3}" class="list-group-item list-group-item-action text-grey hoverable"><span class="float-right text-grey"><i class="material-icons">store</i></span>Club</a>
                 <div class="list-group" [ngClass]="{'border-secondary border': show3}">
                   <a [@fadeInAnim]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/bestuur"><span class="float-right"><i class="fa fa-sitemap" aria-hidden="true"></i></span> Bestuur</a>
                   <a [@fadeInAnim]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/info"><span class="float-right"><i class="material-icons">info_outline</i></span> Info</a>
                   <a [@fadeInAnim2]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/ligging"><span class="float-right"><i class="material-icons">location_on</i></span> Ligging</a>
                   <a [@fadeInAnim2]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/contact"><span class="float-right"><i class="material-icons">phone</i></span> Contact</a>
-                  <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/documenten"><span class="float-right"><i class="fa fa-files-o" aria-hidden="true"></i></span> Nuttige documenten</a>
-                  <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/jeugd/links"><span class="float-right"><i class="material-icons">link</i></span> Links</a>
+                  <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/documenten"><span class="float-right"><i class="fa fa-files-o" aria-hidden="true"></i></span> Nuttige documenten</a>
+                  <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/links"><span class="float-right"><i class="material-icons">link</i></span> Links</a>
+                  <a [@fadeInAnim4]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" (click)="sidebar.close()" routerLink="/club/nieuws"><span class="float-right"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> Nieuws</a>
                 </div>
-
+                <a routerLink="/supporters" routerLinkActive="bg-primary text-secondary" (click)="sidebar.close()" class="list-group-item list-group-item-action">Supporters<span class="float-right"><i class="fa fa-heart" aria-hidden="true"></i></span></a>
                 <a routerLink="/evenementen" routerLinkActive="bg-primary text-secondary" (click)="sidebar.close()" class="list-group-item list-group-item-action">Evenementen<span class="float-right"><i class="material-icons">event</i></span></a>
                 <a routerLink="/sponsors" routerLinkActive="bg-primary text-secondary" (click)="sidebar.close()" class="list-group-item list-group-item-action">Sponsors<span class="float-right"><i class="material-icons">flag</i></span></a>
               </div>
@@ -54,20 +56,27 @@
 
       </mat-sidenav>
       <mat-sidenav-content >
-        <div class="row bg-ksk p-2 border rounded">
+        <div class="row bg-ksk p-2 border rounded align-items-center">
           <div class="col">
             <div class="row justify-content-center">
               <div class="col">
                 <h2 class="text-secondary hoverable" (click)="sidebar.open()"><i class="fa fa-bars" aria-hidden="true"></i></h2>
               </div>
               <div class="col">
-                <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook" aria-hidden="true"></i></a> </h2>
+                <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a> </h2>
               </div>
             </div>
           </div>
           <div class="col text-center">
-            <h2 class="text-dark text-center">KSK Klinge</h2>
-            <small class="text-muted d-block m-l-4 text-secondary">Waar voetbal een feest is</small>
+            <div class="d-block d-md-none">
+              <h1 class="text-hide">KSK Klinge</h1>
+              <a routerLink="/home"><img src="assets/img/logo2.png" class="img-fluid rounded"/></a>
+            </div>
+            <div class="d-none d-md-block">
+              <h1 class="text-dark text-center" routerLink="/home">KSK Klinge</h1>
+              <small class="text-muted d-block m-l-4 text-secondary">Waar voetbal een feest is</small>
+            </div>
+
           </div>
           <div class="col">
             <div class="row justify-content-center">
@@ -80,27 +89,39 @@
             </div>
           </div>
         </div>
+        <div class="row m-2 justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="row">
+              <div class="col mt-2">
+                <a (click)="newSignupAdded(newsletterModal)" class="btn btn-block btn-primary text-white d-none d-sm-block"><i class="fa fa-at align-middle mr-2" aria-hidden="true"></i><span class="align-middle ">Inschrijven nieuwsbrief</span></a>
+                <p class="text-center">
+                <a (click)="newSignupAdded(newsletterModal)" class="d-block d-sm-none rounded-circle" tooltip="Inschrijven voor nieuwsbrief"><i class="fa fa-at align-middle mr-2" aria-hidden="true"></i></a>
+                </p>
+              </div>
+              <div class="col mt-2">
+                <a href="https://chat.whatsapp.com/JFQmjOzI1mS2HqdF7okJRn" class="btn btn-block btn-primary text-white d-none d-sm-block"><i class="fa fa-whatsapp align-middle mr-2" aria-hidden="true"></i><span class="align-middle ">Supporters KSK Klinge</span></a>
+                <p class="text-center">
+                  <a href="https://chat.whatsapp.com/JFQmjOzI1mS2HqdF7okJRn" class="d-block d-sm-none rounded-circle" tooltip="Deelnemen aan Whatsapp 'Supporters KSK Klinge'"><i class="fa fa-whatsapp align-middle mr-2" aria-hidden="true"></i></a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
         <router-outlet></router-outlet>
         <div class="jumbotron">
-          <div class="row justify-content-center">
+          <div class="row justify-content-center" *ngIf="mainSponsors && mainSponsors.length > 0">
+
             <div class="col-12 col-lg-8 col-xl-6">
-              <div class="row mb-3">
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoclima.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoDCS.png" /></a>
-                </div>
-              </div>
-              <div class="row mt-5">
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/KBC.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logo4repair.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoalinco.png" /></a>
+              <div class="row justify-content-center">
+                <div class="col-md-4 mt-3 col-xs-12" *ngFor="let sponsor of mainSponsors">
+                  <div *ngIf="sponsor.website && sponsor.website != ''">
+                    <a [href]="sponsor.website"><img class="img-fluid" [src]="sponsor.fotoUrl" [alt]="sponsor.naam" /></a>
+                  </div>
+                  <div *ngIf="!sponsor.website || sponsor.website == ''">
+                    <img class="img-fluid" [src]="sponsor.fotoUrl" [alt]="sponsor.naam" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -113,20 +134,27 @@
 
   </div>
   <div *ngIf="checkPath() && screen > 992" [style.height.px] = "height" >
-    <div class="row bg-ksk p-2 border rounded">
+    <div class="row bg-ksk p-2 border rounded align-items-center">
       <div class="col">
         <div class="row justify-content-center">
           <div class="col">
             <h2 class="text-secondary hoverable" (click)="sidebarToggle()"><i class="fa fa-bars" aria-hidden="true"></i></h2>
           </div>
           <div class="col">
-            <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook" aria-hidden="true"></i></a> </h2>
+            <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a> </h2>
           </div>
         </div>
       </div>
       <div class="col text-center">
-        <h2 class="text-dark text-center">KSK Klinge</h2>
-        <h5><small class="text-muted d-block m-l-4 text-secondary">Waar voetbal een feest is</small></h5>
+        <div class="d-block d-md-none">
+          <h1 class="text-hide">KSK Klinge</h1>
+          <a routerLink="/home"><img src="assets/img/logo2.png" class="img-fluid rounded"/></a>
+        </div>
+        <div class="d-none d-md-block">
+          <h1 class="text-dark text-center" routerLink="/home">KSK Klinge</h1>
+          <h5><small class="text-muted d-block m-l-4 text-secondary">Waar voetbal een feest is</small></h5>
+        </div>
+
       </div>
       <div class="col">
         <div class="row justify-content-center">
@@ -136,21 +164,20 @@
           <div class="col">
             <h2 class="text-secondary"><a class="text-dark" href="https://www.google.be/maps/place/KSK+Klinge/@51.2523569,4.0796667,15z/data=!4m5!3m4!1s0x0:0xbbd1cff8880fa39e!8m2!3d51.2522243!4d4.077808?hl=nl"><i class="fa fa-map-marker" aria-hidden="true"></i></a> </h2>
           </div>
-          <p>
-            {{height}}
-          </p>
+
         </div>
 
       </div>
     </div>
+
     <mat-sidenav-container style="min-height: 100vw">
-      <mat-sidenav #sidebar mode="side"  [opened]="sbOpen" fixedTopGap="90" fixedInViewport="true">
+      <mat-sidenav #sidebar mode="side"  [opened]="sbOpen" fixedTopGap="100" fixedInViewport="true">
         <div class="sidebarWidth ">
           <div class="row">
             <div class="col ">
               <div class="list-group m-4 bg-ksk">
                 <a routerLink="/home" routerLinkActive="bg-primary text-secondary" class="list-group-item list-group-item-action">KSK Klinge<span class="float-right"><i class="material-icons">home</i></span></a>
-                <a (click)="showTeam()" [ngClass]="{'bg-activeAccent': show1}" class="list-group-item list-group-item-action text-grey">Senioren<span class="float-right text-grey"><i class="material-icons">people</i></span></a>
+                <a (click)="showTeam()" [ngClass]="{'bg-activeAccent': show1}" class="list-group-item list-group-item-action text-grey hoverable">Senioren<span class="float-right text-grey"><i class="material-icons">people</i></span></a>
                 <div class="list-group" [ngClass]="{'border-secondary border': show1}">
                   <a [@fadeInAnim]="show1" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/senioren/aploeg"><span class="float-right"><i class="material-icons">format_color_text</i></span> Senioren</a>
 
@@ -166,9 +193,10 @@
                   <a [@fadeInAnim3]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/jeugd/u13"><span class="float-right"><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span> U13</a>
                   <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/jeugd/u15"><span class="float-right"><i class="fa fa-trophy" aria-hidden="true"></i></span> U15</a>
                   <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/jeugd/u17"><span class="float-right"><i class="fa fa-star-o" aria-hidden="true"></i></span> U17</a>
+                  <a [@fadeInAnim4]="show2" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/jeugd/nieuws"><span class="float-right"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> Nieuws</a>
                 </div>
 
-                <a (click)="showClub()" [ngClass]="{'bg-activeAccent': show3}" class="list-group-item list-group-item-action text-grey"><span class="float-right text-grey"><i class="material-icons">store</i></span>Club</a>
+                <a (click)="showClub()" [ngClass]="{'bg-activeAccent': show3}" class="list-group-item list-group-item-action text-grey hoverable"><span class="float-right text-grey"><i class="material-icons">store</i></span>Club</a>
                 <div class="list-group" [ngClass]="{'border-secondary border': show3}">
                   <a [@fadeInAnim]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/bestuur"><span class="float-right"><i class="fa fa-sitemap" aria-hidden="true"></i></span> Bestuur</a>
                   <a [@fadeInAnim]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/info"><span class="float-right"><i class="material-icons">info_outline</i></span> Info</a>
@@ -176,8 +204,9 @@
                   <a [@fadeInAnim2]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/contact"><span class="float-right"><i class="material-icons">phone</i></span> Contact</a>
                   <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/documenten"><span class="float-right"><i class="fa fa-files-o" aria-hidden="true"></i></span> Nuttige documenten</a>
                   <a [@fadeInAnim3]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/links"><span class="float-right"><i class="material-icons">link</i></span> Links</a>
+                  <a [@fadeInAnim4]="show3" class="pl-5 list-group-item list-group-item-action" routerLinkActive="text-secondary bg-primary" routerLink="/club/nieuws"><span class="float-right"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span> Nieuws</a>
                 </div>
-
+                <a routerLink="/supporters" routerLinkActive="bg-primary text-secondary" class="list-group-item list-group-item-action">Supporters<span class="float-right"><i class="material-icons">favorite</i></span></a>
                 <a routerLink="/evenementen" routerLinkActive="bg-primary text-secondary" class="list-group-item list-group-item-action">Evenementen<span class="float-right"><i class="material-icons">event</i></span></a>
                 <a routerLink="/sponsors" routerLinkActive="bg-primary text-secondary" class="list-group-item list-group-item-action">Sponsors<span class="float-right"><i class="material-icons">flag</i></span></a>
               </div>
@@ -188,29 +217,37 @@
 
       </mat-sidenav>
       <mat-sidenav-content >
-        <div class="m-4">
-          <router-outlet></router-outlet>
-        </div>
-        <div class="jumbotron">
-          <div class="row justify-content-center">
-            <div class="col-12 col-lg-8 col-xl-6">
-              <div class="row mb-3">
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoclima.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoDCS.png" /></a>
-                </div>
+        <div class="row mt-2 justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="row">
+              <div class="col mt-2">
+                <button (click)="newSignupAdded(newsletterModal)" class="btn btn-block btn-primary text-white" placement="bottom" tooltip="Inschrijven voor nieuwsbrief"><i class="fa fa-at align-middle mr-2" aria-hidden="true"></i>
+                  <span class="align-middle">Blijf op de hoogte van alle nieuws rond KSK</span></button>
               </div>
-              <div class="row mt-5">
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/KBC.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logo4repair.png" /></a>
-                </div>
-                <div class="col text-center">
-                  <a href=""><img class="img-fluid" src="assets/img/sponsors/logoalinco.png" /></a>
+              <div class="col mt-2">
+                <a href="https://chat.whatsapp.com/JFQmjOzI1mS2HqdF7okJRn" class="btn btn-block btn-primary text-white"><i class="fa fa-whatsapp align-middle mr-2" aria-hidden="true"></i><span class="align-middle"> "Supporters KSK Klinge"</span></a>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="m-4">
+
+          <router-outlet></router-outlet>
+       </div>
+        <div class="jumbotron">
+          <div class="row justify-content-center" *ngIf="mainSponsors && mainSponsors.length > 0">
+
+            <div class="col-12 col-lg-8 col-xl-6">
+              <div class="row justify-content-center">
+                <div class="col-md-4 mt-3 col-xs-12" *ngFor="let sponsor of mainSponsors">
+                  <div *ngIf="sponsor.website && sponsor.website != ''">
+                    <a [href]="sponsor.website"><img class="img-fluid" [src]="sponsor.fotoUrl" [alt]="sponsor.naam" /></a>
+                  </div>
+                  <div *ngIf="!sponsor.website || sponsor.website == ''">
+                    <img class="img-fluid" [src]="sponsor.fotoUrl" [alt]="sponsor.naam" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,7 +255,7 @@
           <hr />
           <div class="row justify-content-center mt-4">
             <div class="col text-center">
-                <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook" aria-hidden="true"></i></a> </h2>
+                <h2><a class="text-dark" href="https://www.facebook.com/groups/35796537836/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a> </h2>
             </div>
             <div class="col text-center">
                 <h2><a class="text-dark" href="tel:03/770 56 81"><i class="fa fa-phone" aria-hidden="true"></i></a> </h2>
@@ -252,3 +289,43 @@
     </div>
     <router-outlet></router-outlet>
   </div>
+
+  <ng-template #newsletterModal>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Nieuwsbrief</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <form #newSubscriberForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="col-12 col-md-6 form-group">
+            <label for="subscriberFirstName" class="text-primary">Voornaam</label>
+            <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="subscriber.voornaam" #vnaam="ngModel" name="vnaam" required id="subscriberFirstName" type="text" value="subscriber.voornaam">
+            <div class="invalid-feedback">Voornaam is vereist</div>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="subscriberName" class="text-primary">Familienaam</label>
+            <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="subscriber.naam" #naam="ngModel" name="naam" required id="subscriberName" type="text" value="subscriber.naam">
+            <div class="invalid-feedback">Familienaam is vereist</div>
+          </div>
+        </div>
+
+        <div class="form-row justify-content-center">
+          <div class="col-12 form-group">
+            <label for="mail" class="text-primary">Email</label>
+            <input class="form-control" placeholder="Email" required [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="subscriber.email" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+        </div>
+
+        <div class="form-row mt-2">
+          <div class="col-12 form-group">
+            <div class="btn-group">
+              <button class="btn btn-success" [disabled]="!newSubscriberForm.form.valid" type="submit" name="action">Inschrijven</button>
+              <button class="btn btn-danger" (click)="modalRef.hide()">Annuleer</button>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+  </ng-template>

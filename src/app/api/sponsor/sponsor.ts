@@ -7,6 +7,7 @@ export class Sponsor {
     public telnr: string,
     public fotoUrl: string,
     public adres: string,
-    public slogan: string
+    public slogan: string,
+    public isHoofdsponsor: boolean
     ){}
 }

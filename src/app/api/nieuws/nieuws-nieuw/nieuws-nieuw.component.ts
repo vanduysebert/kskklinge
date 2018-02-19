@@ -6,14 +6,14 @@ import * as moment from 'moment';
 import {NieuwsService} from './../nieuws.service';
 import { Nieuws } from './../nieuws';
 import {MatSnackBar} from '@angular/material';
-
+import { AuthenticationService } from './../../../user/authentication.service';
 @Component({
   selector: 'app-nieuws-nieuw',
   templateUrl: './nieuws-nieuw.component.html',
   styleUrls: ['./nieuws-nieuw.component.scss']
 })
 export class NieuwsNieuwComponent implements OnInit {
-  news: Nieuws = new Nieuws(0, "", "", "", "", 2);
+  news: Nieuws = new Nieuws(0, "", "", "", "", 2, false, 150);
   time: string;
   playDate: Date;
   froalaOptions:Object = {
@@ -21,11 +21,14 @@ export class NieuwsNieuwComponent implements OnInit {
     imageMaxSize: 1024 * 1024 * 5,
     imageUploadURL: AppSettings.API_ENDPOINT + 'nieuws/upload',
     videoUpload: false,
-    fileUpload: false
+    fileUpload: false,
+    requestHeaders: {
+      Authorization: 'Bearer ' + this.authenticationService.token
+    }
   }
 
 
-  constructor(private router: Router, private nieuwsService: NieuwsService, private snackBar: MatSnackBar) {
+  constructor(private authenticationService: AuthenticationService,private router: Router, private nieuwsService: NieuwsService, private snackBar: MatSnackBar) {
 
   }
 

@@ -2,10 +2,16 @@
   <h3 class="text-dark text-center">Ploeg {{team.naam}} aanpassen</h3>
   <div class="row justify-content-center">
     <form #editTeamForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
-      <div class="form-row align-items-center">
-
+      <div class="form-row justify-content-center">
         <div class="col-12 col-md-6 form-group">
-          <div class="row justify-content-center" *ngIf="src">
+          <label for="teamName" class="text-primary">Ploegnaam</label>
+          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="team.naam" #naam="ngModel" name="naam" required id="teamName" type="text" value="team.naam">
+          <div class="invalid-feedback">Ploegnaam is vereist</div>
+        </div>
+      </div>
+      <div class="form-row align-items-center">
+        <div class="col-12 col-md-6 form-group" *ngIf="src">
+          <div class="row justify-content-center">
             <div class="col-8">
               <img class="img-fluid" [src]="src">
             </div>
@@ -22,52 +28,47 @@
           />
         </div>
       </div>
-
-      <div class="form-row justify-content-center">
-        <div class="col-12 col-md-6 form-group">
-          <label for="teamName" class="text-primary">Ploegnaam</label>
-          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="team.naam" #naam="ngModel" name="naam" required id="teamName" type="text" value="team.naam">
-          <div class="invalid-feedback">Ploegnaam is vereist</div>
-
-        </div>
-      </div>
-
       <div class="form-row">
-
         <div class="col-12 col-md-6 form-group">
-          <label for="trainer_1"  class="text-primary">Naam trainer</label>
-          <input  class="form-control" placeholder="Naam trainer" [ngClass]="{'is-valid': trainer_1.valid}" [(ngModel)]="team.trainer_1" #trainer_1="ngModel" name="trainer_1" id="trainer_1" type="text" value="">
-
-        </div>
+          <label for="trainer_1" class="text-primary">Naam trainer</label>
+          <input class="form-control" placeholder="Naam trainer" [ngClass]="{'is-valid': trainer_1.valid}" [(ngModel)]="team.trainer_1" #trainer_1="ngModel" name="trainer_1" id="trainer_1" type="text" value=""> </div>
         <div class="col-12 col-md-6 form-group">
           <label for="telTrainer_1" class="text-primary">Telefoon trainer</label>
-          <input class="form-control" placeholder="Telefoon trainer" [ngClass]="{'is-valid': telTrainer_1.valid}" [(ngModel)]="team.telTrainer_1" #telTrainer_1="ngModel" name="telTrainer_1" id="telTrainer_1" type="text" value="">
-
-        </div>
+          <input class="form-control" placeholder="Telefoon trainer" [ngClass]="{'is-valid': telTrainer_1.valid}" [(ngModel)]="team.telTrainer_1" #telTrainer_1="ngModel" name="telTrainer_1" id="telTrainer_1" type="text" value=""> </div>
       </div>
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
-          <label for="trainer_2"  class="text-primary">Naam trainer(2)</label>
-          <input class="form-control" placeholder="Naam trainer(2)" [ngClass]="{'is-valid': trainer_2.valid}" [(ngModel)]="team.trainer_2" #trainer_2="ngModel" name="trainer_2" id="trainer_2" type="text" value="">
-
-        </div>
+          <label for="trainer_2" class="text-primary">Naam trainer(2)</label>
+          <input class="form-control" placeholder="Naam trainer(2)" [ngClass]="{'is-valid': trainer_2.valid}" [(ngModel)]="team.trainer_2" #trainer_2="ngModel" name="trainer_2" id="trainer_2" type="text" value=""> </div>
         <div class="col-12 col-md-6 form-group">
           <label for="telTrainer_2" class="text-primary">Telefoon trainer(2)</label>
-          <input class="form-control" placeholder="Telefoon trainer(2)" [ngClass]="{'is-valid': telTrainer_2.valid}" [(ngModel)]="team.telTrainer_2" #telTrainer_2="ngModel" name="telTrainer_2" id="telTrainer_2" type="text" value="">
-
+          <input class="form-control" placeholder="Telefoon trainer(2)" [ngClass]="{'is-valid': telTrainer_2.valid}" [(ngModel)]="team.telTrainer_2" #telTrainer_2="ngModel" name="telTrainer_2" id="telTrainer_2" type="text" value=""> </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <label for="mailTrainer_1" class="text-primary">Email trainer</label>
+          <input class="form-control" placeholder="Email trainer" [ngClass]="{'is-valid': mailTrainer_1.valid}" [(ngModel)]="team.mailTrainer_1" #mailTrainer_1="ngModel" name="mailTrainer_1" id="mailTrainer_1" type="text" value="">
+        </div>
+        <div class="col-12 col-md-6 form-group">
+          <label for="mailTrainer_2" class="text-primary">Email trainer(2)</label>
+          <input class="form-control" placeholder="Email trainer(2)" [ngClass]="{'is-valid': mailTrainer_2.valid}" [(ngModel)]="team.mailTrainer_2" #mailTrainer_2="ngModel" name="mailTrainer_2" id="mailTrainer_2" type="text" value="">
         </div>
       </div>
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
-          <label for="trainingsdagen"  class="text-primary">Trainingsdagen</label>
-          <input class="form-control" placeholder="Trainingsdagen (bv dinsdag en donderdag)" [ngClass]="{'is-valid': trainingsdagen.valid}" [(ngModel)]="team.trainingsdagen" #trainingsdagen="ngModel" name="trainingsdagen" id="trainingsdagen" type="text" value="">
-
-        </div>
-
+          <label for="trainingsdagen" class="text-primary">Trainingsdagen</label>
+          <input class="form-control" placeholder="Trainingsdagen (bv dinsdag en donderdag)" [ngClass]="{'is-valid': trainingsdagen.valid}" [(ngModel)]="team.trainingsdagen" #trainingsdagen="ngModel" name="trainingsdagen" id="trainingsdagen" type="text" value="">          </div>
         <div class="col-12 col-md-6 form-group">
-            <label for="trainingsuur"  class="text-primary">Aanvangsuur training</label>
-
-            <timepicker [(ngModel)]="time" [showMeridian]="false" name="trainingsuur" id="trainingsuur"></timepicker>
+          <label for="trainingsuur" class="text-primary">Aanvangsuur training</label>
+          <timepicker [(ngModel)]="time" [showMeridian]="false" name="trainingsuur" id="trainingsuur"></timepicker>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <label for="sponsorSelect" class="text-primary d-block">Sponsor</label>
+          <select class="form-control" [(ngModel)]="team.sponsor_id" name="sponsorSelectName" id="sponsorSelect">
+           <option *ngFor="let sponsor of sponsors" name="sponsor" [ngValue]="sponsor.sponsor_id">{{sponsor.naam}}</option>
+         </select>
         </div>
       </div>
       <div class="form-row justify-content-center">
@@ -77,7 +78,6 @@
             <button class="btn-dark btn" [routerLink]="['/api/ploegen']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Ploegenoverzicht</button>
             <button class="btn-info btn" [routerLink]="['/api/ploegen/ploeg-detail', team.ploeg_id]">Detail {{team.naam}}</button>
           </div>
-
         </div>
       </div>
     </form>

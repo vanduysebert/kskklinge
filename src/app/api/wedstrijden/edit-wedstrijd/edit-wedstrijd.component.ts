@@ -25,6 +25,18 @@ export class EditWedstrijdComponent implements OnInit {
  ]);
 
  froalaOptions:Object = {
+   events : {
+     'froalaEditor.image.error' : function(e, editor, error, response) {
+       console.log("err");
+
+       console.log(error);
+     },
+     'froalaEditor.image.uploaded': function (e, editor, response) {
+       console.log("uploaded");
+       console.log(response);
+     }
+
+   },
    charCounterCount: false,
    imageMaxSize: 1024 * 1024 * 5,
    imageUploadURL: AppSettings.API_ENDPOINT + 'wedstrijden/upload',

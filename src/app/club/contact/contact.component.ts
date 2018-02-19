@@ -12,7 +12,7 @@ export class ContactComponent implements OnInit {
 
   errorSend = false;
   submitted: boolean = false;
-  model: Visitor = new Visitor("", "", "", "", "", "");
+  model: Visitor = new Visitor("", "", "", "", "");
   constructor(private contactService : ContactService) { }
 
   onSubmit() {
@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
  handleResponse(response){
       if(response.status =='success'){
 
-        this.model = {firstName: '', lastName: '', email: '', phone:'', address: '', subjectMail: ''};
+        this.model = new Visitor("", "", "", "",  "");
         this.submitted = true;
       }
 

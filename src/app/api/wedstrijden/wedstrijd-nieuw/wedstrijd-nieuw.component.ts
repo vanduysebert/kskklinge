@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import {WedstrijdService} from './../wedstrijd.service';
 import { Wedstrijd } from './../wedstrijd';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-
+import { AuthenticationService } from './../../../user/authentication.service';
 @Component({
   selector: 'app-wedstrijd-nieuw',
   templateUrl: './wedstrijd-nieuw.component.html',
@@ -20,12 +20,17 @@ export class WedstrijdNieuwComponent implements OnInit {
   time: string;
   ploegen: Ploeg[];
   froalaOptions:Object = {
+    
     charCounterCount: false,
     imageMaxSize: 1024 * 1024 * 5,
     imageUploadURL: AppSettings.API_ENDPOINT + 'wedstrijden/upload',
     videoUpload: false,
-    fileUpload: false
+    fileUpload: false,
+    requestHeaders: {
+      Authorization: 'Bearer ' + this.authenticationService.token
+    }
   }
+
 
   kskTeam: string;
   playDate: Date;
@@ -34,7 +39,7 @@ export class WedstrijdNieuwComponent implements OnInit {
  ]);
 
 
-  constructor(location: Location, private router: Router, private ploegenService : PloegenService, private wedstrijdService: WedstrijdService) {
+  constructor(private authenticationService: AuthenticationService,location: Location, private router: Router, private ploegenService : PloegenService, private wedstrijdService: WedstrijdService) {
     router.events.subscribe((val) => {
       let s: string;
       let v: number;
@@ -61,10 +66,7 @@ export class WedstrijdNieuwComponent implements OnInit {
         // this.snackBar.open("Verslag Klinge " + this.game.ploegNaam + ' - ' + this.game.tegenstander + " succesvol aangemaakt. " + thuis,"", {
         //   duration: 2000
         // });
-        this.router.navigateByUrl('/api/wedstrijden').then(()=>{
-          location.reload();
-         }
-        );
+        this.router.navigateByUrl('/api/wedstrijden');
       }
     });
 

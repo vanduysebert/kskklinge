@@ -1,28 +1,26 @@
 <div #home>
-
-
   <div class="row">
     <div class="col" id="topHome">
       <carousel>
         <slide>
-          <img src="assets/img/main1.jpg" alt="First slide" class="rounded" style="display: block; width: 100%;">
+          <img src="assets/img/main1.jpg" alt="First slide" class="rounded slideImg img-fluid" style="display: block; width: 100%;">
         </slide>
         <slide>
-          <img src="assets/img/main2.jpg" alt="Second slide" style="display: block; width: 100%;">
+          <img src="assets/img/main2.jpg" alt="Second slide" class="rounded slideImg img-fluid" style="display: block; width: 100%;">
           <div class="carousel-caption d-none d-md-block ">
             <h3 class="text-white d-inline px-2"></h3>
             <p><a routerLink="/evenementen" class="btn btn-lg btn-secondary">Evenementen</a></p>
           </div>
         </slide>
         <slide>
-          <img src="assets/img/main3.jpg" alt="Third slide" style="display: block; width: 100%;">
+          <img src="assets/img/main3.jpg" alt="Third slide" class="rounded slideImg" style="display: block; width: 100%;">
           <div class="carousel-caption d-none d-md-block">
             <h3 class="text-white d-inline px-2"></h3>
             <p><a routerLink="/senioren/aploeg" class="btn btn-lg btn-secondary">Senioren</a></p>
           </div>
         </slide>
         <slide>
-          <img src="assets/img/main4.jpg" alt="Third slide" style="display: block; width: 100%;">
+          <img src="assets/img/main4.jpg" alt="Third slide" class="rounded slideImg" style="display: block; width: 100%;">
           <div class="carousel-caption d-none d-md-block">
             <h3 class="text-white d-inline px-2"></h3>
             <p><a routerLink="/jeugd" class="btn btn-lg btn-secondary">Jeugd</a></p>
@@ -36,55 +34,77 @@
       <ul class="list-inline justify-content-center">
         <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#eventSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></a></li>
         <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#newsSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" (click)="checkIfBirthdays(birthdayModal)" href="#birthdaySection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-birthday-cake" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#sponsorSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
         <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#nextGameSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-hand-o-right" aria-hidden="true"></i></a></li>
         <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#tableSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-trophy" aria-hidden="true"></i></a></li>
-                <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#lastGameSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+        <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#lastGameSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
         <li class="list-inline-item hoverable m-1"> <a pageScroll [pageScrollEasing]="myEasing" href="#sponsorSection" class="rounded-circle text-center display-inline m-2"><i class="fa fa-flag-checkered" aria-hidden="true"></i></a></li>
       </ul>
     </div>
   </div>
 
-
   <div class="row mt-3 justify-content-center featurette">
     <div class="col-12 col-xl-6 menu-item p-3 text-center">
       <h2 class="text-center text-primary" id="eventSection">Evenementen</h2>
       <div class="row" *ngFor="let event of events">
-        <div class="card col bg-ksk mb-1 hoverable" routerLink="/evenementen" fragment="event{{event.nieuws_id}}">
+        <div class="card col mb-1 hoverable hoverableCard" routerLink="/evenementen" fragment="event{{event.nieuws_id}}">
           <div class="card-body ">
             <h4 class="card-title text-dark">{{event.titel}}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">{{event.eventDate | amDateFormat:"DD/MM/YYYY"}}</h6>
-
-            <a routerLink="/evenementen" class="card-link float-right">Meer info</a>
+            <h6 class="card-subtitle mb-2 text-muted">{{event.eventDate | amDateFormat:"DD/MM/YYYY"}}</h6> <a routerLink="/evenementen" class="card-link float-right">Meer info</a>
           </div>
         </div>
       </div>
-
       <h2 class="text-center text-primary mt-3" id="newsSection">Nieuws</h2>
       <div class="row" *ngFor="let event of news">
         <div class="col">
-          <div class="card col bg-ksk mb-1 hoverable" routerLink="/evenementen" fragment="event{{event.nieuws_id}}">
+          <div class="card col mb-1 hoverable hoverableCard" *ngIf="event.newsType == 'club'" routerLink="/club/nieuws" fragment="event{{event.nieuws_id}}">
             <div class="card-body ">
               <h4 class="card-title text-dark">{{event.titel}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted float-right">{{event.datum | amDateFormat:"DD/MM/YYYY"}}</h6>
-              <div [froalaView]="event.inhoud">
-              </div>
+              <h6 class="card-subtitle mb-2 text-muted text-left">{{event.newsType}}nieuws<span class="float-right">{{event.datum | amDateFormat:"DD/MM/YYYY"}}</span></h6>
+
+            </div>
+          </div>
+          <div class="card col mb-1 hoverable hoverableCard" *ngIf="event.newsType == 'jeugd'" routerLink="/jeugd/nieuws" fragment="event{{event.nieuws_id}}">
+            <div class="card-body ">
+              <h4 class="card-title text-dark">{{event.titel}}</h4>
+              <h6 class="card-subtitle mb-2 text-muted text-left">{{event.newsType}}nieuws<span class="float-right">{{event.datum | amDateFormat:"DD/MM/YYYY"}}</span></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="birthdaySection" *ngIf="birthdayPlayers && birthdayPlayers.length > 0">
+        <div class="col">
+          <div class="card bg-accent col mb-1">
+            <div class="card-body ">
+              <p class="card-title text-primary lead text-left">Volgende leden zijn vandaag jarig:</p>
+              <ul  class="list-group ">
+                <li *ngFor="let speler of birthdayPlayers" style="width:100%" class="list-group-item bg-ksk">
+                  <div class="media">
+                    <img *ngIf="speler.fotoUrl" class="mr-3 img-fluid rounded-circle" width="65" [src]="speler.fotoUrl" alt="">
+                    <div class="media-body align-self-center">
+                      <h6 class="mt-0 text-dark text-left lead">{{speler.voornaam}} {{speler.naam}} - {{today | amDifference: speler.geboortedatum: 'years'}} jaar</h6>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+              <h6 class="card-title text-primary text-left mt-2">KSK Klinge wenst ze bij deze van harte proficiat!</h6>
             </div>
           </div>
 
         </div>
-
       </div>
       <div class="row">
         <div class="col">
           <p>
+            <a class="btn btn-primary text-white float-left" (click)="addToNewsletter(newsletterHomeModal)">Inschrijven voor nieuwsbrief</a>
             <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
           </p>
         </div>
       </div>
-
     </div>
-
     <div class="col-12 col-xl-6 border-top menu-item p-3 text-center mx-auto">
       <div class="row" *ngIf="lastGame">
         <div class="col">
@@ -99,39 +119,41 @@
             <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
           </p>
         </div>
-
       </div>
       <hr />
       <div class="row">
         <div class="col">
           <h2 class="text-primary" id="nextGameSection">Volgende speeldag</h2>
-          <div class="frameDiv mx-auto mb-4">
+          <div class="frameDiv mx-auto mb-4 d-none d-sm-block">
+            <iframe class="d-block mx-auto frameCenter" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1213"></iframe>
+          </div>
+          <div class="frameDiv mx-auto mb-4 d-xs-block d-sm-none">
             <iframe class="d-block mx-auto frameCenter" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1190"></iframe>
           </div>
           <p>
             <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
           </p>
         </div>
-
       </div>
       <hr />
       <div class="row">
         <div class="col">
           <h2 class="text-center text-primary" id="tableSection">Stand</h2>
-          <div class="frameDivs mx-auto mb-4">
+          <div class="frameDivs mx-auto mb-4 d-sm-block d-none">
+            <iframe class="d-block mx-auto frameCenters" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1214"></iframe>
+          </div>
+          <div class="frameDivs mx-auto mb-4 d-sm-none d-xs-block">
             <iframe class="d-block mx-auto frameCenters" frameborder="0" allowfullscreen src="http://www.voetbalkrant.com/service/noscript.php?id=1191"></iframe>
           </div>
           <p>
             <a class="float-right rounded-circleSmall" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
           </p>
-
         </div>
-
       </div>
     </div>
   </div>
   <div class="row justify-content-center border-row featurette  p-3" *ngIf="lastGame">
-    <div class="col-12 col-xl-9 border border-dark border-content p-3 bg-ksk" *ngIf="lastGame">
+    <div class="col-12 col-xl-9 border border-dark border-content p-3 bg-ksk"  *ngIf="lastGame">
       <h2 *ngIf="lastGame.thuisSpelend" class="text-center text-primary clearfix mb-2" id="lastGameSection">
           KSK - {{lastGame.tegenstander}} <small class="text-muted float-right">{{lastGame.datum | amDateFormat:'DD/MM/YYYY'}}</small>
         </h2>
@@ -141,14 +163,10 @@
       <h4 *ngIf="!lastGame.thuisSpelend" class="text-muted text-center">{{lastGame.doelpuntenTegenstander}} - {{lastGame.doelpuntenKSK}}</h4>
       <h4 *ngIf="lastGame.thuisSpelend" class="text-muted text-center">{{lastGame.doelpuntenKSK}} - {{lastGame.doelpuntenTegenstander}}</h4>
       <div [froalaView]="lastGame.verslag"></div>
-
       <p>
         <a class="mt-4 float-right" routerLink="/senioren/aploeg">Meer verslagen</a>
       </p>
-
     </div>
-
-
   </div>
   <div class="row">
     <div class="col">
@@ -158,22 +176,32 @@
     </div>
   </div>
   <div class="row border-row featurette">
-    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/jeugd">
-      <div class="rounded-circleMenu"><i class="fa fa-child" aria-hidden="true"></i></div>
-      <h2 class="text-center text-dark">Jeugd</h2>
-      <h4 class="text-muted">Jeugd is de toekomst</h4>
+    <div class="col-12 col-md-6  menu-item p-4 text-center contentSection hoverable" >
+      <div class="rounded-circleMenu" routerLink="/jeugd"><i class="fa fa-child" aria-hidden="true"></i></div>
+      <h2 class="text-center text-dark" routerLink="/jeugd">Jeugd</h2>
+      <h4 class="text-muted" routerLink="/jeugd">De toekomst van de club</h4>
       <p class="text-primary text-justify">KSK Klinge hecht veel belang aan een <strong>kwalitatieve</strong> jeugdopleiding waar <strong>plezier</strong> centraal staat. Dit uit zich in de jaarlijkse toename van jeugdspelers.</p>
       <button class="btn btn-primary btn-block text-center hoverable" routerLink="/jeugd">Bekijk al onze jeugdploegen</button>
-      <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">Jeugdspeler inschrijven</a>
+      <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:kurt_susy@telenet.be">Jeugdspeler inschrijven</a>
       <p>
         <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
       </p>
     </div>
-
-    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/club">
-      <img src="assets/img/logo2.png" class="img-fluid rounded-circle logoPicture bg-ksk" />
-      <h2 class="text-center text-dark">KSK Klinge</h2>
-      <h4 class="text-muted">Club</h4>
+    <div class="col-12 col-md-6  menu-item p-4 text-center contentSection hoverable" >
+      <div class="rounded-circleMenu" routerLink="/supporters"><i class="fa fa-heart" aria-hidden="true"></i></div>
+      <h2 class="text-center text-dark" routerLink="/supporters">Supporters</h2>
+      <h4 class="text-muted" routerLink="/supporters">KSK is trots op haar trouwe achterban</h4>
+      <p class="text-primary text-justify">KSK heeft doorheen de jaren steeds kunnen rekenen op een <strong>talrijke trouwe achterban</strong> die de club in goede en minder goede tijdens steeds gesteund hebben. </p>
+      <button class="btn btn-primary btn-block text-center hoverable" routerLink="/supporters">Bekijk onze supportersacties</button>
+      <a class="btn btn-secondary btn-block text-center hoverable d-block" href=""><i class="fa fa-whatsapp" aria-hidden="true"></i> Deelnemen aan Whats-app groep</a>
+      <p>
+        <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+      </p>
+    </div>
+    <div class="col-12 col-md-6  menu-item p-4 text-center contentSection hoverable" (mouseenter)="setImage(true)" (mouseleave)="setImage(false)">
+      <img src="assets/img/logo2.png" class="img-fluid rounded-circle logoPicture" [ngClass]="{ 'bg-ksk': !hovered, 'bg-secundary': hovered  }" routerLink="/club/info"/>
+      <h2 class="text-center text-dark" routerLink="/club/info">KSK Klinge</h2>
+      <h4 class="text-muted" routerLink="/club/info">Club</h4>
       <p class="text-primary text-justify">Heb je vragen over het reilen en zeilen van de club? Wil je graag de club een handje toesteken als <strong>vrijwilliger</strong>? Op zoek naar <strong>belangrijke documenten</strong>?</p>
       <button class="btn btn-primary btn-block text-center hoverable" routerLink="/club/info">Vind alle info over KSK Klinge</button>
       <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">KSK Klinge contacteren</a>
@@ -181,11 +209,10 @@
         <a class="float-right rounded-circleSmall mt-3" pageScroll [pageScrollEasing]="myEasing" href="#topNav"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
       </p>
     </div>
-
-    <div class="col-12 col-md-6 col-xl-4 menu-item p-4 text-center contentSection hoverable" routerLink="/sponsors">
-      <div class="rounded-circleMenu"><i class="fa fa-flag-checkered" aria-hidden="true"></i></div>
-      <h2 class="text-center text-dark" id="sponsorSection">Sponsors</h2>
-      <h4 class="text-muted">De basis van een gezonde club</h4>
+    <div class="col-12 col-md-6  menu-item p-4 text-center contentSection hoverable" >
+      <div class="rounded-circleMenu" routerLink="/sponsors"><i class="fa fa-flag-checkered" aria-hidden="true"></i></div>
+      <h2 class="text-center text-dark" routerLink="/sponsors" id="sponsorSection">Sponsors</h2>
+      <h4 class="text-muted" routerLink="/sponsors">De basis van een gezonde club</h4>
       <p class="text-primary text-justify">Als een stabiele club met wekelijks tal van bezoekers is KSK Klinge een <strong>ideaal uithangbord</strong> voor lokale <strong>zelfstandigen</strong> en <strong>bedrijven</strong> in de buurt. </p>
       <button class="btn btn-primary btn-block text-center hoverable" routerLink="/sponsors">Bekijk al onze sponsors</button>
       <a class="btn btn-secondary btn-block text-center hoverable d-block" href="mailto:secretariaatkskklinge@telenet.be">Interesse om te sponsoren</a>
@@ -194,7 +221,55 @@
       </p>
     </div>
   </div>
-
-
-
 </div>
+<ng-template #birthdayModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Jarigen</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Helaas zijn er vandaag geen leden van KSK jarig
+  </div>
+</ng-template>
+
+<ng-template #newsletterHomeModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Nieuwsbrief</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <form #newSubscriberHomeForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="col-12 col-md-6 form-group">
+          <label for="subscriberFirstName" class="text-primary">Voornaam</label>
+          <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="subscriber.voornaam" #vnaam="ngModel" name="vnaam" required id="subscriberFirstName" type="text" value="subscriber.voornaam">
+          <div class="invalid-feedback">Voornaam is vereist</div>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="subscriberName" class="text-primary">Familienaam</label>
+          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="subscriber.naam" #naam="ngModel" name="naam" required id="subscriberName" type="text" value="subscriber.naam">
+          <div class="invalid-feedback">Familienaam is vereist</div>
+        </div>
+      </div>
+
+      <div class="form-row justify-content-center">
+        <div class="col-12 form-group">
+          <label for="mail" class="text-primary">Email</label>
+          <input class="form-control" placeholder="Email" required [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="subscriber.email" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+      </div>
+
+      <div class="form-row mt-2">
+        <div class="col-12 form-group">
+          <div class="btn-group">
+            <button class="btn btn-success" [disabled]="!newSubscriberHomeForm.form.valid" type="submit" name="action">Inschrijven</button>
+            <button class="btn btn-danger" (click)="modalRef.hide()">Annuleer</button>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+</ng-template>

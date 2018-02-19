@@ -7,11 +7,12 @@ import { Ploeg }           from './ploeg';
 import { Speler }           from './../spelers/speler';
 import { Wedstrijd }           from './../wedstrijden/wedstrijd';
 import {AppSettings} from '../../app-settings';
+import { AuthenticationService } from './../../user/authentication.service';
 
 @Injectable()
 export class PloegenService {
   private ploegenURL = AppSettings.API_ENDPOINT + '/ploegen';
-  constructor(private http:Http) { }
+  constructor(private http:Http, private authenticationService: AuthenticationService) { }
 
   getPloegen() : Observable<Ploeg[]> {
     return this.http.get(this.ploegenURL)
@@ -41,6 +42,7 @@ export class PloegenService {
   editTeam(team:Ploeg) : Observable<ByteString> {
     let bodyString = JSON.stringify(team); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.put(`${this.ploegenURL}/${team['ploeg_id']}`, team, options) // ...using put request
@@ -51,6 +53,7 @@ export class PloegenService {
   addNewTeam(team: Object) : Observable<string> {
         let bodyString = JSON.stringify(team); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.ploegenURL, team, options) // ...using post request
@@ -59,7 +62,10 @@ export class PloegenService {
   }
 
   deleteTeam(id:number) : Observable<boolean> {
-    return this.http.delete(this.ploegenURL + "/" +id) // ...using put request
+    let headers      = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.token); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers });
+    return this.http.delete(this.ploegenURL + "/" +id, options) // ...using put request
                          .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
@@ -73,6 +79,7 @@ export class PloegenService {
   }
 
   getSpelersByTeam(ploegId: number) : Observable<Speler[]> {
+
     return this.http.get(this.ploegenURL + "/" + ploegId + "/spelers")
                         // ...and calling .json() on the response to return data
                          .map(res=> res.json())

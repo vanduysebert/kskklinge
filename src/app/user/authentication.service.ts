@@ -4,14 +4,27 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 import {AppSettings} from './../app-settings';
 
+
 @Injectable()
 export class AuthenticationService {
     public token: string;
+    public expireDate: Date;
     private authURL = AppSettings.API_ENDPOINT + '/login';
     constructor(private http: Http) {
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
+        this.expireDate = new Date(currentUser && currentUser.expires);
+    }
+
+    tokenIsNotExpired() : boolean {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let expireDate =currentUser && currentUser.expires;
+      if (expireDate > Date.now()/1000) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     login(username: string, password: string): Observable<boolean> {
@@ -23,12 +36,13 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 console.log(response.json());
                 let token = response.json() && response.json().token;
+                let expire = response.json() && response.json().expires;
                 if (token) {
                     // set token property
                     this.token = token;
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token, expires: expire }));
 
                     // return true to indicate successful login
                     return true;

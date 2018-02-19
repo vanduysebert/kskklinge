@@ -20,6 +20,7 @@
               <li *ngIf="ploeg.trainer_2 == null" class="list-group-item"><strong>Telefoonnummer: </strong>{{ploeg.telTrainer_2}}</li>
               <li class="list-group-item"><strong>Trainingsdagen: </strong>{{ploeg.trainingsdagen}}</li>
               <li class="list-group-item"><strong>Trainingsuren (begin): </strong>{{time}}</li>
+              <li class="list-group-item" *ngIf="sponsor"><strong>Sponsor: </strong>{{sponsor.naam}}</li>
             </ul>
           </div>
         </div>
@@ -35,7 +36,6 @@
                 <th class="d-none d-lg-table-cell" scope="col">Ingeschreven</th>
               </tr>
             </thead>
-
             <tbody *ngFor="let speler of spelers">
               <tr>
                 <td scope="row"><a class="apiLink" [routerLink]="['/api/spelers/speler-detail', speler.speler_id]">{{speler.voornaam}} {{speler.naam}}</a></td>
@@ -46,7 +46,6 @@
               </tr>
             </tbody>
           </table>
-
         </div>
         <div class="row">
           <a routerLink="/api/ploegen/ploeg-nieuw" class="btn btn-success">Nieuwe ploeg toevoegen</a>
@@ -55,7 +54,4 @@
       </div>
     </div>
   </div>
-
-
-
 </div>

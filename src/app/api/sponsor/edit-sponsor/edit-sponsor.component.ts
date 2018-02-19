@@ -8,7 +8,7 @@ import { FileUploader } from 'ng2-file-upload';
 import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upload';
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import {MatSnackBar} from '@angular/material';
-
+import { AuthenticationService } from './../../../user/authentication.service';
 @Component({
   selector: 'app-edit-sponsor',
   templateUrl: './edit-sponsor.component.html',
@@ -25,13 +25,14 @@ export class EditSponsorComponent implements OnInit {
   response: string;
   imgSync: boolean = true;
   sizeLimit = 5;
-  constructor(location: Location, private route: ActivatedRoute, private router:Router, private sponsorService: SponsorService, private snackBar: MatSnackBar) {
+  constructor(location: Location, private authenticationService: AuthenticationService, private route: ActivatedRoute, private router:Router, private sponsorService: SponsorService, private snackBar: MatSnackBar) {
     route.params.subscribe( p => {
       this.param = p['id'];
     });
 
     this.uploader = new FileUploader({
-      url: AppSettings.API_ENDPOINT + 'sponsors/upload'
+      url: AppSettings.API_ENDPOINT + 'sponsors/upload',
+      authToken: 'Bearer ' + this.authenticationService.token
     });
 
     this.uploaderOptions =  {

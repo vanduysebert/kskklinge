@@ -108,4 +108,20 @@ export class NieuwsService {
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getNewsYouth() : Observable<any> {
+    return this.http.get(this.nieuwsURL + "/jeugd")
+                        // ...and calling .json() on the response to return data
+                         .map(this.extractData)
+                         //...errors if any
+                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getNewsClub() : Observable<any> {
+    return this.http.get(this.nieuwsURL + "/club")
+                        // ...and calling .json() on the response to return data
+                         .map(this.extractData)
+                         //...errors if any
+                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }

@@ -1,50 +1,69 @@
 <h4 class="text-primary display-4 text-center">Nieuw bericht/evenement</h4>
 <div class="row justify-content-center">
-   <form #newNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
-     <div class="form-row justify-content-center">
-       <div class="col-12 col-md-6 form-group ">
-         <label for="pos" class="text-primary">Titel</label>
-         <input class="form-control" [ngClass]="{'is-valid': pos.valid, 'is-invalid text-danger': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text" value="">
-         <div  class="invalid-feedback">Titel is vereist</div>
-       </div>
-     </div>
-     <div class="form-row">
-       <div class="form-group col-md-6 col-12">
-         <label for="cat" class="text-primary d-block">Categorie</label>
-         <select class="form-control hoverable" required [(ngModel)]="news.newsType"  name="catSelect" id="cat">
+  <form #newNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="form-row justify-content-center">
+      <div class="col-12 col-md-6 form-group ">
+        <label for="pos" class="text-primary">Titel</label>
+        <input class="form-control" [ngClass]="{'is-valid': pos.valid, 'is-invalid text-danger': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text" value="">
+        <div class="invalid-feedback">Titel is vereist</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 col-12">
+        <label for="cat" class="text-primary d-block">Categorie</label>
+        <select class="form-control hoverable" required [(ngModel)]="news.newsType" name="catSelect" id="cat">
            <option name="catOpt" value="2" checked="true">Club</option>
            <option name="catOpt" value="1">Evenement</option>
            <option name="catOpt" value="3">Jeugd</option>
         </select>
-         <div class="invalid-feedback">Categorie is vereist</div>
-       </div>
-       <div class="form-group col-md-6 col-12" *ngIf="news.newsType == 1">
-         <label for="birth" class="text-primary">Datum evenement</label>
-         <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid}" [(ngModel)]="news.eventDate" #birth="ngModel" name="birth" id="playerBirth" value="news.eventDate"
-           type="text">
-       </div>
-     </div>
+        <div class="invalid-feedback">Categorie is vereist</div>
+        <div *ngIf="news.newsType != 1">
+          <label for="duration" class="text-primary">Geldigheid (aantal dagen dat het bericht op website te zien is)</label>
+          <input placeholder="Geldigheid in dagen" class="form-control" [ngClass]="{'text-success is-valid': duration.valid, 'text-danger is-invalid': duration.invalid}" pattern="[0-9]*" [(ngModel)]="news.geldigheid" #duration="ngModel" name="duration" id="duration"
+            type="text" value="">
+          <div class="invalid-feedback">Enkel numerieke waarden</div>
+        </div>
+        <div *ngIf="news.newsType == 1">
+          <label class="col-form-label text-primary">Moet er ingeschreven worden voor het evenement? (Indien ja, zal er een extra knop op website verschijnen waardoor mensen kunnen inschrijven)</label>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="news.kanInschrijven" type="radio" name="ingeschreven" id="exampleRadios1" value="1">
+            <label class="form-check-label text-primary" for="exampleRadios1">
+                Ja
+              </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="news.kanInschrijven" type="radio" name="ingeschreven" id="exampleRadios2" value="0">
+            <label class="form-check-label text-primary" for="exampleRadios2">
+                Nee
+              </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group col-md-6 col-12" *ngIf="news.newsType == 1">
+        <label for="birth" class="text-primary">Datum evenement</label>
+        <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid}" [(ngModel)]="news.eventDate" #birth="ngModel" name="birth" id="playerBirth" value="news.eventDate" type="text">
 
 
-     <div class="form-row">
-       <div class="col form-group">
-         <p class="text-primary">
-           Bericht
-         </p>
-         <div [froalaEditor] [(froalaModel)]="news.inhoud" name="verslag" id="verslag" ></div>
-       </div>
-
-
-     </div>
-     <div class="form-row">
-       <div class="col-12 col-md-6 form-group">
-         <button class="btn btn-success btn-block" [disabled]="!newNewsForm.form.valid" type="submit" name="action">Bericht toevoegen
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col form-group">
+        <p class="text-primary">
+          Bericht
+        </p>
+        <div [froalaEditor]="froalaOptions" [(froalaModel)]="news.inhoud" name="verslag" id="verslag"></div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <button class="btn btn-success btn-block" [disabled]="!newNewsForm.form.valid" type="submit" name="action">Bericht toevoegen
            <i class="fa-floppy-o fa" aria-hidden="true"></i>
        </button>
-       </div>
-       <div class="col-12 col-md-6 form-group">
-         <button class="btn-dark btn-block btn" [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
-       </div>
-     </div>
-   </form>
- </div>
+      </div>
+      <div class="col-12 col-md-6 form-group">
+        <button class="btn-dark btn-block btn" [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
+      </div>
+    </div>
+  </form>
+</div>

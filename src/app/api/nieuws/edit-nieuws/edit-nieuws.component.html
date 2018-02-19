@@ -1,37 +1,57 @@
 <div *ngIf="news">
-  <h4 class="klingeApp-text text-orange center-align">{{news.titel}} aanpassen</h4>
-  <div class="row">
-    <form #editNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col">
+  <h4 class=" text-primary text-center">{{news.titel}} aanpassen</h4>
+  <div class="row justify-content-center">
+    <form #editNewsForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
       <div class="form-row justify-content-center">
         <div class="col-12 col-md-6 form-group">
           <label for="pos" class="text-primary">Titel</label>
           <input class="form-control" [ngClass]="{'is-valid': pos.valid, 'is-invalid text-danger': pos.invalid}" [(ngModel)]="news.titel" #pos="ngModel" required name="pos" id="pos" type="text" value="">
-          <div  class="invalid-feedback">Titel is vereist</div>
+          <div class="invalid-feedback">Titel is vereist</div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6 col-12">
           <label for="cat" class="text-primary d-block">Categorie</label>
-          <select class="form-control hoverable" required [(ngModel)]="cat"  name="catSelect" id="cat">
+          <select class="form-control" required [(ngModel)]="cat" name="catSelect" id="cat">
             <option name="catOpt" value="2" checked="true">Club</option>
             <option name="catOpt" value="1">Evenement</option>
             <option name="catOpt" value="3">Jeugd</option>
          </select>
           <div class="invalid-feedback">Categorie is vereist</div>
+          <div *ngIf="cat != 1">
+            <label for="duration" class="text-primary">Geldigheid (aantal dagen dat het bericht op website te zien is)</label>
+            <input placeholder="Geldigheid in dagen" class="form-control" [ngClass]="{'text-success is-valid': duration.valid, 'text-danger is-invalid': duration.invalid}" pattern="[0-9]*" [(ngModel)]="news.geldigheid" #duration="ngModel" name="duration" id="duration"
+              type="text" value="">
+            <div class="invalid-feedback">Enkel numerieke waarden</div>
+          </div>
+          <div *ngIf="cat == 1">
+            <label class="col-form-label text-primary">Moet er ingeschreven worden voor het evenement? (Indien ja, zal er een extra knop op website verschijnen waardoor mensen kunnen inschrijven)</label>
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="news.kanInschrijven" type="radio" name="ingeschreven" id="exampleRadios1" value="1">
+              <label class="form-check-label text-primary" for="exampleRadios1">
+                  Ja
+                </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="news.kanInschrijven" type="radio" name="ingeschreven" id="exampleRadios2" value="0">
+              <label class="form-check-label text-primary" for="exampleRadios2">
+                  Nee
+                </label>
+            </div>
+          </div>
+
         </div>
         <div class="form-group col-md-6 col-12" *ngIf="cat == 1">
           <label for="birth" class="text-primary">Datum evenement</label>
-          <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid}" [(ngModel)]="news.eventDate" #birth="ngModel" name="birth" id="playerBirth" value="news.eventDate"
-            type="text">
+          <input class="form-control" bsDatepicker [ngClass]="{'is-valid': birth.valid}" [(ngModel)]="news.eventDate" #birth="ngModel" name="birth" id="playerBirth" value="news.eventDate" type="text">
         </div>
       </div>
-
       <div class="form-row">
         <div class="col form-group">
-          <p  class="text-primary">
+          <p class="text-primary">
             Bericht
           </p>
-          <div [froalaEditor] [(froalaModel)]="news.inhoud" name="verslag" id="verslag"></div>
+          <div [froalaEditor]="froalaOptions" [(froalaModel)]="news.inhoud" name="verslag" id="verslag"></div>
         </div>
       </div>
       <div class="form-row">
@@ -46,9 +66,7 @@
       </div>
     </form>
   </div>
-
 </div>
-
 <div *ngIf="!news">
   <h2 class="text-center text-danger">Bericht niet gevonden</h2>
   <div class="row">

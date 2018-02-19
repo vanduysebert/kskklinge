@@ -18,6 +18,18 @@ export class EditNieuwsComponent implements OnInit {
   playDate: Date;
   cat: number;
   froalaOptions:Object = {
+    events : {
+      'froalaEditor.image.error' : function(e, editor, error, response) {
+        console.log("err");
+
+        console.log(error);
+      },
+      'froalaEditor.image.uploaded': function (e, editor, response) {
+        console.log("uploaded");
+        console.log(response);
+      }
+
+    },
     charCounterCount: false,
     imageMaxSize: 1024 * 1024 * 5,
     imageUploadURL: AppSettings.API_ENDPOINT + 'nieuws/upload',
@@ -33,7 +45,7 @@ export class EditNieuwsComponent implements OnInit {
 
   onSubmit() {
     if(this.news.eventDate && this.cat == 1) {
-      this.playDate = new Date(this.news.datum);
+      this.playDate = new Date(this.news.eventDate);
       this.news.eventDate = moment(this.playDate).format('YYYY-MM-DD HH-mm-ss');
       console.log("datum");
     } else {
@@ -51,7 +63,7 @@ export class EditNieuwsComponent implements OnInit {
         this.snackBar.open(this.news.titel + " succesvol aangepast. " ,"", {
           duration: 2000
         });
-        this.router.navigate('../../', { relativeTo: this.route });
+        this.router.navigate(["../../"], { relativeTo: this.route, skipLocationChange: true });
       }
     });
 

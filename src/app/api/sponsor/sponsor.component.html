@@ -1,68 +1,53 @@
 <div *ngIf="route.children.length === 0">
-
   <div class="row justify-content-center">
     <div class="col col-md-10">
       <div class="row justify-content-center mb-3">
         <div class="col-md-8 col-lg-6 col-xl-4">
           <a routerLink="/api/sponsor/new-sponsor" class="btn-lg btn-secondary btn-block btn">Nieuwe sponsor aanmaken</a>
         </div>
-
       </div>
-
       <div class="card border-info">
         <div class="card-header bg-primary">
-            <h3 class=" text-secondary text-center">Sponsoroverzicht</h3>
+          <h3 class=" text-secondary text-center">Sponsoroverzicht</h3>
         </div>
         <div class="card-body text-primary">
-
           <div class="row justify-content-center">
             <div *ngIf="sponsors != null" class="col col-md-10 col-lg-8 col-xl-6">
-                <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
+              <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
             </div>
           </div>
-
           <div class="row mt-4">
-          <mat-table class="table table-bordered table-hover" #table [dataSource]="sponsors" matSort>
-
-
-            <ng-container matColumnDef="naam">
-              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Naam </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/sponsor/sponsor-detail', element.sponsor_id]">{{element.naam}}</a></mat-cell>
-            </ng-container>
-
-
-            <ng-container matColumnDef="website">
-              <mat-header-cell class="tableHeader d-sm-block d-none" *matHeaderCellDef mat-sort-header> Website </mat-header-cell>
-              <mat-cell  *matCellDef="let element" class="text-primary d-sm-block d-none"> {{element.website}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="email">
-              <mat-header-cell class="tableHeader d-lg-block d-none" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-              <mat-cell  *matCellDef="let element" class="text-primary d-lg-block d-none" >{{element.email}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="tel">
-              <mat-header-cell class="tableHeader d-xl-block d-none" *matHeaderCellDef mat-sort-header> Telefoonnummer </mat-header-cell>
-              <mat-cell  *matCellDef="let element" class="text-primary d-xl-block d-none" >{{element.telnr}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="edit">
-              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/sponsor/sponsor-edit', element.sponsor_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="del">
-              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deletePlayer(element.sponsor_id, element.naam, element.voornaam)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
-            </ng-container>
-            <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-          <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]">
-          </mat-paginator>
+            <mat-table class="table table-bordered table-hover" #table [dataSource]="sponsors" matSort>
+              <ng-container matColumnDef="naam">
+                <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Naam </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/sponsor/sponsor-detail', element.sponsor_id]">{{element.naam}}</a></mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="website">
+                <mat-header-cell class="tableHeader d-sm-block d-none" *matHeaderCellDef mat-sort-header> Website </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary d-sm-block d-none"> {{element.website}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="email">
+                <mat-header-cell class="tableHeader d-lg-block d-none" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary d-lg-block d-none">{{element.email}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="tel">
+                <mat-header-cell class="tableHeader d-xl-block d-none" *matHeaderCellDef mat-sort-header> Telefoonnummer </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary d-xl-block d-none">{{element.telnr}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="edit">
+                <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-center"> <a [routerLink]="['/api/sponsor/sponsor-edit', element.sponsor_id]" class="text-primary"><i class="material-icons">edit</i></a> </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="del">
+                <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-center hoverable"> <a (click)="deleteSponsor(element.sponsor_id, element.naam)" class="text-danger "><i class="material-icons">delete</i></a> </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
           </div>
-
         </div>
         <div class="card-footer">
           <a routerLink="/api/sponsor/new-sponsor" class="btn btn-success ">Nieuwe sponsor aanmaken</a>
@@ -70,8 +55,6 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>

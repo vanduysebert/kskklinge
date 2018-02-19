@@ -21,6 +21,11 @@ export class EvenementenComponent implements OnInit {
   loadFutureEvents() {
     this.newsSvc.getUpcomingEventsAll().subscribe(ev => {
       this.events = ev;
+      let l = this.events.length;
+      if (l > 0) {
+        this.showID = this.events[0].nieuws_id;
+        this.showEventDetail(this.events[0].nieuws_id);
+      }
     });
 
   }

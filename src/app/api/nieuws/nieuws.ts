@@ -5,6 +5,8 @@ export class Nieuws {
     public inhoud: string,
     public datum: string,
     public eventDate: string,
-    public newsType: any
+    public newsType: any,
+    public kanInschrijven: boolean,
+    public geldigheid: number
     ){}
 }

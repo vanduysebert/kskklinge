@@ -1,48 +1,44 @@
 <div *ngIf="news">
-
-
-<div  class="row justify-content-center">
-  <div class="col col-md-10 col-lg-8">
-    <div class="border-info card">
-      <div class="card-header  bg-dark">
+  <div class="row justify-content-center">
+    <div class="col col-md-10 col-lg-8">
+      <div class="border-info card">
+        <div class="card-header  bg-dark">
           <h4 class="display-4 text-center text-secondary">{{news.titel}}</h4>
           <p class="text-right muted text-info">
-            <span >{{news.datum |  amDateFormat:'DD MMMM YYYY'}}</span>
-          </p>
-      </div>
-
-      <div class="card-body text-primary">
-        <div  *ngIf="news.newsType == 'evenementen'">
-          <p class="lead text-dark font-weight-bold">
-            Datum evenement: {{news.eventDate | amDateFormat:'DD MMMM YYYY'}}
+            <span *ngIf="news.newsType != 'evenementen'" class="float-left">Geldigheid: {{news.geldigheid}} dagen</span>
+            <span>{{news.datum |  amDateFormat:'DD/MM/YYYY'}}</span>
           </p>
         </div>
-        <div [froalaView]="news.inhoud"></div>
-      </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col">
-            <a routerLink="/api/nieuws/nieuws-nieuw" class="btn btn-success btn-block">Nieuw bericht opmaken</a>
+        <div class="card-body text-primary">
+          <div *ngIf="news.newsType == 'evenementen'">
+            <p class="lead text-dark font-weight-bold">
+              Datum evenement: {{news.eventDate | amDateFormat:'DD/MM/YYYY'}}
+            </p>
+            <p *ngIf="news.kanInschrijven" class="lead text-muted font-italic">
+              <small >Bezoekers kunnen inschrijven via website</small>
+            </p>
           </div>
-          <div class="col">
-            <a class="btn btn-block btn-info" routerLink="/api/nieuws"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</a>
+          <div [froalaView]="news.inhoud"></div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col">
+              <a routerLink="/api/nieuws/nieuws-nieuw" class="btn btn-success btn-block">Nieuw bericht opmaken</a>
+            </div>
+            <div class="col">
+              <a class="btn btn-block btn-info" routerLink="/api/nieuws"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</a>
+            </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
- </div>
-
 </div>
- <div *ngIf="!news">
-   <h3 class="text-center text-danger">Kon bericht niet vinden</h3>
-   <div class="row justify-content-center">
-     <div class="col-3">
-       <button class="btn btn-block btn-dark " [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
-     </div>
-
-   </div>
-
- </div>
+<div *ngIf="!news">
+  <h3 class="text-center text-danger">Kon bericht niet vinden</h3>
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <button class="btn btn-block btn-dark " [routerLink]="['/api/nieuws']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle berichten</button>
+    </div>
+  </div>
+</div>

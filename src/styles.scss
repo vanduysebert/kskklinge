@@ -12,10 +12,50 @@
   cursor:pointer;
 
 }
+
+.row {
+  margin-right: 0;
+}
+
+.btnCircle {
+  padding: 5px;
+  border: 1px solid $appBlueDark;
+  border-radius: 50%;
+  font-size: 24px;
+  margin-left: 13px;
+
+}
+
+.bigText {
+  font-size: 30px;
+}
+
+.hoverableCard {
+  background-color: $lightKSK;
+}
+
+.hoverableCard:hover {
+  background-color: $appBlueGrey;
+
+}
+
+.hoverableCardOdd {
+    background-color: $orange-light;
+}
+
+.hoverableCardOdd:hover {
+  background-color: $orange-active;
+}
 agm-map {
   height: 300px;
 
 }
+
+.radioMg {
+  margin-left: 20px;
+}
+
+
 
 .btn:hover {
   cursor: pointer;
@@ -59,12 +99,12 @@ agm-map {
 }
 
 .frameCenter, .frameDiv {
-  width: 320px;
-  height: 240px;
+  width: 285px;
+  height: 370px;
 }
 
 .frameCenters, .frameDivs {
-  width: 320px;
+  width: 285px;
   height: 400px;
 }
 

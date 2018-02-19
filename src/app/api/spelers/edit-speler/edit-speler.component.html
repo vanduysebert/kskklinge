@@ -7,7 +7,6 @@
           <label for="playerFirstName" class="text-primary">Voornaam</label>
           <input class="form-control" [ngClass]="{'is-valid': vnaam.valid, 'text-danger is-invalid': vnaam.invalid}" [(ngModel)]="player.voornaam" #vnaam="ngModel" name="vnaam" required id="playerFirstName" type="text" value="player.voornaam">
           <div class="invalid-feedback">Voornaam is vereist</div>
-
         </div>
         <div class="form-group col-12 col-md-6">
           <label for="playerName" class="text-primary">Familienaam</label>
@@ -30,16 +29,12 @@
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
           <label for="mail" class="text-primary">Email</label>
-          <input class="form-control" placeholder="Email" [ngClass]="{'is-valid': mail.valid}" [(ngModel)]="player.email" #mail="ngModel" name="mail" id="mail" type="text" value="">
-
-        </div>
+          <input class="form-control" placeholder="Email" [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" [(ngModel)]="player.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+          <div class="invalid-feedback">Geldig emailadres</div>
         <div class="col-12 col-md-6 form-group">
           <label for="tel" class="text-primary">Telefoonnummer</label>
-          <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="player.telefoonnummer" #tel="ngModel" name="tel" id="tel" type="text" value="">
-
-        </div>
+          <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="player.telefoonnummer" #tel="ngModel" name="tel" id="tel" type="text" value=""> </div>
       </div>
-
       <div class="row">
         <div class="col-12 col-md-6 form-group">
           <label for="adres" class="text-primary">Adres</label>
@@ -61,13 +56,10 @@
           </div>
         </div>
       </div>
-
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
           <label for="pos" class="text-primary">Positie</label>
-          <input class="form-control" placeholder="Positie" [ngClass]="{'is-valid': pos.valid}" [(ngModel)]="player.positie" #pos="ngModel" name="pos" id="pos" type="text" value="">
-
-        </div>
+          <input class="form-control" placeholder="Positie" [ngClass]="{'is-valid': pos.valid}" [(ngModel)]="player.positie" #pos="ngModel" name="pos" id="pos" type="text" value=""> </div>
         <div class="col-12 col-md-6 form-group">
           <label for="goal" class="text-primary">Doelpunten</label>
           <input class="form-control" placeholder="Doelpunten" [ngClass]="{'is-valid': goal.valid, 'text-danger is-invalid': goal.invalid}" pattern="[0-9]*" [(ngModel)]="player.doelpunten" #goal="ngModel" name="goal" id="goal" type="text" value="">
@@ -77,7 +69,7 @@
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
           <div class="row justify-content-center" *ngIf="src">
-            <div  class="col-4">
+            <div class="col-4">
               <img class="img-fluid" [src]="src">
             </div>
           </div>
@@ -89,13 +81,10 @@
       </div>
       <div class="form-row">
         <div class="col-12 col-md-6 form-group">
-            <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
-            <span class="text-primary" *ngIf="!src">Foto uploaden</span>
-
-              
-              <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader" name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
+          <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
+          <span class="text-primary" *ngIf="!src">Foto uploaden</span> <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader"
+            name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
         </div>
-
       </div>
       <div class="form-row">
         <div class="col-12 form-group">
@@ -104,7 +93,6 @@
             <button class="btn-dark btn" [routerLink]="['/api/spelers']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Speleroverzicht</button>
             <button class="btn-info btn" [routerLink]="['/api/spelers/speler-detail', player.speler_id]">Detail {{player.naam}}</button>
           </div>
-
         </div>
       </div>
     </form>

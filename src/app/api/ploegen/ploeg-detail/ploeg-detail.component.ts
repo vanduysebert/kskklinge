@@ -10,6 +10,8 @@ import {SpelersService} from './../../spelers/spelers.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import { SponsorService } from './../../sponsor/sponsor.service';
+import { Sponsor } from './../../sponsor/sponsor';
 
 @Component({
   selector: 'app-ploeg-detail',
@@ -20,8 +22,9 @@ export class PloegDetailComponent implements OnInit {
   ploeg: Ploeg;
   spelers: Speler[];
   time: string;
-  param: number
-  constructor(location: Location, route: ActivatedRoute, private ploegService: PloegenService,private spelersService: SpelersService) {
+  param: number;
+  sponsor: Sponsor;
+  constructor(location: Location, route: ActivatedRoute, private ploegService: PloegenService,private spelersService: SpelersService, private sponsorSvc: SponsorService) {
     route.params.subscribe( p => {
       this.param = p['id'];
     });
@@ -32,18 +35,12 @@ export class PloegDetailComponent implements OnInit {
     this.ploegService.getSpelersByTeam(this.param).subscribe(
       spelers => {
         this.spelers = spelers;
-        console.log(spelers)
       },
       err => {
         console.log(err);
       });
   }
 
-  deletePlayer(id: number, speler:string, spelerVoornaam: string) {
-    console.log(speler);
-
-
-  }
 
   loadPloeg() {
     this.ploegService.getPloeg(this.param).subscribe(
@@ -54,6 +51,11 @@ export class PloegDetailComponent implements OnInit {
         if (t) {
           this.time = t.substr(0,5);
         }
+        this.sponsorSvc.getSponsor(this.ploeg.sponsor_id).subscribe(
+          sponsor => {
+            this.sponsor = sponsor;
+          }
+        )
       },
       err => {
         console.log(err);

@@ -13,15 +13,20 @@ export class ContactService {
     private wedstrijdenURL = AppSettings.API_ENDPOINT + '/wedstrijden';
   private _contactUrl = AppSettings.API_ENDPOINT + '/email';
 
-postEmail(newMail: Visitor): Observable<string>{
-  let body = `name=${newMail.firstName + ' ' + newMail.lastName}&phone=${newMail.phone}$address=${newMail.address}&email=${newMail.email}&message=${newMail.subjectMail}`;
-  let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+postEmail(newMail: Object): Observable<string>{
+  let bodyString = JSON.stringify(newMail);
+  let headers = new Headers({ 'Content-Type': 'application/json' });
   let options = new RequestOptions({ headers: headers });
 
 return this.http
-  .post(this._contactUrl, body, options)
+  .post(this._contactUrl, bodyString, options)
   .map(response => <string> response.json())
   .catch(this.handleError)
+
+}
+
+private htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 }
 

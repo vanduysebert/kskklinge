@@ -2,11 +2,17 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
-import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, AfterViewInit, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute, NavigationStart } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-
+import {Sponsor} from './api/sponsor/sponsor';
+import {SponsorService} from './api/sponsor/sponsor.service';
+import {Signup} from './api/signups/signup';
+import {SignupService} from './api/signups/signup.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -57,6 +63,7 @@ trigger('fadeInAnim4', [
   ]
 })
 export class AppComponent implements OnInit {
+  subscriber: Signup = new Signup(0, "", "", "", "");
   route: string;
   screen: number;
   show1: boolean = false;
@@ -65,9 +72,11 @@ export class AppComponent implements OnInit {
   sbOpen: boolean = true;
   height: number;
   isLoaded: boolean = false;
+  mainSponsors: Sponsor[];
+    modalRef: BsModalRef;
   @ViewChild('app') elementView: ElementRef;
 
-  constructor(location: Location, router: Router,activeRoute: ActivatedRoute, ngZone:NgZone) {
+  constructor(private snackBar: MatSnackBar,private modalService: BsModalService, location: Location, router: Router,activeRoute: ActivatedRoute, ngZone:NgZone, private sponsorSVC: SponsorService, private signupService:SignupService) {
     this.screen = window.innerWidth;
 
     window.onresize = (e) =>
@@ -77,7 +86,6 @@ export class AppComponent implements OnInit {
         });
     };
     router.events.subscribe((val) => {
-
       if(location.path() != ''){
         this.route = location.path();
         if (val instanceof NavigationEnd) {
@@ -103,7 +111,38 @@ export class AppComponent implements OnInit {
 
   }
 
+  newSignupAdded(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
   links: string[] = ["test", "test2"];
+
+   onSubmit() {
+     let sign = this.subscriber;
+     this.signupService.addNewSignup(this.subscriber).subscribe(res => {
+       console.log(res);
+       if (res.status == "success") {
+         this.snackBar.open("Bedankt "  + sign.voornaam + ", om u aan te melden voor de nieuwsbrief. U ontvangt vanaf nu alle laatste nieuwtjes via mail!","", {
+           duration: 3000,
+           panelClass: ['bg-primary', 'text-white', 'p4', 'bigText']
+         });
+         this.subscriber = new Signup(0, "", "", "", "");
+       } else if (res.status == "error" && res.errorCode == 1) {
+         this.snackBar.open("Er heeft zich een probleem voorgedaan. Probeer het opnieuw of contacteer ons als het probleem blijft!","", {
+           duration: 4000,
+           panelClass: ['bg-danger', 'text-white', 'p4', 'bigText']
+         });
+          this.subscriber = new Signup(0, "", "", "", "");
+       } else if (res.status == "error" && res.errorCode == 2 ) {
+         this.snackBar.open(sign.email + " is reeds aangemeld voor de nieuwsbrief!","", {
+           duration: 3000,
+           panelClass: ['bg-warning', 'text-primary', 'p4', 'bigText']
+         });
+          this.subscriber = new Signup(0, "", "", "", "");
+       }
+     });
+     this.modalRef.hide();
+   }
 
   checkPath(): boolean {
     if (this.route == null){
@@ -139,8 +178,20 @@ export class AppComponent implements OnInit {
     this.show1 = false;
   }
 
-  ngOnInit() {
+  loadMainSponsors() {
+    this.sponsorSVC.getMainSponsors().subscribe(
+      sponsors => {
+        this.mainSponsors= sponsors;
+      },
+      err => {
+        console.log(err);
+      });
+  }
 
+
+
+  ngOnInit() {
+    this.loadMainSponsors();
   }
 
   ngAfterViewInit() {

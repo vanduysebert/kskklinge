@@ -1,5 +1,4 @@
 <div *ngIf="route.children.length === 0">
-
   <div class="row justify-content-center">
     <div class="col-md-10 ">
       <div class="row justify-content-center mb-3">
@@ -7,68 +6,49 @@
           <a routerLink="/api/nieuws/nieuws-nieuw" class="btn-lg  btn-outline-success btn-block btn">Nieuw evenement/bericht maken</a>
         </div>
       </div>
-
-
       <div class="card border-info">
         <div class="card-header bg-dark text-info">
-            <h3 class="klingeApp-text text-orange">Nieuws/evenementen</h3>
+          <h3 class="klingeApp-text text-orange">Nieuws/evenementen</h3>
         </div>
         <div class="card-body text-primary">
-
           <div class="row justify-content-center">
             <div *ngIf="nieuws != null" class="col col-md-10 col-lg-8 col-xl-6">
-                <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
+              <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Zoek">
             </div>
           </div>
-
           <div class="row mt-4">
-          <mat-table class="table table-bordered table-hover" #table [dataSource]="nieuws" matSort>
-
-
-            <ng-container matColumnDef="datum">
-              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Datum </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/nieuws/nieuws-detail', element.nieuws_id]"> {{element.datum}} </a></mat-cell>
-            </ng-container>
-
-
-            <ng-container matColumnDef="titel">
-              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Titel </mat-header-cell>
-              <mat-cell  *matCellDef="let element" class="text-primary " > {{element.titel}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="newsType">
-              <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
-              <mat-cell  *matCellDef="let element" class="text-primary " > {{element.newsType}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="edit">
-              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a [routerLink]="['/api/nieuws/nieuws-edit', element.nieuws_id]" class="text-primary hoverable"><i class="material-icons">edit</i></a> </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="del">
-              <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
-              <mat-cell *matCellDef="let element" class="text-center" > <a (click)="deleteNieuws(element.nieuws_id, element.titel)" class="text-danger hoverable"><i class="material-icons">delete</i></a> </mat-cell>
-            </ng-container>
-            <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-          <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]">
-          </mat-paginator>
+            <mat-table class="table table-bordered table-hover" #table [dataSource]="nieuws" matSort>
+              <ng-container matColumnDef="datum">
+                <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Datum </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary "> <a class="apiLink" [routerLink]="['/api/nieuws/nieuws-detail', element.nieuws_id]"> {{element.datum | amDateFormat:'DD-MM-YYYY'}} </a></mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="titel">
+                <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Titel </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary "> {{element.titel}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="newsType">
+                <mat-header-cell class="tableHeader " *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-primary "> {{element.newsType}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="edit">
+                <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Aanpassen </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-center"> <a [routerLink]="['/api/nieuws/nieuws-edit', element.nieuws_id]" class="text-primary hoverable"><i class="material-icons">edit</i></a> </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="del">
+                <mat-header-cell class="tableHeader text-center" *matHeaderCellDef> Verwijderen </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="text-center"> <a (click)="deleteNieuws(element.nieuws_id, element.titel)" class="text-danger hoverable"><i class="material-icons">delete</i></a> </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row class="table-info" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
           </div>
         </div>
-        <div class="card-footer ">
-
-            <a routerLink="/api/nieuws/nieuws-nieuw" class="btn btn-success ">Nieuw bericht/evenement maken</a>
-
-
-            <a class="float-sm-right btn btn-dark" routerLink="/api"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Overzicht</a>
+        <div class="card-footer "> <a routerLink="/api/nieuws/nieuws-nieuw" class="btn btn-success ">Nieuw bericht/evenement maken</a> <a class="float-sm-right btn btn-dark" routerLink="/api"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Overzicht</a>
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>

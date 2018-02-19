@@ -1,33 +1,29 @@
 <div *ngIf="game">
-<div  class="row">
-  <div class="col">
-    <div class="card border-info">
-      <div class="card-header bg-primary">
-        <h3 *ngIf="game.thuisSpelend" class="text-center text-secondary">Verslag {{game.ploegNaam}} - {{game.tegenstander}}</h3>
-        <h3 *ngIf="!game.thuisSpelend" class="text-center text-secondary">Verslag {{game.tegenstander}} - {{game.ploegNaam}}</h3>
-        <p class="text-right muted text-info">
-          <span>{{game.datum | amDateFormat:'DD MMMM YYYY'}}</span>
-        </p>
-      </div>
-      <div class="card-body text-primary">
-        <h4 *ngIf="game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}} </h4>
-        <h4 *ngIf="!game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}</h4>
-        <div [froalaView]="game.verslag"></div>
-      </div>
-      <div class="card-footer">
-        <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn btn-success">Nieuw verslag opmaken <i class="fa fa-plus" aria-hidden="true"></i></a>
-        <a class="btn btn-info" routerLink="/api/wedstrijden"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</a>
+  <div class="row">
+    <div class="col">
+      <div class="card border-info">
+        <div class="card-header bg-primary">
+          <h3 *ngIf="game.thuisSpelend" class="text-center text-secondary">Verslag {{game.ploegNaam}} - {{game.tegenstander}}</h3>
+          <h3 *ngIf="!game.thuisSpelend" class="text-center text-secondary">Verslag {{game.tegenstander}} - {{game.ploegNaam}}</h3>
+          <p class="text-right muted text-info">
+            <span>{{game.datum | amDateFormat:'DD MMMM YYYY'}}</span>
+          </p>
+        </div>
+        <div class="card-body text-primary">
+          <h4 *ngIf="game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}} </h4>
+          <h4 *ngIf="!game.thuisSpelend" class="text-center font-weight-bold bg-info p-4">Uitslag: {{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}</h4>
+          <div [froalaView]="game.verslag"></div>
+        </div>
+        <div class="card-footer">
+          <a routerLink="/api/wedstrijden/wedstrijd-nieuw" class="btn btn-success">Nieuw verslag opmaken <i class="fa fa-plus" aria-hidden="true"></i></a>
+          <a class="btn btn-info" routerLink="/api/wedstrijden"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</a>
+        </div>
       </div>
     </div>
   </div>
- </div>
-
 </div>
- <div *ngIf="!game">
-   <h5 class="text-danger text-center">Kon verslag niet vinden</h5>
-   <div class="center">
-     <button class="btn btn-info " [routerLink]="['/api/wedstrijden']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</button>
-
-   </div>
-
- </div>
+<div *ngIf="!game">
+  <h5 class="text-danger text-center">Kon verslag niet vinden</h5>
+  <div class="center">
+    <button class="btn btn-info " [routerLink]="['/api/wedstrijden']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</button> </div>
+</div>

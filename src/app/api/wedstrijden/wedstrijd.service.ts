@@ -6,12 +6,12 @@ import 'rxjs/add/operator/map';
 import {AppSettings} from '../../app-settings';
 import { Wedstrijd }           from './wedstrijd';
 import { Ploeg }           from './../ploegen/ploeg';
-
+import { AuthenticationService } from './../../user/authentication.service';
 @Injectable()
 export class WedstrijdService {
   private wedstrijdenURL = AppSettings.API_ENDPOINT + '/wedstrijden';
   private ploegenURL = AppSettings.API_ENDPOINT + '/ploegen';
-  constructor(private http:Http) { }
+  constructor(private http:Http, private authenticationService: AuthenticationService) { }
 
   getWedstrijden() : Observable<any> {
     return this.http.get(this.wedstrijdenURL)
@@ -40,6 +40,7 @@ export class WedstrijdService {
   editWedstrijd(wedstrijd:Wedstrijd) : Observable<ByteString> {
     let bodyString = JSON.stringify(wedstrijd); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.put(`${this.wedstrijdenURL}/${wedstrijd['wedstrijd_id']}`, wedstrijd, options) // ...using put request
@@ -50,6 +51,7 @@ export class WedstrijdService {
   addNewWedstrijd(wedstrijd: Object) : Observable<string> {
         let bodyString = JSON.stringify(wedstrijd); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
         return this.http.post(this.wedstrijdenURL, wedstrijd, options) // ...using post request
@@ -58,7 +60,10 @@ export class WedstrijdService {
   }
 
   deleteWedstrijd(id:number) : Observable<boolean> {
-    return this.http.delete(this.wedstrijdenURL + "/" +id) // ...using put request
+    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+    return this.http.delete(this.wedstrijdenURL + "/" +id, options) // ...using put request
                          .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
@@ -78,15 +83,5 @@ export class WedstrijdService {
                          //...errors if any
                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
-
-
-
-  // getPloegByWedstrijd(id: number) : Observable<Ploeg> {
-  //   return this.http.get(this.ploegenURL + "/" + id)
-  //                       // ...and calling .json() on the response to return data
-  //                        .map(res=> res.json())
-  //                        //...errors if any
-  //                       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-  // }
 
 }

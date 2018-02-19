@@ -10,7 +10,7 @@
     <div class="col-12 col-lg-10 ">
       <div class="border-info">
         <div class="row align-items-center">
-          <div class="col-12 col-md-8 col-lg-12 col-xl-8 justify-content-center align-self-center">
+          <div class="col-12 col-md-8 col-lg-12 col-xl-8 text-center justify-content-center align-self-center">
             <img *ngIf="ploeg.fotoUrl" [src]="ploeg.fotoUrl" alt="" class="img-fluid rounded border border-primary">
             <h2 *ngIf="!ploeg.fotoUrl" class="text-center">Geen foto beschikbaar</h2>
             <!-- notice the "circle" class -->
@@ -18,10 +18,38 @@
           <div class="col-12 col-md-4 col-lg-12 col-xl-4">
 
             <ul class="list-group">
-              <li class="list-group-item"><strong>Trainer </strong><br />{{ploeg.trainer_1}}</li>
-              <li class="list-group-item" *ngIf="ploeg.trainer_2 != ''"><strong>Trainer </strong><br />{{ploeg.trainer_2}}</li>
-              <li class="list-group-item"><strong>Trainingsdagen </strong><br />{{ploeg.trainingsdagen}} om {{ploeg.trainingsuur}}</li>
+              <li *ngIf="ploeg.trainer_2" class="list-group-item"><strong>Trainers: </strong>
+                <a [href]="'mailto:' + ploeg.mailTrainer_1" *ngIf="ploeg.mailTrainer_1">{{ploeg.trainer_1}}</a>
+                <span *ngIf="ploeg.mailTrainer_1 == null || ploeg.mailTrainer_1 == ''">{{ploeg.trainer_1}}</span>
+                &
+                <a [href]="'mailto:' + ploeg.mailTrainer_2" *ngIf="ploeg.mailTrainer_2">{{ploeg.trainer_2}}</a>
+                <span *ngIf="ploeg.mailTrainer_2 == null || ploeg.mailTrainer_2 == ''">{{ploeg.trainer_2}}</span>
+              </li>
+              <li *ngIf="ploeg.trainer_2 == null" class="list-group-item"><strong>Trainer: </strong>
+                <a [href]="'mailto:' + ploeg.mailTrainer_1" *ngIf="ploeg.mailTrainer_1">{{ploeg.trainer_1}}</a>
+                <span *ngIf="ploeg.mailTrainer_1 == null || ploeg.mailTrainer_1 == ''">{{ploeg.trainer_1}}</span>
+              </li>
+              <li class="list-group-item" *ngIf="ploeg.trainingsdagen && ploeg.trainingsuur"><strong>Trainingsdagen </strong><br />{{ploeg.trainingsdagen}} om {{ploeg.trainingsuur}}</li>
             </ul>
+            <div class="card mt-3" *ngIf="sponsor">
+              <img class="card-img-top" [src]="sponsor.fotoUrl" alt="{{sponsor.naam}}">
+              <div class="card-body">
+                <h5 class="card-title text-primary text-center">{{sponsor.naam}}</h5>
+                <h6 class="text-center" *ngIf="sponsor.slogan == ''"><small class="text-muted text-hide" >Geen slogan</small></h6>
+                <h6 class="text-center" *ngIf="sponsor.slogan != ''"><small class="text-muted" >{{sponsor.slogan}}</small></h6>
+                <div class="row">
+                  <div class="col text-center" *ngIf="sponsor.website != ''">
+                      <a class="text-primary" [href]="sponsor.website"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="col text-center" *ngIf="sponsor.email">
+                        <a class="text-primary" [href]="'mailto:' + sponsor.email"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="col text-center" *ngIf="sponsor.telnr">
+                    <a class="text-primary" [href]="'tel:'+ sponsor.telnr"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row mt-4">
@@ -43,7 +71,7 @@
             <ul  class="list-group  align-items-center">
               <li *ngFor="let speler of spelers" style="width:100%" (click)="showPlayerDetail(speler)" class="hoverable list-group-item align-self-center">
                 <div class="media">
-                  <img class="mr-3 img-fluid rounded-circle" width="65" [src]="speler.fotoUrl" alt="">
+                  <img *ngIf="speler.fotoUrl" class="mr-3 img-fluid rounded-circle" width="65" [src]="speler.fotoUrl" alt="">
                   <div class="media-body align-self-center">
                     <h5 class="mt-0">{{speler.voornaam}} {{speler.naam}}</h5>
                   </div>
@@ -53,15 +81,18 @@
             </ul>
           </div>
         </div>
-        <div class="row justify-content-center mt-3 border p-3 border-secondary rounded bg-ksk" id="gameSection" *ngIf="game">
-          <div class="col-12">
-            <p *ngIf="game.thuisSpelend == 1" class="text-dark display-4 text-center">KSK - {{game.tegenstander}}</p>
-            <h4 *ngIf="game.thuisSpelend == 1" class="text-muted text-center">{{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
-            <p *ngIf="game.thuisSpelend == 0" class="text-dark display-4 text-center">{{game.tegenstander}} - KSK</p>
-            <h4 *ngIf="game.thuisSpelend == 0" class="text-muted text-center">{{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
-            <div [froalaView]="game.verslag"></div>
+        <div id="gameSection">
+          <div class="row justify-content-center mt-3 border p-3 border-secondary rounded bg-ksk"  *ngIf="game">
+            <div class="col-12">
+              <p *ngIf="game.thuisSpelend == 1" class="text-dark display-4 text-center">KSK - {{game.tegenstander}}</p>
+              <h4 *ngIf="game.thuisSpelend == 1" class="text-muted text-center">{{game.doelpuntenKSK}} - {{game.doelpuntenTegenstander}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
+              <p *ngIf="game.thuisSpelend == 0" class="text-dark display-4 text-center">{{game.tegenstander}} - KSK</p>
+              <h4 *ngIf="game.thuisSpelend == 0" class="text-muted text-center">{{game.doelpuntenTegenstander}} - {{game.doelpuntenKSK}}<small class="float-right">{{game.datum | amDateFormat:"DD/MM/YYYY"}}</small></h4>
+              <div [froalaView]="game.verslag"></div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

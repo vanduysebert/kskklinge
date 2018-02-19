@@ -1,75 +1,77 @@
-
 <h3 class="text-dark text-center">{{sponsor.naam}} aanpassen</h3>
 <div class="row justify-content-center">
-   <form #editSponsorForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="sponsorName" class="text-primary">Naam</label>
-          <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="sponsor.naam" #naam="ngModel" name="naam" required id="sponsorName" type="text" value="sponsor.naam">
-          <div class="invalid-feedback">Naam is vereist</div>
-
+  <form #editSponsorForm="ngForm" (ngSubmit)="onSubmit()" class="col-xs-12 col-12 col-md-10 col-lg-8 col-xl-6">
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="sponsorName" class="text-primary">Naam</label>
+        <input class="form-control" [ngClass]="{'is-valid': naam.valid, 'text-danger is-invalid': naam.invalid}" [(ngModel)]="sponsor.naam" #naam="ngModel" name="naam" required id="sponsorName" type="text" value="sponsor.naam">
+        <div class="invalid-feedback">Naam is vereist</div>
+      </div>
+      <div class="col-12 col-md-6 form-group">
+        <label class="col-form-label text-primary">Is sponsor een hoofdsponsor? Indien ja, zal de sponsor op elke pagina te zien zijn</label>
+        <div class="form-check">
+          <input class="form-check-input radioMg" [(ngModel)]="sponsor.isHoofdsponsor" type="radio" name="ingeschreven" id="exampleRadios1" value="1">
+          <label class="form-check-label text-primary radioMg" for="exampleRadios1">
+              Ja
+            </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input radioMg" [(ngModel)]="sponsor.isHoofdsponsor" type="radio" name="ingeschreven" id="exampleRadios2" value="0">
+          <label class="form-check-label text-primary radioMg" for="exampleRadios2">
+              Nee
+            </label>
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="sponsorWeb" class="text-primary">Website</label>
-          <input type="text" class="form-control" name="web" #web="ngModel" id="sponsorWeb" [ngClass]="{'is-valid': web.valid}" placeholder="Website" [(ngModel)]="sponsor.website">
-        </div>
-        <div class="form-group col-md-6 col-12">
-          <label for="sponsorAddress" class="text-primary">Adres</label>
-          <input type="text" class="form-control" name="address" #address="ngModel" id="sponsorAddress" [ngClass]="{'is-valid': web.valid}" placeholder="Adres" [(ngModel)]="sponsor.adres">
-        </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="sponsorWeb" class="text-primary">Website</label>
+        <input type="text" class="form-control" name="web" #web="ngModel" id="sponsorWeb" [ngClass]="{'is-valid': web.valid}" placeholder="Website" [(ngModel)]="sponsor.website">
       </div>
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-          <label for="mail" class="text-primary">Email</label>
-          <input class="form-control" placeholder="Email" [ngClass]="{'is-valid': mail.valid}" [(ngModel)]="sponsor.email" #mail="ngModel" name="mail" id="mail" type="text" value="">
-
-        </div>
-        <div class="col-12 col-md-6 form-group">
-          <label for="tel" class="text-primary">Telefoonnummer</label>
-          <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="sponsor.telnr" #tel="ngModel" name="tel" id="tel" type="text" value="">
-
-        </div>
+      <div class="form-group col-md-6 col-12">
+        <label for="sponsorAddress" class="text-primary">Adres</label>
+        <input type="text" class="form-control" name="address" #address="ngModel" id="sponsorAddress" [ngClass]="{'is-valid': web.valid}" placeholder="Adres" [(ngModel)]="sponsor.adres">
       </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 form-group">
-          <div class="row justify-content-center" *ngIf="src">
-            <div  class="col-4">
-              <img class="img-fluid" [src]="src">
-            </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <label for="mail" class="text-primary">Email</label>
+        <input class="form-control" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [ngClass]="{'is-valid': mail.valid, 'text-danger is-invalid': mail.invalid}" [(ngModel)]="sponsor.email" #mail="ngModel" name="mail" id="mail" type="text" value=""> </div>
+      <div class="col-12 col-md-6 form-group">
+        <label for="tel" class="text-primary">Telefoonnummer</label>
+        <input class="form-control" placeholder="Telefoon" [ngClass]="{'is-valid': tel.valid}" [(ngModel)]="sponsor.telnr" #tel="ngModel" name="tel" id="tel" type="text" value=""> </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6 form-group">
+        <div class="row justify-content-center" *ngIf="src">
+          <div class="col-4">
+            <img class="img-fluid" [src]="src">
           </div>
-          <div class="w-100"></div>
-          <div class="col-12" *ngIf="uploader.progress > 0">
-            <progressbar class="progress active" [value]="uploader.progress" [max]="100" type="success"></progressbar>
-          </div>
         </div>
-        <div class="col-12 col-md-6 form-group">
-          <label for="sponsorSlogan" class="text-primary">slogan</label>
-          <textarea class="form-control" [ngClass]="{'is-valid': slogan.valid}" [(ngModel)]="sponsor.slogan" #slogan="ngModel" name="slogan" id="sponsorSlogan" value=""></textarea>
+        <div class="w-100"></div>
+        <div class="col-12" *ngIf="uploader.progress > 0">
+          <progressbar class="progress active" [value]="uploader.progress" [max]="100" type="success"></progressbar>
         </div>
-
       </div>
-
-
-      <div class="form-row">
-        <div class="col-12 col-md-6 form-group">
-            <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
-            <span class="text-primary" *ngIf="!src">Foto uploaden</span>
-
-
-              <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader" name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
-        </div>
-
+      <div class="col-12 col-md-6 form-group">
+        <label for="sponsorSlogan" class="text-primary">slogan</label>
+        <textarea class="form-control" [ngClass]="{'is-valid': slogan.valid}" [(ngModel)]="sponsor.slogan" #slogan="ngModel" name="slogan" id="sponsorSlogan" value=""></textarea>
       </div>
-     <div class="form-row">
+    </div>
+    <div class="form-row">
+      <div class="col-12 col-md-6 form-group">
+        <span class="text-primary" *ngIf="src">Nieuwe foto uploaden</span>
+        <span class="text-primary" *ngIf="!src">Foto uploaden</span> <input type="file" class="form-control-file" id="validatedCustomFile" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions" ng2FileSelect [uploader]="uploader"
+          name="photoUpload" (click)="uploader.clearQueue()" (change)="checkImage()" />
+      </div>
+    </div>
+    <div class="form-row">
       <div class="col-12 form-group">
-          <div class="btn-group">
-            <button class="btn btn-success" [disabled]="!editSponsorForm.form.valid" type="submit" name="action">Sponsor aanpassen <i class="fa-plus fa" aria-hidden="true"></i></button>
-            <button class="btn btn-dark" [routerLink]="['/api/sponsor']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Sponsorsoverzicht</button>
-          </div>
+        <div class="btn-group">
+          <button class="btn btn-success" [disabled]="!editSponsorForm.form.valid" type="submit" name="action">Sponsor aanpassen <i class="fa-plus fa" aria-hidden="true"></i></button>
+          <button class="btn btn-dark" [routerLink]="['/api/sponsor']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Sponsorsoverzicht</button>
+        </div>
       </div>
-     </div>
-   </form>
- </div>
+    </div>
+  </form>
+</div>

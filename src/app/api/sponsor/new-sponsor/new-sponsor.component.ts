@@ -9,14 +9,14 @@ import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upl
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import * as moment from 'moment';
 import {MatSnackBar} from '@angular/material';
-
+import { AuthenticationService } from './../../../user/authentication.service';
 @Component({
   selector: 'app-new-sponsor',
   templateUrl: './new-sponsor.component.html',
   styleUrls: ['./new-sponsor.component.scss']
 })
 export class NewSponsorComponent implements OnInit {
-  sponsor: Sponsor = new Sponsor(0, "", "", "", "", "", "", "");
+  sponsor: Sponsor = new Sponsor(0, "", "", "", "", "", "", "", false);
   time: string;
   photoUrl: string;
   uploader:FileUploader;
@@ -26,9 +26,10 @@ export class NewSponsorComponent implements OnInit {
   imgSync: boolean = true;
   src: string = "";
   sizeLimit = 5;
-  constructor(private router: Router, private sponsorService: SponsorService, private snackBar: MatSnackBar) {
+  constructor(private router: Router,private authenticationService: AuthenticationService, private sponsorService: SponsorService, private snackBar: MatSnackBar) {
     this.uploader = new FileUploader({
-      url: AppSettings.API_ENDPOINT + 'sponsors/upload'
+      url: AppSettings.API_ENDPOINT + 'sponsors/upload',
+      authToken: 'Bearer ' + this.authenticationService.token
     });
 
     this.uploaderOptions =  {

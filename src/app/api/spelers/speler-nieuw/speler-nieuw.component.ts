@@ -11,6 +11,7 @@ import {FileUploaderOptions, FileItem, ParsedResponseHeaders} from 'ng2-file-upl
 import { ImageResult, ResizeOptions } from 'ng2-imageupload';
 import * as moment from 'moment';
 import {MatSnackBar} from '@angular/material';
+import { AuthenticationService } from './../../../user/authentication.service';
 
 @Component({
   selector: 'app-speler-nieuw',
@@ -29,9 +30,10 @@ export class SpelerNieuwComponent implements OnInit {
   imgSync: boolean = true;
   src: string = "";
   sizeLimit = 5;
-  constructor(private ploegenService : PloegenService, private router: Router, private spelerService: SpelersService, private snackBar: MatSnackBar) {
+  constructor(private ploegenService : PloegenService, private router: Router, private spelerService: SpelersService, private snackBar: MatSnackBar, private authenticationService: AuthenticationService) {
     this.uploader = new FileUploader({
-      url: AppSettings.API_ENDPOINT + 'spelers/upload'
+      url: AppSettings.API_ENDPOINT + 'spelers/upload',
+      authToken: 'Bearer ' + this.authenticationService.token
     });
 
     this.uploaderOptions =  {
@@ -109,29 +111,29 @@ export class SpelerNieuwComponent implements OnInit {
     }
 
    onSubmit() {
-     console.log(this.player);
-     this.birthDate = new Date(this.player.geboortedatum);
-     this.player.geboortedatum = moment(this.birthDate).format('YYYY-MM-DD HH-mm-ss');
-     if (!this.player.ploeg_id) {
-       this.player.ploeg_id = 1
+     try {
+       this.birthDate = new Date(this.player.geboortedatum);
+       this.player.geboortedatum = moment(this.birthDate).format('YYYY-MM-DD HH-mm-ss');
+       if (!this.player.ploeg_id) {
+         this.player.ploeg_id = 1
+       }
+       if (this.uploader.getNotUploadedItems().length) {
+         this.uploader.uploadAll();
+       } else {
+         this.spelerService.addNewPlayer(this.player).subscribe(res => {
+           if (res == "OK") {
+             console.log("not uploaded");
+             this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
+               duration: 2000
+             });
+             this.router.navigateByUrl('/api/spelers');
+           }
+         });
+       }
+     } catch (err) {
+      console.log(err);
      }
-     if (this.uploader.getNotUploadedItems().length) {
-       this.uploader.uploadAll();
-       console.log("uploaded");
-     } else {
-       this.spelerService.addNewPlayer(this.player).subscribe(res => {
-         if (res == "OK") {
-           console.log("not uploaded");
-           this.snackBar.open("Speler " + this.player.voornaam + ' ' + this.player.naam + " succesvol aangemaakt.","", {
-             duration: 2000
-           });
-           this.router.navigateByUrl('/api/spelers').then(()=>{
-             location.reload();
-            }
-           );
-         }
-       });
-     }
+
    }
 
   loadPloegen() {

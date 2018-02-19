@@ -11,7 +11,7 @@
       <h2 class="text-dark jumbotron text-center display-4 font-underline">{{ploegNaam}}</h2>
       <div class="border-info">
         <div class="row align-items-center">
-          <div class="col-12 col-md-8 col-lg-12 col-xl-8 justify-content-center align-self-center">
+          <div class="col-12 col-md-8 col-lg-12 text-center col-xl-8 justify-content-center align-self-center">
             <img *ngIf="ploeg.fotoUrl" [src]="ploeg.fotoUrl" alt="" class="img-fluid rounded border border-primary">
             <h2 *ngIf="!ploeg.fotoUrl" class="text-center">Geen foto beschikbaar</h2>
             <!-- notice the "circle" class -->
@@ -20,8 +20,27 @@
 
             <ul class="list-group">
               <li class="list-group-item"><strong>Trainer </strong><br />{{ploeg.trainer_1}}</li>
-              <li class="list-group-item"><strong>Hulptrainer </strong><br />{{ploeg.trainer_2}}</li>
+              <li class="list-group-item" *ngIf="ploeg.trainer_2"><strong>Hulptrainer </strong><br />{{ploeg.trainer_2}}</li>
             </ul>
+            <div class="card mt-3" *ngIf="sponsor">
+              <img class="card-img-top" [src]="sponsor.fotoUrl" alt="{{sponsor.naam}}">
+              <div class="card-body">
+                <h5 class="card-title text-primary text-center">{{sponsor.naam}}</h5>
+                <h6 class="text-center" *ngIf="sponsor.slogan == ''"><small class="text-muted text-hide" >Geen slogan</small></h6>
+                <h6 class="text-center" *ngIf="sponsor.slogan != ''"><small class="text-muted" >{{sponsor.slogan}}</small></h6>
+                <div class="row">
+                  <div class="col text-center" *ngIf="sponsor.website != ''">
+                      <a class="text-primary" [href]="sponsor.website"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="col text-center" *ngIf="sponsor.email">
+                        <a class="text-primary" [href]="'mailto:' + sponsor.email"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="col text-center" *ngIf="sponsor.telnr">
+                    <a class="text-primary" [href]="'tel:'+ sponsor.telnr"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row mt-4">

@@ -1,59 +1,57 @@
 <div *ngIf="player">
   <div class="row justify-content-center">
     <div class="col col-md-10 col-lg-8">
-        <div class="border-info">
-          <div class="row align-items-center">
-            <div class="col-12 col-md-4">
-              <img *ngIf="player.fotoUrl" [src]="player.fotoUrl" alt="" class="rounded img-fluid">
-              <h2 *ngIf="!player.fotoUrl" class="text-center">Geen foto beschikbaar</h2> <!-- notice the "circle" class -->
-            </div>
-            <div class="col-12 col-md-8">
-                <h4 class="text-primary text-center mb-2">{{player.voornaam}} {{player.naam}}</h4>
-                <div class="row">
-                  <div class="col-12 col-md-6">
-                    <p>
-                      <strong>Ploeg: </strong><br />{{player.ploegNaam}}
-                    </p>
-                    <p>
-                      <strong>Geboortedatum: </strong><br />{{player.geboortedatum}}
-                    </p>
-                    <p>
-                      <strong>Email: </strong><br />{{player.email}}
-                    </p>
-                    <p>
-                      <strong>Adres: </strong><br />
-
-                      {{player.adres}}
-                    </p>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <p>
-                      <strong>Telefoonnummer: </strong><br />{{player.telefoonnummer}}
-                    </p>
-                    <p *ngIf="player.ingeschreven == true">
-                      <strong>Ingeschreven: </strong><br />Ja
-                    </p>
-                    <p *ngIf="player.ingeschreven == false">
-                      <strong>Ingeschreven: </strong><br />Nee
-                    </p>
-                    <p>
-                      <strong>Positie: </strong><br />{{player.positie}}
-                    </p>
-                    <p>
-                      <strong>Doelpunten: </strong><br />{{player.doelpunten}}
-                    </p>
-                  </div>
-                </div>
-              <div class="row justify-content-center mt-3">
-                <button class="btn btn-info" [routerLink]="['/api/spelers']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Speleroverzicht</button>
+      <div class="border-info">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4">
+            <img *ngIf="player.fotoUrl" [src]="player.fotoUrl" alt="" class="rounded img-fluid">
+            <h2 *ngIf="!player.fotoUrl" class="text-center">Geen foto beschikbaar</h2>
+            <!-- notice the "circle" class -->
+          </div>
+          <div class="col-12 col-md-8">
+            <h4 class="text-primary text-center mb-2">{{player.voornaam}} {{player.naam}}</h4>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <p>
+                  <strong>Ploeg: </strong><br />{{player.ploegNaam}}
+                </p>
+                <p>
+                  <strong>Geboortedatum: </strong><br />{{player.geboortedatum}}
+                </p>
+                <p>
+                  <strong>Email: </strong><br />{{player.email}}
+                </p>
+                <p>
+                  <strong>Adres: </strong><br /> {{player.adres}}
+                </p>
+              </div>
+              <div class="col-12 col-md-6">
+                <p>
+                  <strong>Telefoonnummer: </strong><br />{{player.telefoonnummer}}
+                </p>
+                <p *ngIf="player.ingeschreven == true">
+                  <strong>Ingeschreven: </strong><br />Ja
+                </p>
+                <p *ngIf="player.ingeschreven == false">
+                  <strong>Ingeschreven: </strong><br />Nee
+                </p>
+                <p>
+                  <strong>Positie: </strong><br />{{player.positie}}
+                </p>
+                <p>
+                  <strong>Doelpunten: </strong><br />{{player.doelpunten}}
+                </p>
               </div>
             </div>
+            <div class="row justify-content-center mt-3">
+              <button class="btn btn-info" [routerLink]="['/api/spelers']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Speleroverzicht</button>
             </div>
           </div>
         </div>
       </div>
-
- </div>
- <div *ngIf="!player">
-   <h2 class="text-center">Geen speler gevonden</h2>
- </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!player">
+  <h2 class="text-center">Geen speler gevonden</h2>
+</div>

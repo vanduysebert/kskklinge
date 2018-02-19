@@ -1,0 +1,24 @@
+<div class=" jumbotron bg-accent mt-4">
+  <h1 class="display-4 text-primary">Jeugdnieuws</h1>
+
+</div>
+<div class="row">
+  <div class="col">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let event of events; let even = even; let odd = odd" class="list-group-item lead text-primary hoverable mt-2" id="event{{event.nieuws_id}}" [ngClass]="{'bg-ksk': even, 'bg-accent': odd}">
+        <h3 class="text-primary" (click)=showContent(event.nieuws_id)>{{event.titel}} <small class="float-right text-muted">{{event.datum | amDateFormat:"DD/MM/YYYY"}}</small></h3>
+        <div *ngIf="showEventDetail(event.nieuws_id)">
+          <div [froalaView]="event.inhoud"></div>
+        </div>
+
+        <p class="text-muted float-right lead" *ngIf="!showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-plus-square" aria-hidden="true"></i> Meer info
+        </p>
+        <p class="text-muted float-right lead border-bottom" *ngIf="showEventDetail(event.nieuws_id)" (click)=showContent(event.nieuws_id)>
+          <i class="fa fa-minus-square" aria-hidden="true"></i> Minder info
+        </p>
+      </li>
+
+    </ul>
+  </div>
+</div>

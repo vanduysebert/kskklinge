@@ -37,7 +37,11 @@ import { HttpModule } from '@angular/http';
     import { AccordionModule } from 'ngx-bootstrap/accordion';
     import { CollapseModule } from 'ngx-bootstrap/collapse';
     import { CarouselModule } from 'ngx-bootstrap/carousel';
+    import { TooltipModule } from 'ngx-bootstrap/tooltip';
     import {Ng2PageScrollModule} from 'ng2-page-scroll';
+    import { DeviceDetectorModule } from 'ngx-device-detector';
+    import { FacebookModule } from 'ngx-facebook';
+
 //Classes
 import {AppSettings} from './app-settings';
 
@@ -91,7 +95,6 @@ import {AppSettings} from './app-settings';
       import { EditWedstrijdComponent } from './api/wedstrijden/edit-wedstrijd/edit-wedstrijd.component';
     import { SponsorComponent } from './api/sponsor/sponsor.component';
       import { EditSponsorComponent } from './api/sponsor/edit-sponsor/edit-sponsor.component';
-      import { DeleteSponsorComponent } from './api/sponsor/delete-sponsor/delete-sponsor.component';
       import { NewSponsorComponent } from './api/sponsor/new-sponsor/new-sponsor.component';
       import { SponsorDetailComponent } from './api/sponsor/sponsor-detail/sponsor-detail.component';
 //Help-components
@@ -108,6 +111,8 @@ import {AppSettings} from './app-settings';
       import {SponsorService} from './api/sponsor/sponsor.service';
       import {AuthenticationService} from './user/authentication.service';
       import {AuthGuard} from './guards/auth.guard';
+      import {SignupService} from './api/signups/signup.service';
+      import {KlingeFacebookService} from './helpers/klinge-facebook.service';
 
     //--Website
 
@@ -118,6 +123,10 @@ import { defineLocale } from 'ngx-bootstrap/bs-moment';
 import { nl } from 'ngx-bootstrap/locale';
 import { U13Component } from './jeugd/u13/u13.component';
 import { PlayerDetailComponent } from './helpers/player-detail/player-detail.component';
+import { JeugdNieuwsComponent } from './jeugd/jeugd-nieuws/jeugd-nieuws.component';
+import { ClubNieuwsComponent } from './club/club-nieuws/club-nieuws.component';
+import { SupportersComponent } from './supporters/supporters.component';
+import { SignupsComponent } from './api/signups/signups.component';
 
 defineLocale('nl', nl);
 
@@ -168,13 +177,16 @@ defineLocale('nl', nl);
         EditWedstrijdComponent,
       SponsorComponent,
         EditSponsorComponent,
-        DeleteSponsorComponent,
         NewSponsorComponent,
         SponsorDetailComponent,
     BooleanCheckPipe,
     DeleteDialog,
     U13Component,
     PlayerDetailComponent,
+    JeugdNieuwsComponent,
+    ClubNieuwsComponent,
+    SupportersComponent,
+    SignupsComponent,
 
   ],
   imports: [
@@ -200,6 +212,8 @@ defineLocale('nl', nl);
     AccordionModule.forRoot(),
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
+    TooltipModule.forRoot(),
+    FacebookModule.forRoot(),
     MomentModule,
     NgxDatatableModule,
     MatTableModule,
@@ -209,6 +223,7 @@ defineLocale('nl', nl);
     MatSidenavModule,
     MatSnackBarModule,
     Ng2PageScrollModule,
+    DeviceDetectorModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBo9M4SgCZAN7yurg-3KZvs6MMC_YIbMp0'
     })
@@ -226,6 +241,8 @@ defineLocale('nl', nl);
     DeleteDialogService,
     ContactService,
     SponsorService,
+    SignupService,
+      KlingeFacebookService,
      AuthenticationService,
      AuthGuard
   ],

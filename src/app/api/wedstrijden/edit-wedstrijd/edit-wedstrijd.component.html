@@ -6,22 +6,18 @@
         <input type="text" class="form-control" name="birth" #birth="ngModel" required id="playerBirth" [ngClass]="{'text-success is-valid': birth.valid, 'text-danger is-invalid': birth.invalid}" placeholder="Datum" bsDatepicker [(ngModel)]="game.datum">
         <div class="invalid-feedback">Datum is vereist</div>
       </div>
-
     </div>
-
     <div class="form-row">
       <div class="form-group col">
         <label for="ploegSelect" class="text-primary d-block font-weight-bold">Klinge</label>
         <select class="form-control " [(ngModel)]="game.ploeg_id" required name="ploegSelect" id="ploegSelect" (change)="setTeamName($event)">
          <option *ngFor="let ploeg of ploegen" name="ploeg" [ngValue]="ploeg.ploeg_id">{{ploeg.naam}}</option>
        </select>
-
         <div class="invalid-feedback">Je moet een ploeg opgeven</div>
       </div>
       <div class="form-group col">
         <label for="tel" [ngClass]="{'active': game.tegenstander != ''}" class="text-primary font-weight-bold">Tegenstander</label>
         <input placeholder="Tegenstander" class="form-control" [ngClass]="{'text-success is-valid': tel.valid}" [(ngModel)]="game.tegenstander" required #tel="ngModel" name="tel" id="tel" type="text" value="">
-
         <div class="invalid-feedback">Kies een tegenstander</div>
       </div>
     </div>
@@ -30,14 +26,12 @@
         <label for="pos" class="text-primary font-weight-bold">Doelpunten KSK {{game.ploegNaam}}</label>
         <input placeholder="Doelpunten KSK " class="form-control" [ngClass]="{'text-success is-valid': pos.valid, 'text-danger is-invalid': pos.invalid}" [(ngModel)]="game.doelpuntenKSK" #pos="ngModel" pattern="[0-9]*" name="pos" id="pos" type="text" value="">
         <div class="invalid-feedback">Enkel numerieke waarden</div>
-
       </div>
       <div class="form-group col">
         <label for="goal" class="text-primary font-weight-bold">Doelpunten {{game.tegenstander}}</label>
         <input placeholder="Doelpunten tegenstander" class="form-control" [ngClass]="{'text-success is-valid': goal.valid, 'text-danger is-invalid': goal.invalid}" pattern="[0-9]*" [(ngModel)]="game.doelpuntenTegenstander" #goal="ngModel" name="goal" id="goal"
           type="text" value="">
         <div class="invalid-feedback">Enkel numerieke waarden</div>
-
       </div>
     </div>
     <label class="col-form-label text-primary font-weight-bold">KSK thuis/uit?</label>
@@ -53,7 +47,6 @@
           Uit
         </label>
     </div>
-
     <div class="form-row">
       <div class="form-group col s12">
         <p class="text-primary font-weight-bold">
@@ -61,8 +54,6 @@
         </p>
         <div [froalaEditor]="froalaOptions" [(froalaModel)]="game.verslag" name="verslag" id="verslag"></div>
       </div>
-
-
     </div>
     <div class="form-row">
       <div class="form-group col">
@@ -77,8 +68,5 @@
 <div *ngIf="!game">
   <h5 class="text-center text-danger">Kon verslag niet vinden</h5>
   <div class="center">
-    <button class="btn btn-info " [routerLink]="['/api/wedstrijden']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</button>
-
-  </div>
-
+    <button class="btn btn-info " [routerLink]="['/api/wedstrijden']"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Alle verslagen</button> </div>
 </div>
